@@ -17,10 +17,15 @@ imgDuszek.src=duszek
 let player=[new Player()]
 movementPlayer(player[0])
 let allObject=[
-    
+    makeWall(plainWall,20,10,10,60,"green","horizontal"),
+    makeWall(plainWall,20,10,700,60,"green","horizontal"),
+    makeWall(plainWall,10,400,20,60,"green","vertical"),
+    makeWall(plainWall,20,700,200,40,"green","vertical"),
+    makeWall(plainWall,20,50,200,40,"blue","vertical"),
+  
 
 ,player,
-createMonster(Ghost,10)]
+createMonster(Ghost,1)]
 
 //SORT OBJECT TO STATIC AND DYNAMIC
 let staticE=[]
@@ -44,11 +49,11 @@ console.log(dynE)
 
 const runApp=()=>{
 can.ctx.clearRect(0,0,can.C_W,can.C_H)
-player[0].draw(can)
+
 allObject.forEach((allE,allI,allArr)=>{
     allE.forEach((el,i,arr)=>{
         el.draw(can)
-        GRAVITY(staticE,dynE)
+        GRAVITY(staticE,dynE,can)
         if(el.id==="monster"){
             el.movement()
         }

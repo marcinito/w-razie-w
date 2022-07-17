@@ -1,6 +1,6 @@
 export const movementPlayer=(player)=>{
     window.addEventListener("keydown",(e)=>{
-    console.log(player.direction)
+   
         if(e.keyCode===37){
                 player.moveLeft()
         }

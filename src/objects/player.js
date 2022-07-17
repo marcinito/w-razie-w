@@ -7,7 +7,7 @@ export class Player{
         this.type="dynamic"
         this.id="player"
         this.direction=null
-        this.speed=40
+        this.speed=5
 
         //Direction
         this.up=true
@@ -21,28 +21,40 @@ export class Player{
         can.ctx.fillRect(this.posX,this.posY,this.size,this.size)
     }
     moveUp(){
-       if(this.up===true){
-        this.posY-=this.speed
-        this.direction="up"
-       }
+  if(this.up===true){
+    console.log("up working..")
+    this.posY-=this.speed
+    this.down=true
+    this.right=true
+    this.left=true
+  }
     }
     moveDown(){
         if(this.down===true){
+            console.log("down working..")
             this.posY+=this.speed
-        this.direction="down"
-        }
+            this.up=true
+            this.right=true
+            this.left=true
+          }
     }
     moveLeft(){
-      if(this.left===true){
-        this.posX-=this.speed
-        this.direction="left"
-      }
+        if(this.left===true){
+            console.log("left working..")
+            this.posX-=this.speed
+            this.right=true
+            this.up=true
+            this.down=true
+          }
        
     }
     moveRight(){
         if(this.right===true){
+            console.log("right working..")
             this.posX+=this.speed
-        this.direction="right"
-        }
-    }
+            this.left=true
+            this.up=true
+            this.down=true
+          }
+}
 }

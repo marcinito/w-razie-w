@@ -15,7 +15,7 @@ export class Ghost{
         this.directionCrossArr=["negative","positive","null"]
         this.directionCross=random(this.directionCrossArr)
         this.direction=random(this.directionArr)
-        this.speed=Math.floor(Math.random()*3)+1
+        this.speed=Math.floor(Math.random()*4)+1
 
         //direct
         this.left=true
