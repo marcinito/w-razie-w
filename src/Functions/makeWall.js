@@ -1,4 +1,4 @@
-export const makeWall=(object,howMany,posX,posY,size,color,direction)=>{
+export const makeWall=(object,howMany,posX,posY,size,color,direction,wallArr)=>{
     let arrWall=[]
     for(let i=0;i<howMany;i++){
         arrWall.push(new object(posX,posY,size,color,direction))
@@ -9,5 +9,6 @@ export const makeWall=(object,howMany,posX,posY,size,color,direction)=>{
             posY+=size
         }
     }
+    wallArr.push(arrWall)
     return arrWall
 }

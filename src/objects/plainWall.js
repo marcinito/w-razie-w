@@ -5,7 +5,8 @@ export class plainWall{
         this.size=size
         this.color=color
         this.type="static"
-        this.direction=direction 
+        this.direction=direction
+        
     }
     draw(can){
         can.ctx.fillStyle=this.color

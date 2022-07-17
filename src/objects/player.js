@@ -7,7 +7,7 @@ export class Player{
         this.type="dynamic"
         this.id="player"
         this.direction=null
-        this.speed=5
+        this.speed=20
 
         //Direction
         this.up=true
@@ -27,6 +27,7 @@ export class Player{
     this.down=true
     this.right=true
     this.left=true
+    this.direction="up"
   }
     }
     moveDown(){
@@ -36,6 +37,7 @@ export class Player{
             this.up=true
             this.right=true
             this.left=true
+            this.direction="down"
           }
     }
     moveLeft(){
@@ -45,6 +47,7 @@ export class Player{
             this.right=true
             this.up=true
             this.down=true
+            this.direction="left"
           }
        
     }
@@ -55,6 +58,7 @@ export class Player{
             this.left=true
             this.up=true
             this.down=true
+            this.direction="right"
           }
 }
 }

@@ -1,7 +1,7 @@
 import { borderBarrier } from "./helpFunction/borderBarrier"
 import { changeDirectionMonster } from "./helpFunction/changeDirectionMonster"
 
-export const GRAVITY=(sArr,dArr,can,allObject)=>{
+export const GRAVITY=(sArr,dArr,can,wallArr)=>{
 
 
 sArr.forEach((sE,sI,statArr)=>{
@@ -70,46 +70,47 @@ dArr.forEach((dE,dI,dynArr)=>{
                      
            if(sE.direction==="vertical"){
             //right
-            if(dE.posX+dE.size>sE.posX && dE.posX+dE.size<sE.posX+sE.size/2){
+            if(dE.posX+dE.size>sE.posX && dE.posX+dE.size<sE.posX+sE.size/2 && dE.direction==="right"){
               dE.right=false
               dE.left=true
               dE.up=true
               dE.down=true
               let sizeColision =dE.posX+dE.size-sE.posX
               dE.posX-=sizeColision+2
-                // console.log("hit right...")
+                console.log("hit right...")
+                console.log(dE.direction)
+                
+       
               }
+            
+       
                       //left
-                      if(dE.posX<sE.posX+sE.size && dE.posX>sE.posX+sE.size/2){
-                        dE.left=false
+                      if(dE.posX<sE.posX+sE.size && dE.posX>sE.posX+sE.size/2 && dE.direction==="left"){
+                       
+                          dE.left=false
                         dE.right=true
                         dE.up=true
                         dE.down=true
                         let sizeColiision = sE.posX+sE.size-dE.posX
                         dE.posX+=sizeColiision+2
-                        // console.log("hit left...")
+                        console.log("hit left...")
+                       
                         }
                         //up
-            if(dE.posY>sE.posY+sE.size/2 && dE.posY<sE.posY+sE.size){
-              dE.up=false
-              dE.down=true
-              dE.left=true
-              dE.right=true
-              let sizeColision=sE.posY+sE.size-dE.posY
-              dE.posY+=sizeColision+2
-              // console.log("hit up...")
-            
-              }
-              //down
-            if(dE.posY+dE.size>sE.posY && dE.posY+dE.size<sE.posY+sE.size/2){
-              dE.down=false
-              dE.up=true
-              dE.left=true
-              dE.right=true
-              let sizeColision=dE.posY+dE.size-sE.posY
-              dE.posY-=sizeColision+2
-              // console.log("hit down...")
-              }
+                 if(dE.posY>sE.posY+sE.size/2 && dE.posY<sE.posY+sE.size){
+                        dE.up=false
+                        let sizeColision=sE.posY+sE.size-dE.posY
+                        dE.posY+=sizeColision
+                        console.log("hit up...")
+                 }
+                 //down
+                 if(dE.posY+dE.size>sE.posY && dE.posY+dE.size<sE.posY+sE.size/2){
+                  dE.down=false
+                  let sizeColision=dE.posY+dE.size-sE.posY
+                  dE.posY-=sizeColision
+                  console.log("hit down..")
+                 }
+                        
            }
          
                
@@ -133,28 +134,8 @@ dArr.forEach((dE,dI,dynArr)=>{
               dE.right=true
               let sizeColision=dE.posY+dE.size-sE.posY
               dE.posY-=sizeColision+2
-              // console.log("hit down...")
+              console.log("hit down...")
               }
-              if(dE.posX+dE.size>sE.posX && dE.posX+dE.size<sE.posX+sE.size/2){
-                dE.right=false
-                dE.left=true
-                dE.up=true
-                dE.down=true
-                let sizeColision =dE.posX+dE.size-sE.posX
-                dE.posX-=sizeColision+2
-                  // console.log("hit right...")
-                }
-                        //left
-                        if(dE.posX<sE.posX+sE.size && dE.posX>sE.posX+sE.size/2){
-                          dE.left=false
-                          dE.right=true
-                          dE.up=true
-                          dE.down=true
-                          let sizeColiision = sE.posX+sE.size-dE.posX
-                          dE.posX+=sizeColiision+2
-                          // console.log("hit left...")
-                          }
-
            }
               }
               }
