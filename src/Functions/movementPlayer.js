@@ -13,5 +13,10 @@ export const movementPlayer=(player)=>{
 if(e.keyCode===40){
     player.moveDown()
 }
+if(e.keyCode===32){
+   
+    player.fire()
+}
+
     })
 }

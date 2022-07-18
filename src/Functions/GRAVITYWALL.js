@@ -1,7 +1,7 @@
 import { borderBarrier } from "./helpFunction/borderBarrier"
 import { changeDirectionMonster } from "./helpFunction/changeDirectionMonster"
 
-export const GRAVITY=(sArr,dArr,can,wallArr)=>{
+export const GRAVITYWALL=(sArr,dArr,can,wallArr)=>{
 
 
 sArr.forEach((sE,sI,statArr)=>{
@@ -68,7 +68,7 @@ dArr.forEach((dE,dI,dynArr)=>{
               //Player Collision with static Element
               if(dE.id==="player"){
                      
-           if(sE.direction==="vertical"){
+          
             //right
             if(dE.posX+dE.size>sE.posX && dE.posX+dE.size<sE.posX+sE.size/2 && dE.direction==="right"){
               dE.right=false
@@ -96,27 +96,14 @@ dArr.forEach((dE,dI,dynArr)=>{
                         console.log("hit left...")
                        
                         }
-                        //up
-                 if(dE.posY>sE.posY+sE.size/2 && dE.posY<sE.posY+sE.size){
-                        dE.up=false
-                        let sizeColision=sE.posY+sE.size-dE.posY
-                        dE.posY+=sizeColision
-                        console.log("hit up...")
-                 }
-                 //down
-                 if(dE.posY+dE.size>sE.posY && dE.posY+dE.size<sE.posY+sE.size/2){
-                  dE.down=false
-                  let sizeColision=dE.posY+dE.size-sE.posY
-                  dE.posY-=sizeColision
-                  console.log("hit down..")
-                 }
+              
                         
-           }
+           
          
                
-           if(sE.direction==="horizontal"){
+          
              //up
-            if(dE.posY>sE.posY+sE.size/2 && dE.posY<sE.posY+sE.size){
+            if(dE.posY>sE.posY+sE.size/2 && dE.posY<sE.posY+sE.size && dE.direction==="up"){
               dE.up=false
               dE.down=true
               dE.left=true
@@ -127,7 +114,7 @@ dArr.forEach((dE,dI,dynArr)=>{
             
               }
               //down
-            if(dE.posY+dE.size>sE.posY && dE.posY+dE.size<sE.posY+sE.size/2){
+            if(dE.posY+dE.size>sE.posY && dE.posY+dE.size<sE.posY+sE.size/2 && dE.direction==="down"){
               dE.down=false
               dE.up=true
               dE.left=true
@@ -136,7 +123,7 @@ dArr.forEach((dE,dI,dynArr)=>{
               dE.posY-=sizeColision+2
               console.log("hit down...")
               }
-           }
+         
               }
               }
 

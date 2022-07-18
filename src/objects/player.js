@@ -1,3 +1,4 @@
+import { Glock } from "./GUN/glock"
 export class Player{
     constructor(){
         this.posX=300
@@ -6,7 +7,7 @@ export class Player{
         this.color="orange"
         this.type="dynamic"
         this.id="player"
-        this.direction=null
+        this.direction="up"
         this.speed=20
 
         //Direction
@@ -14,6 +15,10 @@ export class Player{
         this.down=true
         this.left=true
         this.right=true
+        //gun
+      
+     
+        this.bullet=[]
 
     }
     draw(can){
@@ -61,4 +66,10 @@ export class Player{
             this.direction="right"
           }
 }
+
+fire(){
+this.bullet.push(new Glock(this.posX,this.posY,this.direction))
+
+}
+
 }
