@@ -19,7 +19,7 @@ export class plainWall{
         this.size=size
         this.color=color
         this.type="static"
-        this.id="plainWall"
+        this.id="wall"
         this.direction=direction
         this.image=[block100,block80,block50,block20]
         this.hp=10

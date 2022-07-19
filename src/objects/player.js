@@ -7,12 +7,13 @@ export class Player{
         this.color="orange"
         this.type="dynamic"
         this.id="player"
+        this.doGravityWork=true
         this.direction="down"
         this.speed=20
 
         //Direction
         this.up=true
-        this.down=true
+       
         this.left=true
         this.right=true
         //gun
@@ -28,43 +29,28 @@ export class Player{
     moveUp(){
   if(this.up===true){
     console.log("up working..")
-    this.posY-=this.speed
-    this.down=true
-    this.right=true
-    this.left=true
+    this.posY-=100
+    this.doGravityWork=true
+    
     this.direction="up"
   }
     }
-    moveDown(){
-        if(this.down===true){
-            console.log("down working..")
-            this.posY+=this.speed
-            this.up=true
-            this.right=true
-            this.left=true
-            this.direction="down"
-          }
-    }
+
     moveLeft(){
-        if(this.left===true){
-            console.log("left working..")
+            this.doGravityWork=true
             this.posX-=this.speed
-            this.right=true
-            this.up=true
-            this.down=true
             this.direction="left"
-          }
        
     }
     moveRight(){
-        if(this.right===true){
-            console.log("right working..")
+            this.doGravityWork=true
             this.posX+=this.speed
-            this.left=true
-            this.up=true
-            this.down=true
             this.direction="right"
-          }
+      
+}
+moveDown(){
+  this.direction="down"
+
 }
 
 fire(){

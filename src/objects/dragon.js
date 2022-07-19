@@ -4,14 +4,7 @@ import dragonImg from '../images/monsters/dragon.png'
 let dragon=new Image(100,100)
 dragon.src=dragonImg 
 
-let changeImage=0
-setInterval(()=>{
-changeImage++
-if(changeImage===4){
-    changeImage=0
-}
 
-},200)
 
 
 export class Dragon{
@@ -21,6 +14,8 @@ export class Dragon{
         this.size=100
         this.type="dynamic"
         this.id="monster"
+      
+        
         this.image=dragon
 
         this.directionArr=["up","left","right","down"]
@@ -42,9 +37,10 @@ export class Dragon{
 
     }
     draw(can,changeImage){
-
+       
 if(changeImage===1){
 this.animationEffect=0
+
 }
 if(changeImage===2){
     this.animationEffect=191

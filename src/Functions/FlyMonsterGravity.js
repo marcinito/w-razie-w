@@ -1,7 +1,10 @@
 import { borderBarrier } from "./helpFunction/borderBarrier"
 import { changeDirectionMonster } from "./helpFunction/changeDirectionMonster"
 
-export const GRAVITYWALL=(sArr,dArr,can,wallArr)=>{
+export const flyMonsterContactWall=(sArr,dArr,can,allObject)=>{
+
+
+
 
 
 sArr.forEach((sE,sI,statArr)=>{
@@ -65,66 +68,7 @@ dArr.forEach((dE,dI,dynArr)=>{
               }
     
               }
-              //Player Collision with static Element
-              if(dE.id==="player"){
-                     
-          
-            //right
-            if(dE.posX+dE.size>sE.posX && dE.posX+dE.size<sE.posX+sE.size/2 || dE.direction==="right"){
-              dE.right=false
-              dE.left=true
-              dE.up=true
-              dE.down=true
-              let sizeColision =dE.posX+dE.size-sE.posX
-              dE.posX-=sizeColision+2
-                console.log("hit right...")
-                console.log(dE.direction)
-                
-       
-              }
-            
-       
-                      //left
-                      if(dE.posX<sE.posX+sE.size && dE.posX>sE.posX+sE.size/2 || dE.direction==="left"){
-                       
-                          dE.left=false
-                        dE.right=true
-                        dE.up=true
-                        dE.down=true
-                        let sizeColiision = sE.posX+sE.size-dE.posX
-                        dE.posX+=sizeColiision+2
-                        console.log("hit left...")
-                       
-                        }
-              
-                        
-           
-         
-               
-          
-             //up
-            if(dE.posY>sE.posY+sE.size/2 && dE.posY<sE.posY+sE.size || dE.direction==="up"){
-              dE.up=false
-              dE.down=true
-              dE.left=true
-              dE.right=true
-              let sizeColision=sE.posY+sE.size-dE.posY
-              dE.posY+=sizeColision+2
-              // console.log("hit up...")
-            
-              }
-              //down
-            if(dE.posY+dE.size>sE.posY && dE.posY+dE.size<sE.posY+sE.size/2 || dE.direction==="down"){
-              dE.down=false
-              dE.up=true
-              dE.left=true
-              dE.right=true
-              let sizeColision=dE.posY+dE.size-sE.posY
-              dE.posY-=sizeColision+2
-              console.log("hit down...")
-              }
-         
-              }
+     
               }
 
               borderBarrier(dE,can,changeDirectionMonster)

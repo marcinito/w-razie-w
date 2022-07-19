@@ -5,7 +5,7 @@ import {plainWall} from './objects/plainWall'
 import {makeWall} from './Functions/makeWall'
 import {Player} from './objects/player'
 import {movementPlayer} from './Functions/movementPlayer'
-import {GRAVITYWALL} from './Functions/GRAVITYWALL'
+
 import {createMonster} from './Functions/createMonster.js'
 import {Ghost} from './objects/ghost'
 import { AmmoVsWall } from './Functions/AmmoVSWall'
@@ -13,6 +13,7 @@ import { FireAtakFromPlayer } from './Functions/FireAtakFromPlayer'
 import { DRAWALL } from './Functions/shortHandFunction/DRAWAll'
 import { solidWall } from './objects/solidWall'
 import { Dragon } from './objects/dragon'
+import { flyMonsterContactWall } from './Functions/FlyMonsterGravity'
 
 let can=canvasSettings()
 
@@ -21,24 +22,26 @@ const imgDuszek=new Image(100,100)
 imgDuszek.src=duszek
 
 
-let player=[new Player()]
-movementPlayer(player[0])
-let allObject=[
-   
-   
+let WALL=
+[
     makeWall(plainWall,10,200,300,60,"skyblue","vertical"),
     makeWall(plainWall,30,10,can.C_H-50,60,"skyblue","horizontal"),
     makeWall(plainWall,4,50,200,60,"skyblue","vertical"),
     makeWall(solidWall,10,400,200,60,"skyblue","vertical"),
-  
-
-,player,
-createMonster(Ghost,0),
-createMonster(Dragon,2),
 ]
 
+let MONSTER=
+[
+    createMonster(Ghost,3),
+    createMonster(Dragon,1),
+]
 
-//SORT OBJECT TO STATIC AND DYNAMIC
+let player=new Player()
+movementPlayer(player)
+let allObject=WALL.concat(MONSTER)
+
+
+//SORT OBJECT TO STATIC AND DYNAMIC 
 let staticE=[]
 let dynE=[]
 
@@ -55,6 +58,13 @@ allObject.forEach(el=>{
     
  })
 })
+allObject.forEach((el,i,arr)=>{
+    el.forEach((pE,pI,pArr)=>{
+        if(pE.id==="wall"){
+
+        }
+    })
+})
 
 
 
@@ -65,19 +75,30 @@ allObject.forEach(el=>{
 
 const runApp=()=>{
 can.ctx.clearRect(0,0,can.C_W,can.C_H)
-player[0].posY+=player[0].speed
+//player
+player.draw(can)
+FireAtakFromPlayer(player,can)
+AmmoVsWall(player,staticE,can,allObject)
+//////
 
 
-FireAtakFromPlayer(player[0],can)
+
+
+
 allObject.forEach((allE,allI,allArr)=>{
     allE.forEach((el,i,arr)=>{
        DRAWALL(el,can)
-       
-        GRAVITYWALL(staticE,dynE,can)
-        AmmoVsWall(player[0],staticE,can,allObject)
+        
+        flyMonsterContactWall(staticE,dynE,can)
+     
         
         if(el.id==="monster"){
             el.movement()
+        }
+        if(el.type==="dynamic"){
+            if(el.doGravityWork){
+                el.posY+=2
+            }
         }
     })
 })

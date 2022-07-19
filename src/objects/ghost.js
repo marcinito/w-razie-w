@@ -13,6 +13,7 @@ export class Ghost{
         this.type="dynamic"
         this.id="monster"
         this.image=imgGhost
+        this.abilityToFly="fly"
      
         //DIRECTION
         this.directionArr=["up","left","right","down"]

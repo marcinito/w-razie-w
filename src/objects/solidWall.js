@@ -19,7 +19,7 @@ export class solidWall{
         this.size=size
         this.color=color
         this.type="static"
-        this.id="solidWall"
+        this.id="wall"
         this.direction=direction
         this.image=[block1,block2,block3,block4]
         this.hp=25
