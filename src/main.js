@@ -20,22 +20,23 @@ let can=canvasSettings()
 const imgDuszek=new Image(100,100)
 imgDuszek.src=duszek
 
-let wallArr=[]
+
 let player=[new Player()]
 movementPlayer(player[0])
 let allObject=[
-    makeWall(solidWall,24,30,110,60,"skyblue","horizontal",wallArr),
-    makeWall(plainWall,4,30,700,60,"skyblue","horizontal",wallArr),
-    makeWall(plainWall,24,400,20,60,"skyblue","vertical",wallArr),
-    makeWall(solidWall,24,700,200,60,"skyblue","vertical",wallArr),
-    makeWall(plainWall,4,50,200,60,"skyblue","vertical",wallArr),
+   
+   
+    makeWall(plainWall,10,200,300,60,"skyblue","vertical"),
+    makeWall(plainWall,30,10,can.C_H-50,60,"skyblue","horizontal"),
+    makeWall(plainWall,4,50,200,60,"skyblue","vertical"),
+    makeWall(solidWall,10,400,200,60,"skyblue","vertical"),
   
 
 ,player,
-createMonster(Ghost,1),
+createMonster(Ghost,0),
 createMonster(Dragon,2),
 ]
-console.log(wallArr)
+
 
 //SORT OBJECT TO STATIC AND DYNAMIC
 let staticE=[]
@@ -58,16 +59,21 @@ allObject.forEach(el=>{
 
 
 
-console.log(dynE)
+
+
+
 
 const runApp=()=>{
 can.ctx.clearRect(0,0,can.C_W,can.C_H)
+player[0].posY+=player[0].speed
+
+
 FireAtakFromPlayer(player[0],can)
 allObject.forEach((allE,allI,allArr)=>{
     allE.forEach((el,i,arr)=>{
        DRAWALL(el,can)
        
-        GRAVITYWALL(staticE,dynE,can,wallArr)
+        GRAVITYWALL(staticE,dynE,can)
         AmmoVsWall(player[0],staticE,can,allObject)
         
         if(el.id==="monster"){

@@ -7,7 +7,7 @@ export class Player{
         this.color="orange"
         this.type="dynamic"
         this.id="player"
-        this.direction="up"
+        this.direction="down"
         this.speed=20
 
         //Direction

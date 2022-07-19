@@ -70,7 +70,7 @@ dArr.forEach((dE,dI,dynArr)=>{
                      
           
             //right
-            if(dE.posX+dE.size>sE.posX && dE.posX+dE.size<sE.posX+sE.size/2 && dE.direction==="right"){
+            if(dE.posX+dE.size>sE.posX && dE.posX+dE.size<sE.posX+sE.size/2 || dE.direction==="right"){
               dE.right=false
               dE.left=true
               dE.up=true
@@ -85,7 +85,7 @@ dArr.forEach((dE,dI,dynArr)=>{
             
        
                       //left
-                      if(dE.posX<sE.posX+sE.size && dE.posX>sE.posX+sE.size/2 && dE.direction==="left"){
+                      if(dE.posX<sE.posX+sE.size && dE.posX>sE.posX+sE.size/2 || dE.direction==="left"){
                        
                           dE.left=false
                         dE.right=true
@@ -103,7 +103,7 @@ dArr.forEach((dE,dI,dynArr)=>{
                
           
              //up
-            if(dE.posY>sE.posY+sE.size/2 && dE.posY<sE.posY+sE.size && dE.direction==="up"){
+            if(dE.posY>sE.posY+sE.size/2 && dE.posY<sE.posY+sE.size || dE.direction==="up"){
               dE.up=false
               dE.down=true
               dE.left=true
@@ -114,7 +114,7 @@ dArr.forEach((dE,dI,dynArr)=>{
             
               }
               //down
-            if(dE.posY+dE.size>sE.posY && dE.posY+dE.size<sE.posY+sE.size/2 && dE.direction==="down"){
+            if(dE.posY+dE.size>sE.posY && dE.posY+dE.size<sE.posY+sE.size/2 || dE.direction==="down"){
               dE.down=false
               dE.up=true
               dE.left=true
