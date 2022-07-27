@@ -1,7 +1,7 @@
 export const borderBarrier=(dE,can,changeDirectionMonster)=>{
     if(dE.posX<=0){
         if(
-            dE.id==="monster"){changeDirectionMonster(dE,dE.directionCross,"left")
+            dE.id==="monsterFly"){changeDirectionMonster(dE,dE.directionCross,"left")
                 dE.posX+=2
                 dE.down=true
                 dE.up=true
@@ -13,7 +13,7 @@ export const borderBarrier=(dE,can,changeDirectionMonster)=>{
         }
     }
     if(dE.posX+dE.size>=can.C_W){
-        if(dE.id==="monster"){
+        if(dE.id==="monsterFly"){
             changeDirectionMonster(dE,dE.directionCross,"right")
             dE.posX-=2
             dE.down=true
@@ -26,8 +26,7 @@ export const borderBarrier=(dE,can,changeDirectionMonster)=>{
         }
     }
     if(dE.posY<=0){
-        if(
-            dE.id==="monster"){changeDirectionMonster(dE,dE.directionCross,"up")
+        if(dE.id==="monsterFly"){changeDirectionMonster(dE,dE.directionCross,"up")
             dE.down=true
             dE.up=false
             dE.left=true

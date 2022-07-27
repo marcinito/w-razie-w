@@ -1,36 +1,44 @@
-import { changeDirectionMonster } from "../Functions/helpFunction/changeDirectionMonster"
-import { random } from "../Functions/helpFunction/random"
-import duszek from '../images/duszek.png'
+
+import { random } from '../../Functions/helpFunction/random'
+import duszek from '../ghost/duszek.png'
 let imgGhost=new Image(100,100)
 imgGhost.src=duszek
 
 export class Ghost{
     constructor(){
         this.posX=100
-        this.posY=100
+        this.posY=155
         this.size=60
+        this.attack=0.1
         this.color="plum"
         this.type="dynamic"
-        this.id="monster"
+        this.id="monsterFly"
         this.image=imgGhost
-        this.abilityToFly="fly"
+        this.name="ghost"
      
         //DIRECTION
         this.directionArr=["up","left","right","down"]
         this.directionCrossArr=["negative","positive","null"]
         this.directionCross=random(this.directionCrossArr)
         this.direction=random(this.directionArr)
-        this.speed=Math.floor(Math.random()*4)+1
+        this.speed=0
 
         //direct
         this.left=true
         this.right=true
         this.down=true
         this.up=true
+        //HP
+        this.hpTotal=320
+        this.hp=this.hpTotal
+        this.percentageHp=50
+        this.ratePercentage=50
    
     }
     draw(can){
-       
+        can.ctx.fillStyle="red"
+        can.ctx.fillRect(this.posX,this.posY-5,this.percentageHp,5)
+        can.ctx.strokeRect(this.posX,this.posY-5,50,5)
         can.ctx.drawImage(this.image,this.posX,this.posY,this.size,this.size)
     }
 

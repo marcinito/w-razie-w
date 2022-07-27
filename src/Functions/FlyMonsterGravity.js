@@ -29,13 +29,13 @@ dArr.forEach((dE,dI,dynArr)=>{
           else{
             //COLISSION ***************************************************
             //Monster Collisionb with static Element
-            if(dE.id==="monster"){
+            if(dE.id==="monsterFly"){
               //right
               if(rightVertex>sE.posX && rightVertex<sE.posX+sE.size/2){
-              dE.down=true
-              dE.up=true
-              dE.right=false
-              dE.left=true
+                dE.down=true
+                dE.up=true
+                dE.right=false
+                dE.left=true
               dE.posX-=dE.speed+2
               changeDirectionMonster(dE,dE.directionCross,"right")
               }
@@ -71,6 +71,7 @@ dArr.forEach((dE,dI,dynArr)=>{
      
               }
 
+              
               borderBarrier(dE,can,changeDirectionMonster)
        
   })

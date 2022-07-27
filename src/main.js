@@ -1,70 +1,56 @@
-import css from './style.css'
-import duszek from './images/duszek.png'
+import scss from './style.scss'
+
 import { canvasSettings } from './Functions/settingCanas'
 import {plainWall} from './objects/plainWall'
 import {makeWall} from './Functions/makeWall'
-import {Player} from './objects/player'
-import {movementPlayer} from './Functions/movementPlayer'
+import { Player } from './objects/player/player'
+import { movementPlayer } from './objects/player/movementPlayer'
 
 import {createMonster} from './Functions/createMonster.js'
-import {Ghost} from './objects/ghost'
-import { AmmoVsWall } from './Functions/AmmoVSWall'
-import { FireAtakFromPlayer } from './Functions/FireAtakFromPlayer'
-import { DRAWALL } from './Functions/shortHandFunction/DRAWAll'
+import {Ghost} from './objects/ghost/ghost'
+import { AmmoVsWall } from './objects/player/AmmoVSWall'
+import { FireAtakFromPlayer } from './objects/player/FireAtakFromPlayer'
+
 import { solidWall } from './objects/solidWall'
-import { Dragon } from './objects/dragon'
-import { flyMonsterContactWall } from './Functions/FlyMonsterGravity'
+import { Dragon } from './objects/dragon/dragon'
+
+import { PLAYERGRAVITY } from './objects/player/PLAYERGRAVITY'
+import { ghostAttackPlayer } from './objects/ghost/GhostAttackPlayer'
+import { whenFireBallFromDragonTouchWallOrPlayer } from './objects/dragon/whenFireBallFromDragonTouchWallOrPlayer'
+import { whenDragonTouchPlayer } from './objects/dragon/whenDragonTouchPlayer'
+import { ghostGravity } from './objects/ghost/ghostGravity'
+import { dragonGravity } from './objects/dragon/dragonGravity'
+import { ammoFromPlayerVsGhost } from './objects/ghost/ammoFromPlayerVsGhost'
+import { ammoFromPlayerVsDragon } from './objects/dragon/ammoFromPlayerVsDragon'
+import { checkIfPlayerIsAlive } from './objects/player/checkIfPlayerIsAlive'
+import { drawMenuEquipment } from './Functions/drawMenuEquipment'
 
 let can=canvasSettings()
 
 
-const imgDuszek=new Image(100,100)
-imgDuszek.src=duszek
 
+
+
+
+let player=new Player()
+movementPlayer(player)
 
 let WALL=
 [
-    makeWall(plainWall,10,200,300,60,"skyblue","vertical"),
-    makeWall(plainWall,30,10,can.C_H-50,60,"skyblue","horizontal"),
-    makeWall(plainWall,4,50,200,60,"skyblue","vertical"),
-    makeWall(solidWall,10,400,200,60,"skyblue","vertical"),
+    // makeWall(plainWall,10,200,300,60,"orange","horizontal"),
+    // makeWall(plainWall,10,20,360,60,"skyblue","horizontal"),
+    makeWall(plainWall,30,10,can.C_H-170,60,"orange","horizontal"),
+    makeWall(plainWall,4,50,200,60,"pink","horizontal"),
+    makeWall(solidWall,17,400,100,60,"green","vertical"),
+    player.blockToBuild
 ]
 
 let MONSTER=
 [
-    createMonster(Ghost,3),
+    createMonster(Ghost,2),
     createMonster(Dragon,1),
 ]
-
-let player=new Player()
-movementPlayer(player)
-let allObject=WALL.concat(MONSTER)
-
-
-//SORT OBJECT TO STATIC AND DYNAMIC 
-let staticE=[]
-let dynE=[]
-
-allObject.forEach(el=>{
- el.forEach((pE,i,arr)=>{
-    //pE - particular element
-    if(pE.type==="static"){
-        staticE.push(pE)
-       
-    }
-    else if(pE.type==="dynamic"){
-        dynE.push(pE)
-    }
-    
- })
-})
-allObject.forEach((el,i,arr)=>{
-    el.forEach((pE,pI,pArr)=>{
-        if(pE.id==="wall"){
-
-        }
-    })
-})
+console.log(MONSTER)
 
 
 
@@ -72,37 +58,68 @@ allObject.forEach((el,i,arr)=>{
 
 
 
+
+let counter=0
+setInterval(()=>{
+counter++
+},500)
 
 const runApp=()=>{
+
+drawMenuEquipment()
+
 can.ctx.clearRect(0,0,can.C_W,can.C_H)
 //player
 player.draw(can)
 FireAtakFromPlayer(player,can)
-AmmoVsWall(player,staticE,can,allObject)
+AmmoVsWall(player,WALL,can)
+PLAYERGRAVITY(player,WALL,can)
+checkIfPlayerIsAlive(player)
 //////
+//****************** */
+//wall
+//pArrWallArray-particular array with set o wall
+WALL.forEach((pArrWallArray,wI,WALLarray)=>{
+pArrWallArray.forEach((title,pItitle,pArrWall)=>{
+    if(title.hp>0){
+        title.draw(can)
+    }
 
+})   
+})
 
-
-
-
-allObject.forEach((allE,allI,allArr)=>{
-    allE.forEach((el,i,arr)=>{
-       DRAWALL(el,can)
+//MONSTER
+MONSTER.forEach((pArrMonster,index,arrayMONSTER)=>{
+    pArrMonster.forEach((monster,i,arr)=>{
+        monster.draw(can)
+        monster.movement()
         
-        flyMonsterContactWall(staticE,dynE,can)
-     
-        
-        if(el.id==="monster"){
-            el.movement()
+        // flyMonsterContactWall(WALL,MONSTER,can)
+       
+      
+        if(monster.name==="ghost"){
+            ghostAttackPlayer(player,arr)
+            ghostGravity(WALL,arr,can)
+            ammoFromPlayerVsGhost(arr,player)
         }
-        if(el.type==="dynamic"){
-            if(el.doGravityWork){
-                el.posY+=2
-            }
+        if(monster.name==="dragon"){
+            dragonGravity(WALL,arr,can)
+            monster.attackFireBall(counter,can)
+            whenFireBallFromDragonTouchWallOrPlayer(monster,player,WALL,can)
+            whenDragonTouchPlayer(player,arr)
+            ammoFromPlayerVsDragon(arr,player)
         }
+ 
+
     })
 })
+
+
+
+
 
     requestAnimationFrame(runApp)
 }
 runApp()
+
+

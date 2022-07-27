@@ -1,5 +1,7 @@
-import { random } from "../Functions/helpFunction/random"
-import dragonImg from '../images/monsters/dragon.png'
+
+import { random } from '../../Functions/helpFunction/random'
+import dragonImg from '../dragon/dragon.png'
+import {FireBallAttackFromMonster} from '../dragon/fireBallAttackFromMonster'
 
 let dragon=new Image(100,100)
 dragon.src=dragonImg 
@@ -11,9 +13,11 @@ export class Dragon{
     constructor(){
         this.posX=10
         this.posY=10
-        this.size=100
+        this.size=130
         this.type="dynamic"
-        this.id="monster"
+        this.id="monsterFly"
+        this.name="dragon"
+        this.attack={wall:4,player:30,whenTouchPlayer:60}
       
         
         this.image=dragon
@@ -22,18 +26,23 @@ export class Dragon{
         this.directionCrossArr=["negative","positive","null"]
         this.directionCross=random(this.directionCrossArr)
         this.direction=random(this.directionArr)
-        this.speed=1
-
+        this.speed=0
 
          //direct
          this.left=true
          this.right=true
          this.down=true
          this.up=true
-
          this.animationEffect=0
+        //atack
+        this.fireBall=[]
+        //HP
+        this.hpTotal=553
+        this.hp=this.hpTotal
+        this.percentageHp=this.size
+        this.ratePercentage=this.size
 
-        
+
 
     }
     draw(can,changeImage){
@@ -48,20 +57,21 @@ if(changeImage===2){
 if(changeImage===3){
     this.animationEffect=191*2
 }
-
-
+can.ctx.fillStyle="yellow"
+can.ctx.fillRect(this.posX,this.posY-5,this.percentageHp,5)
+can.ctx.strokeRect(this.posX,this.posY-5,this.size,5)
 if(this.direction==="left"){
-    can.ctx.drawImage(this.image,this.animationEffect,483,191,161,this.posX,this.posY,150,this.size)
+    can.ctx.drawImage(this.image,this.animationEffect,483,191,161,this.posX,this.posY,130,this.size)
 
 }
 if(this.direction==="right"){
-    can.ctx.drawImage(this.image,this.animationEffect,161,191,161,this.posX,this.posY,150,this.size)
+    can.ctx.drawImage(this.image,this.animationEffect,161,191,161,this.posX,this.posY,130,this.size)
 }
 if(this.direction==="up"){
-    can.ctx.drawImage(this.image,this.animationEffect,0,191,161,this.posX,this.posY,150,this.size)
+    can.ctx.drawImage(this.image,this.animationEffect,0,191,161,this.posX,this.posY,130,this.size)
 }
 if(this.direction==="down"){
-    can.ctx.drawImage(this.image,this.animationEffect,322,191,161,this.posX,this.posY,150,this.size)
+    can.ctx.drawImage(this.image,this.animationEffect,322,191,161,this.posX,this.posY,130,this.size)
 }
     }
     
@@ -134,6 +144,20 @@ if(this.direction==="down"){
             }
               
             }
-        
+attackFireBall(counter,can){
+
+    if(counter%5===0 && this.fireBall.length<1){
+    
+        this.fireBall.push(new FireBallAttackFromMonster(this.posX,this.posY))
+    }
+    if(this.fireBall.length>0){
+        this.fireBall.forEach((el,i,arr)=>{
+           el.draw(can)
+           el.posY+=1
+        })
+    }
+    
+}
+      
     
 }

@@ -5,21 +5,22 @@ export class Glock{
         this.size=10
         this.color="black"
         this.id="weapon"
-        this.direction=direction
+        this.strenghtAttack=9.7
+        this.directionAttack=direction
     }
     draw(can){
     can.ctx.fillStyle=this.color
     can.ctx.fillRect(this.posX,this.posY,this.size,this.size)
-    if(this.direction==="left"){
+    if(this.directionAttack==="left"){
         this.posX-=5
     }
-    if(this.direction==="right"){
+    if(this.directionAttack==="right"){
         this.posX+=5
     }
-    if(this.direction==="up"){
+    if(this.directionAttack==="up"){
         this.posY-=5
     }
-    if(this.direction==="down"){
+    if(this.directionAttack==="down"){
         this.posY+=5
     }
     }
