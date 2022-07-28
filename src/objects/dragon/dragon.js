@@ -11,7 +11,7 @@ dragon.src=dragonImg
 
 export class Dragon{
     constructor(){
-        this.posX=10
+        this.posX=100
         this.posY=10
         this.size=130
         this.type="dynamic"
@@ -26,8 +26,7 @@ export class Dragon{
         this.directionCrossArr=["negative","positive","null"]
         this.directionCross=random(this.directionCrossArr)
         this.direction=random(this.directionArr)
-        this.speed=0
-
+        this.speed=0.5
          //direct
          this.left=true
          this.right=true
@@ -46,7 +45,7 @@ export class Dragon{
 
     }
     draw(can,changeImage){
-       
+      
 if(changeImage===1){
 this.animationEffect=0
 

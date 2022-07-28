@@ -1,28 +1,23 @@
 export class Glock{
-    constructor(posX,posY,direction){
+    constructor(posX,posY,xDirection,yDirection){
         this.posX=posX
         this.posY=posY
         this.size=10
         this.color="black"
         this.id="weapon"
         this.strenghtAttack=9.7
-        this.directionAttack=direction
+        this.dAttackX=xDirection
+        this.dAttackY=yDirection
     }
     draw(can){
     can.ctx.fillStyle=this.color
     can.ctx.fillRect(this.posX,this.posY,this.size,this.size)
-    if(this.directionAttack==="left"){
-        this.posX-=5
-    }
-    if(this.directionAttack==="right"){
-        this.posX+=5
-    }
-    if(this.directionAttack==="up"){
-        this.posY-=5
-    }
-    if(this.directionAttack==="down"){
-        this.posY+=5
-    }
+       
+            this.posX+=1
+            this.posY-=1
+            
+        
+
     }
 
 }

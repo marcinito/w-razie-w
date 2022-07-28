@@ -1,4 +1,5 @@
 export const AmmoVsWall=(player,WALL,can)=>{
+   
 let bulletArr=player.bullet
 WALL.forEach((arrayWithTitle,index,fullArrOfWall)=>{
 arrayWithTitle.forEach((title,tI,tArr)=>{
@@ -13,8 +14,14 @@ arrayWithTitle.forEach((title,tI,tArr)=>{
             bArr.splice(bArr[bI],1)
             
             if(title.hp===0 || title.hp<0){
+                if(title.name==="plainWall"){
+                    player.building.plainWall.quantity+=1
+                }
+                if(title.name==="solidWall"){
+                    player.building.solidWall.quantity+=1
+                }
                tArr.splice(tI,1)
-              
+                
             }
             }
 

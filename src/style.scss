@@ -1,3 +1,101 @@
-body{
-    background-color: red;
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    
+    
 }
+body{
+    background-color: skyblue;
+    display:flex;
+   
+    flex-direction: column;
+    max-height:100%;
+  
+    max-width:100%;
+    height:100%;
+    left:0;
+    overflow:hidden;
+    cursor:none;
+    
+}
+
+.viewFinder{
+    position:absolute;
+    .viewFinderImg{
+        position:absolute;
+        width:30px;
+        height:30px;
+        opacity:1;
+        z-index:20
+        
+    }
+}
+#canvas{
+    border:1px solid black;
+    position:absolute;
+}
+.menuEq{
+    width:30%;
+    height:10%;
+    background-color: green;
+    position: absolute;
+    right:0;
+    opacity:0.7;
+    display:grid;
+    grid-template-columns:60% 40% ;
+   
+    .blockTitleMenu{
+        height:100%;
+        width:100%;
+        background-color: plum;
+        display:flex;
+        .slot{
+            width:25%;
+            height:100%;
+            border:1px solid black;
+            display: flex;
+            justify-content: center;
+            font-size:11px;
+            font-weight:bold;
+            flex-direction: column;
+           
+            .imgTitle{
+            width:99%;
+            height:80%;
+            }
+            .quantity{
+                display:flex;
+                .number{
+                    -webkit-text-stroke:1px red
+                }
+            }
+          
+        }
+     
+
+    }
+
+.gunMenu{
+    
+height:100%;
+width:100%;
+background-color: darkblue;
+display:flex;
+
+.slot{
+    width:33%;
+    height:100%;
+    border:1px solid red;
+    .gunImg{
+        width:100%;
+        height:80%;
+    }
+
+}
+}
+
+}
+
+
+
