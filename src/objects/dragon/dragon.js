@@ -12,7 +12,7 @@ dragon.src=dragonImg
 export class Dragon{
     constructor(){
         this.posX=100
-        this.posY=10
+        this.posY=100
         this.size=130
         this.type="dynamic"
         this.id="monsterFly"
@@ -26,7 +26,7 @@ export class Dragon{
         this.directionCrossArr=["negative","positive","null"]
         this.directionCross=random(this.directionCrossArr)
         this.direction=random(this.directionArr)
-        this.speed=0.5
+        this.speed=0
          //direct
          this.left=true
          this.right=true

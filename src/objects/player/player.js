@@ -1,20 +1,23 @@
-import { Glock } from "../GUN/glock"
-import playerImageFile from './playerImage.png'
+import { Dynamite } from "../GUN/dynamite/dynamite"
+import { Glock } from "../GUN/glock/glock"
+import playerImageFile from './playerSprite.png'
 const playerImage=new Image(100,100)
 playerImage.src=playerImageFile
 export class Player{
     constructor(){
         this.posX=300
         this.posY=500
-        this.size=45.7
+        this.size=40.7
         this.color="blue"
         //IMAGE PLAYER
         this.image=playerImage
         this.animation=0
-        this.movementOngoing=true
+        this.money=0
+       
        
         this.id="player"
       this.strenghtGravity=2
+  
         this.directionMove="down"
         this.directionAttack="left"
         this.directionJump="left"
@@ -39,13 +42,16 @@ export class Player{
    //quantity live
    this.quantityLive=3
 
+
    //MODE DASHBOARD
    this.mode="fireFire"
    //BUILDIN NEW BLOCK
-   this.building={plainWall:{quantity:3,canIBuild:false},solidWall:{quantity:3,canIBuild:false}}
+   this.building={plainWall:{quantity:3,canIBuild:false},solidWall:{quantity:3,canIBuild:false},magmaWall:{quantity:3,canIBuild:false}}
    this.blockToBuild=[]
        //gun
-       this.bullet=[]
+       this.GUN={glock:{choosen:true,available:true,ammo:102332},dynamite:{choosen:false,available:true,ammo:52112}}
+       this.bulletGlockArray=[]
+       this.dynamitsArray=[]
        
        
 
@@ -53,32 +59,29 @@ export class Player{
     draw(can){
  
       can.ctx.fillStyle="green"
-        can.ctx.fillRect(this.posX+10,this.posY-25,this.percentageHp,10)
-        can.ctx.strokeRect(this.posX+10,this.posY-25,50,10)
-    if(this.directionMove==="down"||this.directionMove==="up"&&this.movementOngoing===true){
-      can.ctx.drawImage(this.image,0,0,200,200,this.posX,this.posY,this.size,this.size)
-    }
-     
-     if(this.directionMove==="left"&&this.movementOngoing===false){
-      can.ctx.drawImage(this.image,this.animation,510,200,200,this.posX,this.posY,this.size,this.size)
+        can.ctx.fillRect(this.posX,this.posY-25,this.percentageHp,10)
+        can.ctx.strokeRect(this.posX,this.posY-25,50,10)
+ 
+     can.ctx.strokeRect(this.posX,this.posY,this.size,this.size)
+     if(this.directionMove==="up" || this.directionMove==="down"){
+      can.ctx.drawImage(this.image,0,0,250,240,this.posX,this.posY,this.size,this.size)
       
      }
-     if(this.directionMove==="right"&&this.movementOngoing===false){
-      can.ctx.drawImage(this.image,this.animation,0,200,200,this.posX,this.posY,this.size,this.size)
-      
-     }
-     if(this.directionMove==="up"){
-      can.ctx.drawImage(this.image,this.animation,0,200,200,this.posX,this.posY,this.size,this.size)
-      
-     }
-     if(this.movementOngoing===true&&this.directionMove==="left"){
-      can.ctx.drawImage(this.image,1000,510,200,200,this.posX,this.posY,this.size,this.size)
-     }
-     if(this.movementOngoing===true&&this.directionMove==="right"){
-      can.ctx.drawImage(this.image,0,0,200,200,this.posX,this.posY,this.size,this.size)
-     }
+     if(this.directionMove==="left"){
    
-     
+      can.ctx.drawImage(this.image,this.animation,500,250,240,this.posX,this.posY,this.size,this.size)
+    
+      if(this.animation>=1000){
+        this.animation=0
+      }
+     }
+     if(this.directionMove==="right")
+   
+     can.ctx.drawImage(this.image,this.animation,750,250,240,this.posX,this.posY,this.size,this.size)
+    
+     if(this.animation>=1000){
+       this.animation=0
+     }
     }
     moveUp(){
   
@@ -118,14 +121,14 @@ export class Player{
       
   this.directionMove="up"
   this.directionAttack="up"
-  this.movementOngoing=false
+
 
     }
 
     moveLeft(){
       
-   
-            this.animation+=200
+      
+            this.animation+=250
             if(this.animation>=1200){
               this.animation=0
             }
@@ -136,12 +139,12 @@ export class Player{
             if(this.left===true){
               this.posX-=this.speed
             }
-            this.movementOngoing=false
+          
            
        
     }
     moveRight(){
-           this.animation+=200
+           this.animation+=250
            if(this.animation>=1200){
             this.animation=0
            }
@@ -152,17 +155,26 @@ export class Player{
             if(this.right===true){
               this.posX+=this.speed
             }
-            this.movementOngoing=false
+            
 }
 moveDown(){
   this.directionMove="down"
   this.directionAttack="down"
-  this.movementOngoing=false
+  
 
 }
 
-fire(xDirection,yDirection){
-this.bullet.push(new Glock(this.posX,this.posY,xDirection,yDirection))
+fire(){
+if(this.GUN.glock.choosen===true&&this.GUN.glock.available===true&&this.GUN.glock.ammo>0){
+  this.GUN.glock.ammo-=1
+  this.bulletGlockArray.push(new Glock(this.posX+this.size/2,this.posY+this.size/2,this.directionAttack))
+
+}
+if(this.GUN.dynamite.choosen===true&&this.GUN.dynamite.available===true&&this.GUN.dynamite.ammo>0){
+  this.GUN.dynamite.ammo-=1
+  this.dynamitsArray.push(new Dynamite(this.posX+this.size/2,this.posY-10,this.directionAttack))
+
+}
 
 }
 

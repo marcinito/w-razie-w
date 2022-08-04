@@ -4,7 +4,7 @@ export const ammoFromPlayerVsDragon=(arrayDragon,player)=>{
 
     arrayDragon.forEach((monster,indexMonster,arrayMONSTER)=>{
 
-        player.bullet.forEach((bullet,indexBullet,arrayBullet)=>{
+        player.bulletGlockArray.forEach((bullet,indexBullet,arrayBullet)=>{
             if(bullet.posX+bullet.size<monster.posX || bullet.posX>monster.posX+monster.size||
                 bullet.posY>monster.posY+monster.size || bullet.posY+bullet.size<monster.posY){
                     //NO COLLISION

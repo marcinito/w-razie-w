@@ -1,6 +1,7 @@
 import { handleHp } from "../../Functions/helpFunction/handleHp"
+import { goldenCoin } from "../ITEMSonMAP/goldenCoin/goldenCoin"
 
-export const whenFireBallFromDragonTouchWallOrPlayer=(monster,player,WALL,can)=>{
+export const whenFireBallFromDragonTouchWallOrPlayer=(monster,player,WALL,can,itemsOnMap)=>{
 //IF FIRE BALL MEET WALL BLOCK
 
 WALL.forEach((titleArray,indexTitleArray,arrayWall)=>{
@@ -12,9 +13,13 @@ monster.fireBall.forEach((ball,indexBall,arrayBall)=>{
     //fire ball no collision with title
         }
         else{
+            title.isHitBy="dragonBall"
             title.hp-=monster.attack.wall
             arrayBall.splice(indexBall,1)
-            if(title.hp<0){
+            if(title.hp<0&&title.isHitBy==="dragonBall"){
+                if(title.name==="goldWall"){
+                        itemsOnMap.push(new goldenCoin(title.posX,title.posY,title.size))
+                }
                 arrayTitle.splice(indexTitle,1)
             }
         }

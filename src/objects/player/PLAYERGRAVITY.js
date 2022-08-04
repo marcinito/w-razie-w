@@ -13,104 +13,106 @@ let pYSize=player.posY+player.size
 //STRENGHT GRAVITY
 player.posY+=player.strenghtGravity
 
-let dwa=0
+
 WALL.forEach((pAW,pAI,wallArray)=>{
     //pE-particular Element wall title
-  pAW.forEach((pE,pI,pArr)=>{
+  pAW.forEach((title,pI,pArr)=>{
 
     //CONTACT PLAYER WITH TITLE FROM WALL
-    if(player.posX+player.size<pE.posX || player.posX>pE.posX+pE.size ||
-         player.posY+player.size<pE.posY || player.posY>pE.posY+pE.size){
+    if(player.posX+player.size<title.posX || player.posX>title.posX+title.size ||
+         player.posY+player.size<title.posY || player.posY>title.posY+title.size){
 
          }
          else{
      
           //HORIZONTAL WALL CONTACT WITH PLAYER
-          if(pE.direction==="horizontal"){
-          
+          if(title.direction==="horizontal"){
+            
       //When player touch horizontal element on top
    
-            if(pYSize>pE.posY-player.size && pE.posY>pY){
+            if(pYSize>title.posY-player.size && title.posY>pY){
               //Gravity dont work when player stand on block
             player.posY-=player.strenghtGravity
             //
               player.down=false
-             pE.color="white"
+             title.color="white"
              player.up=true
              player.stop=true
              player.counterJump=0
+             
+             
 
          
             
              
             }
-         //Block MoveRight on horizontal when meet wall
-            if(pXSize>pE.posX && pE.posY<pYSize &&pXSize<pE.posX+pE.size/2 && player.directionMove==="right"){
-              player.posX=pE.posX-player.size-2
-            
-              // player.right="false"
-              pE.color="red"
-              console.log("HORIZONTAl right")
-             
-            
-            }
             //Move Left
-            if(pX<pE.posX+pE.size&&pX>pE.posX+pE.size/2 && player.directionMove==="left" &&pYSize>pE.posY){
-              player.posX+=player.speed
-              // player.left=false
-            
+            if(player.posX<title.posX+title.size&&player.posX>title.posX+title.size/2&&player.directionMove==="left"
+            &&player.posY+player.size>title.posY&&player.posY+player.size<title.posY+title.size){
+              let deepCollision=title.posX+title.size-player.posX
              
-              pE.color="pink"
+              player.posX+=deepCollision+3
+              console.log("teraz 1")
              
             }
+            if(player.posX<title.posX+title.size&&player.posX>title.posX+title.size/2&&player.directionMove==="left"&&player.posY+player.size>title.posY+title.size){
+              let deepCollision=title.posX+title.size-player.posX
+             
+              
+             console.log("teraz")
+            }
+
+          
       //Block jump when meet down horizontal wall
       //JUMP JUMP
-      if(pY<pE.posY+pE.size+player.size&&pY>pE.posY+pE.size/2){
-        player.posY=pE.posY+pE.size
-        pE.color="black"
+      if(pY<title.posY+title.size+player.size&&pY>title.posY+title.size/2){
+        player.posY=title.posY+title.size
+        title.color="black"
         player.stop=false
         player.up=false
-        pE.color="red"
+        title.color="red"
       }
 
           }
 
           //VERTICAL
-          if(pE.direction==="vertical"){
+          if(title.direction==="vertical"){
           
             //STAND ON TOP
-            if(pYSize>pE.posY-player.size&&pYSize<pE.posY+pE.size){
+            if(pYSize>title.posY-player.size&&pYSize<title.posY+title.size){
               player.down=false
+              player.up=true
               player.posY-=player.strenghtGravity
               player.counterJump=0
+
               
              
             }
 
             //BLOCK RIGHT
-            if(pXSize>pE.posX&&pXSize<pE.posX+pE.size && player.directionMove==="right"&&pYSize>pE.posY){
-              player.posX=pE.posX-player.size-2
+            if(pXSize>title.posX&&pXSize<title.posX+title.size && player.directionMove==="right"&&pYSize>title.posY){
+              player.posX=title.posX-player.size-2
               // player.right=false
-              pE.color="#696969"
+              title.color="#696969"
               console.log("block right..v.")
              
             }
             //BLOCK LEFT
-            if(pX<pE.posX+pE.size&&pX>pE.posX+pE.size/2&&player.directionMove==="left"&&pYSize>pE.posY){
-              let collisionSize=pE.posX+pE.size-player.posX
-              player.posX=pE.posX+pE.size+1
+            if(pX<title.posX+title.size&&pX>title.posX+title.size/2&&player.directionMove==="left"&&pYSize>title.posY){
+              let collisionSize=title.posX+title.size-player.posX
+              player.posX=title.posX+title.size+1
              
               // player.left=false
-              pE.color="darkblue"
+              title.color="darkblue"
               console.log("block left")
               
 
             }
-            //JUMP JUMP
-            if(pY<pE.posY+pE.size&&pY>pE.posY+pE.size/2&&player.directionMove=="up"){
-              player.posY=pE.posY+pE.size+2
-              pE.color="yellow"
-              player.up=false
+            // BLOCK JUMP JUMP
+            if(pY<title.posY+title.size&&pY>title.posY+title.size/2&&player.directionMove=="up"){
+              player.posY=title.posY+title.size+2
+              title.color="yellow"
+              console.log("wykonuje sie")
               
              
               

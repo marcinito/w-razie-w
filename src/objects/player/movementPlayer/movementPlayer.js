@@ -1,6 +1,5 @@
-import { plainWall } from "../../plainWall"
-import { solidWall } from "../../solidWall"
-
+import { plainWall } from "../../WALL/plainWall/plainWall"
+import { solidWall } from "../../WALL/solidWall/solidWall"
 
 
 
@@ -12,7 +11,7 @@ const POINTER=document.querySelector(".viewFinderImg")
 export const movementPlayer=(player,imgTitleFromMenu)=>{
     
     window.addEventListener("keydown",(e)=>{
-        console.log(player.directionMove)
+        
         if(e.keyCode===37){
                
                 player.moveLeft()
@@ -38,15 +37,15 @@ if(e.keyCode===81){
 
     //HANDLE MENU WITH TITLE TO BUILD NEW TITLE ON MAP
     window.addEventListener("keyup",(e)=>{
-        console.log(e.keyCode)
+  
         //JUMP
         if(e.keyCode===38){
-            if(player.counterJump<2){
+            if(player.counterJump<1){
                 player.moveUp()
                 player.counterJump++
             }
         
-            if(player.counterJump>2){
+            if(player.counterJump>1){
                 player.up=false
                 
             }
@@ -84,8 +83,14 @@ if(e.keyCode===81){
      }
 if(e.keyCode===81){
 //Q take GLOCK
-player.mode="fireFire"
+player.GUN.glock.choosen=true
+player.GUN.dynamite.choosen=false
 }
+if(e.keyCode===87){
+    //W take dynamite
+    player.GUN.glock.choosen=false
+    player.GUN.dynamite.choosen=true
+    }
 
 
 
@@ -95,18 +100,16 @@ player.mode="fireFire"
         //PLAIN WALL IS BUILDING
       if(player.mode==="buildingWall"){
         if(player.building.plainWall.quantity>0 && player.building.plainWall.canIBuild===true){
-            player.blockToBuild.push(new plainWall(e.x-35,e.y-35,60,"red","horizontal"))
+            player.blockToBuild.push(new plainWall(e.x-35,e.y-35,65,"red","horizontal"))
             player.building.plainWall.quantity-=1
         }
         // SOLID WALL IS BUILDING
         if(player.building.solidWall.quantity>0 && player.building.solidWall.canIBuild===true){
-            player.blockToBuild.push(new solidWall(e.x-30,e.y-30,60,"red","horizontal"))
+            player.blockToBuild.push(new solidWall(e.x-30,e.y-30,65,"red","horizontal"))
             player.building.solidWall.quantity-=1
         }
       }
-      if(player.mode==="fireFire"){
-        player.fire(e.x,e.y)
-      }
+     
     })
     window.addEventListener("mousemove",(e)=>{
 

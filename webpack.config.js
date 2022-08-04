@@ -56,6 +56,7 @@ module: {
       },
     ],
   },
+
 devServer:{
     static:path.join(__dirname,"dist"),
     port:3001,

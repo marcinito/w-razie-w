@@ -1,7 +1,7 @@
-import one from '../images/solidWall/100SolidBlock.png'
-import two from '../images/solidWall/80SolidBlock.png'
-import three from '../images/solidWall/50SolidBlock.png'
-import four from '../images/solidWall/20SolidBlock.png'
+import one from './images/100SolidBlock.png'
+import two from './images/80SolidBlock.png'
+import three from './images/50SolidBlock.png'
+import four from './images/20SolidBlock.png'
 
 let block1=new Image(100,100)
 let block2=new Image(100,100)
@@ -18,25 +18,30 @@ export class solidWall{
         this.posY=posY
         this.size=size
         this.color=color
-        this.type="static"
+        this.isHit="null"
         this.name="solidWall"
         this.direction=direction
         this.image=[block1,block2,block3,block4]
-        this.hp=25
-        
+        this.hp=26
+        this.isHitBy="null"
     }
     draw(can){
-      if(this.hp===25 || this.hp<25 || this.hp===20){
+      let hpRate=this.hp-1
+      if(hpRate>19){
         can.ctx.drawImage(this.image[0],this.posX,this.posY,this.size,this.size)
+        return
       }
-      if(this.hp===19||this.hp<19||this.hp==12){
+      if(hpRate>11){
         can.ctx.drawImage(this.image[1],this.posX,this.posY,this.size,this.size)
+        return
       }
-      if(this.hp===11 || this.hp<11 ){
+      if(hpRate>5){
         can.ctx.drawImage(this.image[2],this.posX,this.posY,this.size,this.size)
+        return
       }
-      if(this.hp===5 || this.hp<5 ){
+      if(hpRate>0||hpRate===0 ){
         can.ctx.drawImage(this.image[3],this.posX,this.posY,this.size,this.size)
+        return
       }
          
     }
