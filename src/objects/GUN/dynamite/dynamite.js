@@ -31,7 +31,7 @@ export class Dynamite{
 
     draw(can,arrBullet){
     
-   can.ctx.strokeRect(this.posX,this.posY,this.size,this.size)
+  
         
         //THROW IN RIGHT DIRECTION
         if(this.directionAttack==="right"){

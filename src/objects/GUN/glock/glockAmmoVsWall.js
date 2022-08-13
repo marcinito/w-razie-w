@@ -1,4 +1,7 @@
 import { goldenCoin } from "../../ITEMSonMAP/goldenCoin/goldenCoin"
+import { magmaWallItems } from "../../ITEMSonMAP/magmaWall/magmaWallItems"
+import { plainWallItems } from "../../ITEMSonMAP/plainWall/plainWallItems"
+import { solidWallItems } from "../../ITEMSonMAP/solidWall/solidWallItems"
 
 export const glockAmmoVsWall=(player,WALL,can,itemsOnMap)=>{
    
@@ -7,20 +10,32 @@ export const glockAmmoVsWall=(player,WALL,can,itemsOnMap)=>{
     arrayWithTitle.forEach((title,tI,tArr)=>{
     
 
-        if(title.hp<0 && title.isHitBy==="glock"){
-           console.log("wykonwalo sie tak czy siak")
+        if(title.isHitBy==="glock"&&title.hp<0 || title.hp===0){
+        
                 if(title.name==="plainWall"){
-                    player.building.plainWall.quantity+=1
+                    
+                    if(itemsOnMap!==undefined){
+                        itemsOnMap.push(new plainWallItems(title.posX,title.posY,title.size))
+                    }
                 }
                 if(title.name==="solidWall"){
-                    player.building.solidWall.quantity+=1
+                    
+                    if(itemsOnMap!==undefined){
+                        itemsOnMap.push(new solidWallItems(title.posX,title.posY,title.size))
+                    }
                 }
                 if(title.name==="magmaWall"){
-                    player.building.magmaWall.quantity+=1
+                    if(itemsOnMap!==undefined){
+                        itemsOnMap.push(new magmaWallItems(title.posX,title.posY,title.size))
+                    }
                 }
                 if(title.name==="goldWall"){
-                    itemsOnMap.push(new goldenCoin(title.posX,title.posY,title.size))
+                   
+                    if(itemsOnMap!==undefined){
+                        itemsOnMap.push(new goldenCoin(title.posX,title.posY,title.size))
+                    }
                 }
+             
              
                 tArr.splice(tI,1)
             
@@ -34,9 +49,12 @@ export const glockAmmoVsWall=(player,WALL,can,itemsOnMap)=>{
             //NO COLLISION
         }
         else{
+     
         tArr[tI].hp-=1
         tArr[tI].isHitBy="glock"
+        
         bArr.splice(bArr[bI],1)
+        
         
         
         

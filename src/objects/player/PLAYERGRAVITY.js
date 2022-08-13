@@ -2,14 +2,6 @@ export const PLAYERGRAVITY=(player,WALL,can)=>{
 
 //paW- particular array with wall
 
-
-
-let pX=player.posX
-let pXSize=player.posX+player.size
-let pY=player.posY
-let pYSize=player.posY+player.size
-
-
 //STRENGHT GRAVITY
 player.posY+=player.strenghtGravity
 
@@ -30,45 +22,44 @@ WALL.forEach((pAW,pAI,wallArray)=>{
             
       //When player touch horizontal element on top
    
-            if(pYSize>title.posY-player.size && title.posY>pY){
+            if(player.posY+player.size>title.posY-1 && title.posY>player.posY&&player.posY+player.size<title.posY+title.size/2){
               //Gravity dont work when player stand on block
-            player.posY-=player.strenghtGravity
+   
+            let deepCollision=player.posY+player.size-title.posY
+            player.posY-=deepCollision
+           
+              
             //
               player.down=false
              title.color="white"
              player.up=true
-             player.stop=true
              player.counterJump=0
-             
-             
-
-         
-            
-             
             }
             //Move Left
             if(player.posX<title.posX+title.size&&player.posX>title.posX+title.size/2&&player.directionMove==="left"
-            &&player.posY+player.size>title.posY&&player.posY+player.size<title.posY+title.size){
+            &&player.posY+player.size>title.posY){
               let deepCollision=title.posX+title.size-player.posX
-             
+              player.up=false
               player.posX+=deepCollision+3
-              console.log("teraz 1")
+              console.log("move left player")
              
             }
-            if(player.posX<title.posX+title.size&&player.posX>title.posX+title.size/2&&player.directionMove==="left"&&player.posY+player.size>title.posY+title.size){
-              let deepCollision=title.posX+title.size-player.posX
-             
-              
-             console.log("teraz")
+            //move right
+            if(player.posX+player.size>title.posX&&player.posX+player.size<title.posX+title.size/2&&player.directionMove==="right"&&
+            player.posY+player.size>title.posY){
+              let deepCollision=player.posX+player.size-title.posX
+              player.posX-=deepCollision+3
+              player.up=false
+              console.log("move right player")
             }
-
           
       //Block jump when meet down horizontal wall
       //JUMP JUMP
-      if(pY<title.posY+title.size+player.size&&pY>title.posY+title.size/2){
+      if(player.posY<title.posY+title.size+3&&player.posY>title.posY+title.size/2){
         player.posY=title.posY+title.size
         title.color="black"
-        player.stop=false
+      //  
+        player.stop=true
         player.up=false
         title.color="red"
       }
@@ -79,41 +70,47 @@ WALL.forEach((pAW,pAI,wallArray)=>{
           if(title.direction==="vertical"){
           
             //STAND ON TOP
-            if(pYSize>title.posY-player.size&&pYSize<title.posY+title.size){
+            if(player.posY+player.size>title.posY-1&&player.posY+player.size<title.posY+title.size/2){
               player.down=false
               player.up=true
-              player.posY-=player.strenghtGravity
               player.counterJump=0
+              let deepCollision=player.posY+player.size-title.posY
+              player.posY-=deepCollision
+            
 
               
              
             }
 
             //BLOCK RIGHT
-            if(pXSize>title.posX&&pXSize<title.posX+title.size && player.directionMove==="right"&&pYSize>title.posY){
-              player.posX=title.posX-player.size-2
-              // player.right=false
+            if(player.posX+player.size>title.posX&&player.posX+player.size<title.posX+title.size && player.directionMove==="right"
+            &&player.posY+player.size>title.posY){
+              let deepCollision=player.posX+player.size-title.posX
+              player.posX-=deepCollision+3
+
+              player.up=false
               title.color="#696969"
               console.log("block right..v.")
              
             }
             //BLOCK LEFT
-            if(pX<title.posX+title.size&&pX>title.posX+title.size/2&&player.directionMove==="left"&&pYSize>title.posY){
-              let collisionSize=title.posX+title.size-player.posX
-              player.posX=title.posX+title.size+1
-             
-              // player.left=false
+            if(player.posX<title.posX+title.size&&player.posX>title.posX+title.size/2&&player.directionMove==="left"&&player.posY+player.size>title.posY){
+          
+              let deepCollision=title.posX+title.size-player.posX
+              player.posX+=deepCollision+3
+              player.up=false
+              
               title.color="darkblue"
               console.log("block left")
               
 
             }
             // BLOCK JUMP JUMP
-            if(pY<title.posY+title.size&&pY>title.posY+title.size/2&&player.directionMove=="up"){
+            if(player.posY<title.posY+title.size&&player.posY>title.posY+title.size/2&&player.directionMove=="up"){
               player.posY=title.posY+title.size+2
               title.color="yellow"
               console.log("wykonuje sie")
-              
+              player.up=false
              
               
             }

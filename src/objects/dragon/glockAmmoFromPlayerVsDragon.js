@@ -1,6 +1,6 @@
 import { handleHp } from "../../Functions/helpFunction/handleHp"
 
-export const ammoFromPlayerVsDragon=(arrayDragon,player)=>{
+export const glockAmmoFromPlayerVsDragon=(arrayDragon,player)=>{
 
     arrayDragon.forEach((monster,indexMonster,arrayMONSTER)=>{
 
@@ -10,12 +10,9 @@ export const ammoFromPlayerVsDragon=(arrayDragon,player)=>{
                     //NO COLLISION
                 }
                 else{
+                    
                     monster.hp-=bullet.strenghtAttack
-                 
                     monster.percentageHp-=handleHp(bullet.strenghtAttack,monster)
-                  console.log(monster.hp,"hp")
-                  console.log(bullet.strenghtAttack,"powerOfAttack")
-                  console.log(monster.percentageHp,"percentage")
                     arrayBullet.splice(indexBullet,1)
                     if(monster.hp<0){
                         arrayMONSTER.splice(indexMonster,1)

@@ -4,25 +4,42 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bahianita&family=Inconsolata:wght@200;400&family=Inspiration&family=Rubik:wght@300&display=swap" rel="stylesheet">
     <title>LuRcH</title>
 </head>
 <body>
+    <img class="bodys">
     <div class="viewFinder">
         <img class='viewFinderImg'/>
     </div>
     <canvas id="canvas"></canvas>
     <div class="menuEq">
-        <div class="blockTitleMenu">
-            <div class="slot one"><img class="imgTitle"/><div class="quantity"></div></div>
-            <div class="slot two"><img class="imgTitle"/><div class="quantity"></div></div>
-            <div class="slot three"><img class="imgTitle"/><div class="quantity"></div></div>
-            <div class="slot four"><img class="imgTitle"/><div class="quantity"></div></div>
+   
+        <div class="insideBp">
+            <div class="bpPlace" id="1"><img class="slotBp 1" data-empty="true" ></img><span class="ammoQuantity"></span></div>
+            <div class="bpPlace" id="2"><img class="slotBp 2" data-empty="true"></img><span class="ammoQuantity"></span></div>
+            <div class="bpPlace" id="3"><img class="slotBp 3" data-empty="true"></img><span class="ammoQuantity"></span></div>
+            <div class="bpPlace" id="4"><img class="slotBp 4" data-empty="true"></img><span class="ammoQuantity"></span></div>
+            <div class="bpPlace" id="5"><img class="slotBp 5" data-empty="true"></img><span class="ammoQuantity"></span></div>
+            <div class="bpPlace" id="6"><img class="slotBp 6" data-empty="true"></img><span class="ammoQuantity"></span></div>
+            <div class="bpPlace" id="7"><img class="slotBp 6" data-empty="true"></img><span class="ammoQuantity"></span></div>
+            <div class="bpPlace" id="8"><img class="slotBp 6" data-empty="true"></img><span class="ammoQuantity"></span></div>
+           
+         
         </div>
-        <div class="gunMenu">
-            <div class="slot one"><img class="gunImg"><div class="ammo"></div></div>
-            <div class="slot one"><img class="gunImg"><div class="ammo"></div></div>
-            <div class="slot one"><img class="gunImg"><div class="ammo"></div></div>
-
+    </div>
+    <div class="mainMenu">
+        <canvas id="canvasMenu"></canvas>
+        <img class="bug1">
+        <img class="tloStrony">
+        <div class="logo"></div>
+        <div class="panelOption">
+            <button class="btn startGame">Start Game</button>
+            <button class="btn">Instruction</button>
+            <button class="btn">Story</button>
+            <button class="btn">Settings</button>
         </div>
     </div>
 

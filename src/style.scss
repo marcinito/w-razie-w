@@ -6,9 +6,10 @@
     
 }
 body{
-    background-color: skyblue;
+  
     display:flex;
-   
+    
+    background-size: 100%;
     flex-direction: column;
     max-height:100%;
   
@@ -16,7 +17,10 @@ body{
     height:100%;
     left:0;
     overflow:hidden;
-    cursor:none;
+    background-color:skyblue;
+   
+    
+   
     
 }
 
@@ -27,74 +31,131 @@ body{
         width:30px;
         height:30px;
         opacity:1;
-        z-index:20
+        z-index:-20;
         
     }
 }
 #canvas{
     border:1px solid black;
     position:absolute;
+    
+    
+    
 }
 .menuEq{
-    width:30%;
-    height:10%;
+    width:70%;
+    height:5%;
     background-color: green;
     position: absolute;
-    right:0;
-    opacity:0.7;
-    display:grid;
-    grid-template-columns:60% 40% ;
+    bottom:5%;
+    left:50%;
+    transform:translateX(-50%);
+    opacity:1;
    
-    .blockTitleMenu{
+   
+    
+
+.insideBp{
+    width:100%;
+    height:200%;
+    background-color: brown;
+    
+    border:5px solid black;
+  
+  display:flex;
+   
+ .bpPlace{
+    width:20%;
+    height:100%;
+    border:3px solid darkblue;
+    .slotBp{
+        border:1px solid black;
+        background-color: darkorange;
+        width:100%;
+        height:100%;
+        position:relative;
+        
+    }
+    .ammoQuantity{
+       
+        color:white;
+        font-weight:bold;
+       
+        width:30%;
+        height:20%;
+        background-color: blue;
+        position:relative;
+        top:-40%;
+
+
+    }
+ }
+}
+
+}
+.mainMenu{
+    position:absolute;
+    width:100%;
+    height:100%;
+    opacity:1;
+    cursor:pointer;
+    z-index:10;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+  #canvasMenu{
+    
+    
+    position:absolute;
+  }
+    .tloStrony{
+        width:80%;
+      
+        position:absolute;
+        left:50%;
+        transform:translateX(-50%);
+        // filter:blur(3px) grayscale(50%);
+       
+    }
+    .logo{
         height:100%;
         width:100%;
-        background-color: plum;
-        display:flex;
-        .slot{
-            width:25%;
-            height:100%;
-            border:1px solid black;
-            display: flex;
-            justify-content: center;
-            font-size:11px;
-            font-weight:bold;
-            flex-direction: column;
-           
-            .imgTitle{
-            width:99%;
-            height:80%;
-            }
-            .quantity{
-                display:flex;
-                .number{
-                    -webkit-text-stroke:1px red
-                }
-            }
-          
-        }
+        position:absolute;
+        top:0;
+       
+        background-color:black;
      
-
+       opacity:0.3;
+      
+      
+        
     }
-
-.gunMenu{
-    
-height:100%;
-width:100%;
-background-color: darkblue;
-display:flex;
-
-.slot{
-    width:33%;
-    height:100%;
-    border:1px solid red;
-    .gunImg{
-        width:100%;
-        height:80%;
+    .panelOption{
+        position:absolute;
+       
+        width:60%;
+        height:70%;
+        opacity:0.6;
+        background-color: green;
+        left:50%;
+        top:20%;
+        transform:translateX(-50%);
+        // filter: invert(20%);
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        border:5px solid black;
+        
+        border-radius: 10%;
+        .btn{
+            z-index:10;
+            width:50%;
+            height:20%;
+            font-size:50px;
+            font-family: 'Bahianita', cursive;
+            margin-top:2%;
+        }
     }
-
-}
-}
-
 }
 
 

@@ -9,6 +9,7 @@ export class goldenCoin{
         this.size=size-20
         this.image=coin
         this.layOnMap=true
+        this.name="goldenCoin"
       
         
        

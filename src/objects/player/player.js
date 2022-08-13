@@ -1,18 +1,22 @@
 import { Dynamite } from "../GUN/dynamite/dynamite"
 import { Glock } from "../GUN/glock/glock"
+import { Axe } from "../GUN/axe/axe"
 import playerImageFile from './playerSprite.png'
+import { updateEqDashboard } from "./shorthandFunction/updateEqDashboard"
+
 const playerImage=new Image(100,100)
 playerImage.src=playerImageFile
 export class Player{
     constructor(){
         this.posX=300
-        this.posY=500
+        this.posY=20
         this.size=40.7
         this.color="blue"
         //IMAGE PLAYER
         this.image=playerImage
         this.animation=0
-        this.money=0
+       
+        
        
        
         this.id="player"
@@ -30,8 +34,10 @@ export class Player{
         this.right=true
  
         //JUMP HANDLE
-   this.powerJump=20
+   this.powerJump=40
    this.counterJump=0
+   this.stop=false
+  
 
    //HP
    this.hpTotal=100
@@ -43,15 +49,28 @@ export class Player{
    this.quantityLive=3
 
 
-   //MODE DASHBOARD
-   this.mode="fireFire"
+     //backpack
+     this.whatIsInHand="glock"
+     this.backpack={
+      money:{amount:0,itemInBp:false},
+      axe:{amount:0,itemInBp:false,ammo:"∞",},
+      glock:{amount:0,itemInBp:false,ammo:21212,},
+      dynamite:{amount:0,itemInBp:false,ammo:0,},
+      solidWall:{amount:0,itemInBp:false,ammo:0,},
+      plainWall:{amount:0,itemInBp:false,ammo:0,},
+      magmaWall:{amount:0,itemInBp:false,ammo:0,},
+     }
+
+
    //BUILDIN NEW BLOCK
-   this.building={plainWall:{quantity:3,canIBuild:false},solidWall:{quantity:3,canIBuild:false},magmaWall:{quantity:3,canIBuild:false}}
+    this.mode=true
    this.blockToBuild=[]
        //gun
-       this.GUN={glock:{choosen:true,available:true,ammo:102332},dynamite:{choosen:false,available:true,ammo:52112}}
+    
        this.bulletGlockArray=[]
        this.dynamitsArray=[]
+       this.axeArray=[]
+  
        
        
 
@@ -60,6 +79,8 @@ export class Player{
  
       can.ctx.fillStyle="green"
         can.ctx.fillRect(this.posX,this.posY-25,this.percentageHp,10)
+        can.ctx.lineWidth=1
+        can.ctx.strokeStyle="black"
         can.ctx.strokeRect(this.posX,this.posY-25,50,10)
  
      can.ctx.strokeRect(this.posX,this.posY,this.size,this.size)
@@ -84,29 +105,40 @@ export class Player{
      }
     }
     moveUp(){
-  
+  this.stop=false
       if(this.up===true){
         this.posY-=this.powerJump
       setTimeout(()=>{
-        if(this.stop===true){
+        
+         if(this.stop===false){
           this.posY-=this.powerJump
-        }
+         }
+        
         setTimeout(()=>{
-          if(this.stop===true){
+        
+          if(this.stop===false){
             this.posY-=this.powerJump
-          }
+           }
+          
           setTimeout(()=>{
-            if(this.stop===true){
+           
+            if(this.stop===false){
               this.posY-=this.powerJump
-            }
+             }
+            
             setTimeout(()=>{
-              if(this.stop===true){
+             
+              if(this.stop===false){
                 this.posY-=this.powerJump
-              }
+               }
+                
+              
               setTimeout(()=>{
-                if(this.stop===true){
+              
+                if(this.stop===false){
                   this.posY-=this.powerJump
-                }
+                 }
+                
               },20)
             },20)
           },20)
@@ -126,7 +158,7 @@ export class Player{
     }
 
     moveLeft(){
-      
+      this.strenghtGravity=2
       
             this.animation+=250
             if(this.animation>=1200){
@@ -165,15 +197,28 @@ moveDown(){
 }
 
 fire(){
-if(this.GUN.glock.choosen===true&&this.GUN.glock.available===true&&this.GUN.glock.ammo>0){
-  this.GUN.glock.ammo-=1
-  this.bulletGlockArray.push(new Glock(this.posX+this.size/2,this.posY+this.size/2,this.directionAttack))
-
+if(this.whatIsInHand==="axe"){
+  
+  if(this.backpack.axe.ammo>0){
+    if(this.axeArray.length<1){
+        this.axeArray.push(new Axe())
+    }
+  }
 }
-if(this.GUN.dynamite.choosen===true&&this.GUN.dynamite.available===true&&this.GUN.dynamite.ammo>0){
-  this.GUN.dynamite.ammo-=1
-  this.dynamitsArray.push(new Dynamite(this.posX+this.size/2,this.posY-10,this.directionAttack))
-
+if(this.whatIsInHand==="glock"){
+  if(this.backpack.glock.ammo>0){
+    let slot
+    this.bulletGlockArray.push(new Glock(this.posX,this.posY,this.directionMove))
+    this.backpack.glock.ammo-=1
+updateEqDashboard("glock",this.backpack)
+  }
+}
+if(this.whatIsInHand==="dynamite"){
+  if(this.backpack.dynamite.ammo>0){
+    this.dynamitsArray.push(new Dynamite(this.posX,this.posY,this.directionMove))
+    this.backpack.dynamite.ammo-=1
+    updateEqDashboard("dynamite",this.backpack)
+  }
 }
 
 }

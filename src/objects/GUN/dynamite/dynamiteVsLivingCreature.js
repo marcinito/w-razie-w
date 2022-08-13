@@ -14,9 +14,12 @@ player.dynamitsArray.forEach((dynamite,indexDynamit,arrayDynamit)=>{
         }
         else{
            
+          if(dynamite.timeToExplode<0){
             monster.hp-=dynamite.strenghtAttack
-                 
-                    monster.percentageHp-=handleHp(dynamite.strenghtAttack,monster)
+            console.log(monster)
+            console.log(monster.hp)
+               monster.percentageHp-=handleHp(dynamite.strenghtAttack,monster)
+          }
                     
                     if(monster.hp<0){
                         arrMonster.splice(indexMonster,1)

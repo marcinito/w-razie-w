@@ -58,6 +58,8 @@ if(changeImage===3){
 }
 can.ctx.fillStyle="yellow"
 can.ctx.fillRect(this.posX,this.posY-5,this.percentageHp,5)
+can.ctx.lineWidth=1
+can.ctx.strokeStyle="black"
 can.ctx.strokeRect(this.posX,this.posY-5,this.size,5)
 if(this.direction==="left"){
     can.ctx.drawImage(this.image,this.animationEffect,483,191,161,this.posX,this.posY,130,this.size)

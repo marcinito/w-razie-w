@@ -38,6 +38,8 @@ export class Ghost{
     draw(can){
         can.ctx.fillStyle="red"
         can.ctx.fillRect(this.posX,this.posY-5,this.percentageHp,5)
+        can.ctx.lineWidth=1
+        can.ctx.strokeStyle="black"
         can.ctx.strokeRect(this.posX,this.posY-5,50,5)
         can.ctx.drawImage(this.image,this.posX,this.posY,this.size,this.size)
     }
