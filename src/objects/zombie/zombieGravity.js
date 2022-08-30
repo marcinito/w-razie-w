@@ -1,7 +1,7 @@
 import { random } from "../../Functions/helpFunction/random"
 import { zombieTouchAnotherZombie } from "./zombieTouchAnotherZombie"
 
-export const zombieGravity=(WALL,zombieArr)=>{
+export const zombieGravity=(WALL,zombieArr,can)=>{
 //GRAVITY ZOMBIE
 zombieArr.forEach((zombie,i,arr)=>{
     zombie.posY+=zombie.strenghtGravity
@@ -81,6 +81,12 @@ particularArray.forEach((title,indexTitle,particularArrayArray)=>{
                 }
                }
                 
+            }
+            if(zombie.posX<0){
+                zombie.directionMove="right"
+            }
+            if(zombie.posX+zombie.size>can.C_W){
+                zombie.directionMove="left"
             }
 
     })

@@ -6,7 +6,7 @@ setInterval(()=>{
 counter+=1
 },25)
 export const zombieTouchAnotherZombie=(zA)=>{
-    zA
+    
 zA.forEach((el,i,arr)=>{
     if(counter%100===0){
       if(i<arr.length-1){

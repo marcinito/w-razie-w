@@ -6,13 +6,29 @@ import {FireBallAttackFromMonster} from '../dragon/fireBallAttackFromMonster'
 let dragon=new Image(100,100)
 dragon.src=dragonImg 
 
+let changeImage=0
+setInterval(()=>{
+changeImage++
+if(changeImage>=3){
+    changeImage=0
+    
+}
+},150)
 
+//COUNTER is equivalent how often dragon attack from fire ball
+let counter=0
+setInterval(()=>{
+counter++
+if(counter>=3){
+    counter=0
+}
+},1000)
 
 
 export class Dragon{
-    constructor(){
-        this.posX=100
-        this.posY=100
+    constructor(posX,posY){
+        this.posX=posX
+        this.posY=posY
         this.size=130
         this.type="dynamic"
         this.id="monsterFly"
@@ -26,7 +42,7 @@ export class Dragon{
         this.directionCrossArr=["negative","positive","null"]
         this.directionCross=random(this.directionCrossArr)
         this.direction=random(this.directionArr)
-        this.speed=0
+        this.speed=1
          //direct
          this.left=true
          this.right=true
@@ -36,7 +52,7 @@ export class Dragon{
         //atack
         this.fireBall=[]
         //HP
-        this.hpTotal=553
+        this.hpTotal=800
         this.hp=this.hpTotal
         this.percentageHp=this.size
         this.ratePercentage=this.size
@@ -44,7 +60,7 @@ export class Dragon{
 
 
     }
-    draw(can,changeImage){
+    draw(can){
       
 if(changeImage===1){
 this.animationEffect=0
@@ -145,7 +161,7 @@ if(this.direction==="down"){
             }
               
             }
-attackFireBall(counter,can){
+attackFireBall(can){
 
     if(counter%5===0 && this.fireBall.length<1){
     

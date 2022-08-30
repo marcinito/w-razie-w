@@ -1,4 +1,6 @@
 import { handleHp } from "../../../Functions/helpFunction/handleHp"
+import { monsterDropItem } from "../../../Functions/helpFunction/monsterDropItem"
+import { itemsOnMap } from "../../../main"
 export const dynamiteVsLivingCreature=(MONSTER,player)=>{
 //DYNAMITE HIT MONSTER
 MONSTER.forEach((particularArray,index,arr)=>{
@@ -22,6 +24,7 @@ player.dynamitsArray.forEach((dynamite,indexDynamit,arrayDynamit)=>{
           }
                     
                     if(monster.hp<0){
+                        monsterDropItem(monster,itemsOnMap)
                         arrMonster.splice(indexMonster,1)
                     }
         }

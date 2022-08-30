@@ -7,7 +7,15 @@ const path=require("path")
 module.exports={
     mode:"development",
 entry:{
-    main:'./src/main.js'
+    main:{
+      import:'./src/main.js',
+      
+    },
+    instruction:{
+      import:'./src/instruction.js',
+    
+
+    }
 },
 output:{
     path:path.resolve(__dirname,"dist"),
@@ -18,8 +26,16 @@ plugins:[
        template:'./src/index.html',
        filename:"index.html",
        inject:"body",
+       chunks:['main']
 
     }),
+    new HtmlWebpackPlugin({
+      template:'./src/instruction.html',
+      filename:"instruction.html",
+      inject:"body",
+      chunks:['instruction'],
+
+   }),
    
 ],
 module: {
@@ -31,18 +47,8 @@ module: {
         use: ["style-loader", "css-loader"],
       },
       {
-        test: /\.(png|jpe?g|gif)$/i,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[ext]',
-              outputPath: 'assets/images/',
-              esModule:false,
-            }
-            
-          },
-        ],
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
       },
       
   
@@ -63,6 +69,10 @@ module: {
           "sass-loader",
         ],
       },
+      {
+        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        type: 'asset/resource',
+      },
 
  
     ],
@@ -73,6 +83,8 @@ devServer:{
     port:3001,
     open:true,
     hot:true,
+    compress:true,
+  
 
 }
 }

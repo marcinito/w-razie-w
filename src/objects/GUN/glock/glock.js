@@ -7,6 +7,7 @@ export class Glock{
         this.name="glock"
         this.strenghtAttack=9.7
         this.directionAttack=directionAttack
+        
     }
     draw(can){
        

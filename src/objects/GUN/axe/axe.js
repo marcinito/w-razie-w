@@ -1,28 +1,59 @@
-import axeImg from './attackAxe.png'
-import { player } from '../../../main'
-const axe=new Image(100,100)
+import axeImgLeft from './attackAxe.png'
+import axeImgRight from './attackAxe-right.png'
 
-axe.src=axeImg
+const axeLeft=new Image(100,100)
+const axeRight=new Image(100,100)
+axeRight.src=axeImgRight
+axeLeft.src=axeImgLeft
 export class Axe{
-    constructor(){
-        this.name="axe"
-      
-        this.image=axe
-        this.strenghtAttack=1
-        
+    constructor(posX,posY,direction,sizePlayer){
         this.size=30
+        this.name="axe"
+      if(direction==="left"){
+        this.posX=posX-35
+        this.posY=posY
+      }
+      if(direction==="right"){
+        this.posX=posX+sizePlayer+5
+        this.posY=posY
+      }
+      if(direction==="down"){
+        this.posX=posX+5
+        this.posY=posY+sizePlayer+5
+      }
+      if(direction==="up"){
+        this.posX=posX+5
+        this.posY=posY-sizePlayer+5
+      }
+       
+        this.image=axeLeft
+        this.strenghtAttack={wall:0.05,monster:0.5}
+        this.direction=direction
+        
+    
      
-        this.lifeCycleAttack=0 //lifeCycle serve as time to expire attack from axe
+   //lifeCycle serve as time to expire attack from axe
+   this.lifeCycleAttack=0
     }
     draw(can,axeCounter){
         this.lifeCycleAttack+=1
-        can.ctx.strokeStyle="red"
-       can.ctx.strokeRect(player.posX-35,player.posY,this.size,this.size)
-        if(player.directionMove==="left"){
-            can.ctx.drawImage(axe,axeCounter*534,0,534,497,player.posX-30,player.posY,this.size,this.size)
+   
+        if(this.direction==="left"){
+            console.log("left")
+            
+            can.ctx.drawImage(axeLeft,axeCounter*534,0,534,497,this.posX,this.posY,this.size,this.size)
         }
-        if(player.directionMove==="right"){
-            can.ctx.drawImage(axe,0,0,534,497,player.posX+player.size,player.posY,this.size,this.size)
+        if(this.direction==="right"){
+            console.log("right")
+            can.ctx.drawImage(axeRight,axeCounter*534,0,534,497,this.posX,this.posY,this.size,this.size)
+        }
+        if(this.direction==="down"){
+            console.log("down")
+            can.ctx.drawImage(axeLeft,axeCounter*534,0,534,497,this.posX,this.posY,this.size,this.size)
+        }
+        if(this.direction==="up"){
+            console.log("down")
+            can.ctx.drawImage(axeLeft,axeCounter*534,0,534,497,this.posX,this.posY,this.size,this.size)
         }
     }
     

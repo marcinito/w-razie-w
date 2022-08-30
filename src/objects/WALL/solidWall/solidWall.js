@@ -24,6 +24,7 @@ export class solidWall{
         this.image=[block1,block2,block3,block4]
         this.hp=26
         this.isHitBy="null"
+        
     }
     draw(can){
       let hpRate=this.hp-1
@@ -42,6 +43,9 @@ export class solidWall{
       if(hpRate>0||hpRate===0 ){
         can.ctx.drawImage(this.image[3],this.posX,this.posY,this.size,this.size)
         return
+      }
+      if(hpRate<1){
+        can.ctx.drawImage(this.image[3],this.posX,this.posY,this.size,this.size)
       }
          
     }

@@ -51,9 +51,13 @@ export const glockAmmoVsWall=(player,WALL,can,itemsOnMap)=>{
         else{
      
         tArr[tI].hp-=1
+        tArr[tI].color="pink"
         tArr[tI].isHitBy="glock"
+       
+
         
         bArr.splice(bArr[bI],1)
+        
         
         
         

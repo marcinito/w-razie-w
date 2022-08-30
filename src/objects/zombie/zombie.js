@@ -5,39 +5,44 @@ let zombieImg=new Image(100,100)
 zombieImg.src=zombieSprite
 let zombieImg2=new Image(100,100)
 zombieImg2.src=zombieSprite2
-
+let zombieMove=0
+setInterval(()=>{
+zombieMove++
+if(zombieMove>7)
+{
+    zombieMove=0
+}
+},100)
 
 export class Zombie{
-    constructor(){
-        this.posX=300+Math.floor(Math.random()*300)
-        this.posY=10
+    constructor(posX,posY){
+        this.posX=posX
+        this.posY=posY
         this.naturalSize=80
         this.size=this.naturalSize
         this.color="darkgreen"
         this.name="zombie"
         this.naturalSpeed=1
         this.speed=0
+       
         this.strenghtGravity=3
         this.strenghtAttack=0.3
-        this.id=(Math.floor(Math.random()*834324))+"qwertyuioplkjhgfsdanzmcbv".slice(Math.floor(Math.random()*15))
+    
         //DIRECTION
         this.directionArr=["left","right"]
         this.directionMove=random(this.directionArr)
         this.isDuringAttackPlayer=false
         this.doFall=false//It serve to draw zombie when he is in air it shows that zombie "fall"
-
-        this.left=true
-        this.right=true
         //OUTFIT
         this.image=zombieImg2
         //hp
-        this.hpTotal=100
+        this.hpTotal=450
         this.hp=this.hpTotal
         this.percentageHp=this.size
         this.ratePercentage=this.size
         
     }
-draw(can,zombieMove){
+draw(can){
     can.ctx.fillStyle=this.color
     can.ctx.fillRect(this.posX,this.posY-10,this.percentageHp,7)
     can.ctx.lineWidth=1
@@ -179,16 +184,16 @@ if(this.directionMove==="left"){
 }
     movement(){
    
-     if(this.left===true){
+    
         if(this.directionMove==="left"){
             this.posX-=this.speed
         }
-     }
-       if(this.right===true){
+     
+     
         if(this.directionMove==="right"){
             this.posX+=this.speed
         }
-       }
+       
 
     }
 }

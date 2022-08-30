@@ -40,9 +40,12 @@ export class magmaWall{
         can.ctx.drawImage(this.image[2],this.posX,this.posY,this.size,this.size)
         return
       }
-      if(hpRate>0||hpRate===0){
+      if(hpRate>0){
         can.ctx.drawImage(this.image[3],this.posX,this.posY,this.size,this.size)
         return
+      }
+      if(hpRate<1){
+        can.ctx.drawImage(this.image[3],this.posX,this.posY,this.size,this.size)
       }
          
     }

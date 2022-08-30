@@ -1,5 +1,8 @@
 import { handleHp } from "../../Functions/helpFunction/handleHp"
 import { goldenCoin } from "../ITEMSonMAP/goldenCoin/goldenCoin"
+import { plainWallItems } from "../ITEMSonMAP/plainWall/plainWallItems"
+import { solidWallItems } from "../ITEMSonMAP/solidWall/solidWallItems"
+import { magmaWallItems } from "../ITEMSonMAP/magmaWall/magmaWallItems"
 
 export const whenFireBallFromDragonTouchWallOrPlayer=(monster,player,WALL,can,itemsOnMap)=>{
 //IF FIRE BALL MEET WALL BLOCK
@@ -19,6 +22,16 @@ monster.fireBall.forEach((ball,indexBall,arrayBall)=>{
             if(title.hp<0&&title.isHitBy==="dragonBall"){
                 if(title.name==="goldWall"){
                         itemsOnMap.push(new goldenCoin(title.posX,title.posY,title.size))
+                }
+                if(title.name==="solidWall"){
+                    itemsOnMap.push(new solidWallItems(title.posX,title.posY,title.size))
+                }
+                if(title.name==="plainWall"){
+                        itemsOnMap.push(new plainWallItems(title.posX,title.posY,title.size))
+                }
+                if(title.name==="magmaWall"){   
+                       itemsOnMap.push(new magmaWallItems(title.posX,title.posY,title.size))
+                    
                 }
                 arrayTitle.splice(indexTitle,1)
             }

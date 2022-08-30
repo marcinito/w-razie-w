@@ -2,7 +2,7 @@ import magmaWallImg from '../../WALL/magmaWall/images/100MagmaBlock.png'
 const magmaWall=new Image(100,100)
 magmaWall.src=magmaWallImg
 export class magmaWallItems{
-    constructor(posX,posY,sizeTitle){
+    constructor(posX,posY,sizeTitle,isDrop,direction){
         this.size=15
         this.posX=posX+sizeTitle/2-this.size/2
         this.posY=posY+sizeTitle/2-this.size/2
@@ -11,6 +11,11 @@ export class magmaWallItems{
         this.image=magmaWall
         this.layOnMap=true
         this.animation=0
+             //When this item is drop from backpack on map
+             this.isDrop=isDrop
+             this.direction=direction
+             this.speedX=1
+             this.strenghtGravity=1
     }
     draw(can){
         this.animation+=1
@@ -23,6 +28,18 @@ export class magmaWallItems{
             
         }
      
+        if(this.isDrop===true){
+
+            if(this.direction==="left"){
+                    
+                    this.posX-=this.speedX
+            }
+            if(this.direction==="right"){
+                    this.posX+=this.speedX
+            }
+                
+                
+            }
 
     }
 }

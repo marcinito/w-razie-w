@@ -25,6 +25,7 @@ export class goldWall{
         this.hp=10
         this.isHitBy="null"
         
+        
     }
     draw(can){
       let hpRate=this.hp-1
@@ -43,6 +44,9 @@ export class goldWall{
       if(hpRate>0||hpRate===0){
         can.ctx.drawImage(this.image[3],this.posX,this.posY,this.size,this.size)
         return
+      }
+      if(hpRate<1){
+        can.ctx.drawImage(this.image[3],this.posX,this.posY,this.size,this.size)
       }
          
     }

@@ -1,8 +1,14 @@
+import { Glock } from "../../GUN/glock/glock"
+import { glockItems } from "../../ITEMSonMAP/glock/glockItems"
 import { magmaWall } from "../../WALL/magmaWall/magmaWall"
 import { plainWall } from "../../WALL/plainWall/plainWall"
 import { solidWall } from "../../WALL/solidWall/solidWall"
+import { countAmmoInGlockInPlayer } from "../shorthandFunction/countAmmoInGlockInPlayer"
+import { displayItemInDetail } from "../shorthandFunction/displayItemInDetail"
+import { dropItemFromBpOnMap } from "../shorthandFunction/dropItemFromBpOnMap"
 import { giveBorderToUsingSlotBp } from "../shorthandFunction/giveBorderToUsingSlotBp"
 import { updateEqDashboard } from "../shorthandFunction/updateEqDashboard"
+
 
 const allSlot=[...document.querySelectorAll(".slotBp")]
 
@@ -11,10 +17,10 @@ const allSlot=[...document.querySelectorAll(".slotBp")]
 
 const POINTER=document.querySelector(".viewFinderImg")
 
-export const movementPlayer=(player,imgTitleFromMenu)=>{
+export const movementPlayer=(player,imgTitleFromMenu,itemsOnMap)=>{
     
     window.addEventListener("keydown",(e)=>{
-        console.log(e.keyCode)
+       
         if(e.keyCode===37){
                
                 player.moveLeft()
@@ -40,7 +46,7 @@ if(e.keyCode===81){
 
     //HANDLE MENU WITH TITLE TO BUILD NEW TITLE ON MAP
     window.addEventListener("keyup",(e)=>{
-  console.log(e.keyCode)
+
         //JUMP
         if(e.keyCode===38){
             if(player.counterJump<1){
@@ -53,69 +59,100 @@ if(e.keyCode===81){
                 
             }
     }
-    //choicee first block
+   
     if(e.keyCode===49){
        //NUMBER 1 on keyboard
         
-        player.whatIsInHand=allSlot[0].dataset.item
-        console.log(allSlot[0].dataset.item)
-       giveBorderToUsingSlotBp(allSlot,allSlot[0])
+   if(allSlot[0].dataset.empty!=="true"){
+    player.whatIsInHand=allSlot[0].dataset.item
+    giveBorderToUsingSlotBp(allSlot,allSlot[0])
+    console.log(allSlot[0])
+displayItemInDetail(allSlot,player)
+
+
+   }
+      
     }
     if(e.keyCode===50){
         //NUMBER 2 on keyboard
-  player.whatIsInHand=allSlot[1].dataset.item
-  console.log(allSlot[1].dataset.item)
-  giveBorderToUsingSlotBp(allSlot,allSlot[1])
+        if(allSlot[1].dataset.empty!=="true"){
+            player.whatIsInHand=allSlot[1].dataset.item
+            giveBorderToUsingSlotBp(allSlot,allSlot[1])
+            console.log(allSlot[1])
+        displayItemInDetail(allSlot,player)
+           }
 
      }
      if(e.keyCode===51){
         //NUMBER 3 on keyboard
-  player.whatIsInHand=allSlot[2].dataset.item
-  console.log(allSlot[2].dataset.item)
-  giveBorderToUsingSlotBp(allSlot,allSlot[2])
+        if(allSlot[2].dataset.empty!=="true"){
+            player.whatIsInHand=allSlot[2].dataset.item
+            giveBorderToUsingSlotBp(allSlot,allSlot[2])
+            console.log(allSlot[2])
+        displayItemInDetail(allSlot,player)
+           }
 
      }
      if(e.keyCode===52){
         //NUMBER 4 on keyboard
-  player.whatIsInHand=allSlot[3].dataset.item
-  console.log(allSlot[3].dataset.item)
-  giveBorderToUsingSlotBp(allSlot,allSlot[3])
+        if(allSlot[3].dataset.empty!=="true"){
+            player.whatIsInHand=allSlot[3].dataset.item
+            giveBorderToUsingSlotBp(allSlot,allSlot[3])
+            console.log(allSlot[3])
+        displayItemInDetail(allSlot,player)
+           }
 
 
      }
      if(e.keyCode===53){
         //NUMBER 5 on keyboard
-  player.whatIsInHand=allSlot[4].dataset.item
-  console.log(allSlot[4].dataset.item)
-  giveBorderToUsingSlotBp(allSlot,allSlot[4])
+        if(allSlot[4].dataset.empty!=="true"){
+            player.whatIsInHand=allSlot[4].dataset.item
+            giveBorderToUsingSlotBp(allSlot,allSlot[4])
+            console.log(allSlot[4])
+        displayItemInDetail(allSlot,player)
+           }
      }
      if(e.keyCode===54){
         //NUMBER 6 on keyboard
-  player.whatIsInHand=allSlot[5].dataset.item
-  console.log(allSlot[5].dataset.item)
-  giveBorderToUsingSlotBp(allSlot,allSlot[5])
+        if(allSlot[5].dataset.empty!=="true"){
+            player.whatIsInHand=allSlot[5].dataset.item
+            giveBorderToUsingSlotBp(allSlot,allSlot[5])
+            console.log(allSlot[5])
+        displayItemInDetail(allSlot,player)
+           }
 
 
      }
      if(e.keyCode===55){
         //NUMBER 7 on keyboard
-  player.whatIsInHand=allSlot[6].dataset.item
-  console.log(allSlot[6].dataset.item)
-  giveBorderToUsingSlotBp(allSlot,allSlot[6])
+        if(allSlot[6].dataset.empty!=="true"){
+            player.whatIsInHand=allSlot[6].dataset.item
+            giveBorderToUsingSlotBp(allSlot,allSlot[6])
+            console.log(allSlot[6])
+        displayItemInDetail(allSlot,player)
+           }
 
 
      }
      if(e.keyCode===56){
         //NUMBER 8 on keyboard
-  player.whatIsInHand=allSlot[7].dataset.item
-  console.log(allSlot[7].dataset.item)
-  giveBorderToUsingSlotBp(allSlot,allSlot[7])
+        if(allSlot[7].dataset.empty!=="true"){
+            player.whatIsInHand=allSlot[7].dataset.item
+            giveBorderToUsingSlotBp(allSlot,allSlot[7])
+            console.log(allSlot[7])
+        displayItemInDetail(allSlot,player)
+           }
 
 
      }
      if(e.keyCode===71){
+        //G
         allSlot.forEach((el,i,arr)=>{
-         console.log(el)
+         if(el.dataset.item==player.whatIsInHand){
+            dropItemFromBpOnMap(el.dataset.item,player.directionMove,itemsOnMap,player.backpack,player)
+            updateEqDashboard(el.dataset.item,player.backpack,"drop")
+         }
         })
      }
 
@@ -129,7 +166,7 @@ if(e.keyCode===81){
     let ey
     window.addEventListener("click",(e)=>{
         //PLAIN WALL IS BUILDING
-     console.log("dziala")
+  
             if(player.whatIsInHand==="solidWall"&&player.backpack.solidWall.amount>0){
             player.blockToBuild.push(new solidWall(ex-30,ey-30,65,"red","horizontal"))
             player.backpack.solidWall.amount-=1
@@ -146,6 +183,7 @@ if(e.keyCode===81){
                     player.backpack.magmaWall.amount-=1
                     updateEqDashboard("magmaWall",player.backpack)
                     }
+                
           
        
      

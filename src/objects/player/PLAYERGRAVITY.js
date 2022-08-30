@@ -56,7 +56,7 @@ WALL.forEach((pAW,pAI,wallArray)=>{
       //Block jump when meet down horizontal wall
       //JUMP JUMP
       if(player.posY<title.posY+title.size+3&&player.posY>title.posY+title.size/2){
-        player.posY=title.posY+title.size
+        player.posY=title.posY+title.size+1
         title.color="black"
       //  
         player.stop=true

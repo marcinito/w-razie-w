@@ -43,6 +43,9 @@ export class plainWall{
         can.ctx.drawImage(this.image[3],this.posX,this.posY,this.size,this.size)
         return
       }
+      if(hpRate<1){
+        can.ctx.drawImage(this.image[3],this.posX,this.posY,this.size,this.size)
+      }
          
     }
     // draw(can){

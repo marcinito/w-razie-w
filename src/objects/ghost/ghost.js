@@ -5,9 +5,9 @@ let imgGhost=new Image(100,100)
 imgGhost.src=duszek
 
 export class Ghost{
-    constructor(){
-        this.posX=100
-        this.posY=155
+    constructor(posX,posY){
+        this.posX=posX
+        this.posY=posY
         this.size=60
         this.attack=0.1
         this.color="plum"
@@ -29,7 +29,7 @@ export class Ghost{
         this.down=true
         this.up=true
         //HP
-        this.hpTotal=320
+        this.hpTotal=150
         this.hp=this.hpTotal
         this.percentageHp=50
         this.ratePercentage=50

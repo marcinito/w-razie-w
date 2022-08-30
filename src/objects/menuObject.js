@@ -4,7 +4,9 @@ import { secondLevelArrangementWall } from "../LEVEL/secondLevel/secondLevelArra
 import { monsterInSecondLevel } from "../LEVEL/secondLevel/monsterInSecondLevel"
 export class menuObject{
     constructor(){
-        this.playGame=false
+        this.playGame="menu"
         this.active="firstLevel"
+        this.click=0
+        this.level=0
     }
 }

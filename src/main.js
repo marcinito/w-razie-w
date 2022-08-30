@@ -1,18 +1,13 @@
-import scss from './style.scss'
+import scss from './mainStyle.scss'
+
 
 import { canvasSettingsGame } from './Functions/settingCanas'
 //WALL IMPORT
 
 import { Player } from './objects/player/player'
+export let player=new Player()
 import { movementPlayer } from './objects/player/movementPlayer/movementPlayer'
-
-import {createMonster} from './Functions/createMonster.js'
-import {Ghost} from './objects/ghost/ghost'
-
 import { FireAtakFromPlayer } from './objects/player/FireAtakFromPlayer'
-
-
-import { Dragon } from './objects/dragon/dragon'
 import { menuObject } from './objects/menuObject'
 import { PLAYERGRAVITY } from './objects/player/PLAYERGRAVITY'
 import { ghostAttackPlayer } from './objects/ghost/GhostAttackPlayer'
@@ -20,125 +15,77 @@ import { whenFireBallFromDragonTouchWallOrPlayer } from './objects/dragon/whenFi
 import { whenDragonTouchPlayer } from './objects/dragon/whenDragonTouchPlayer'
 import { ghostGravity } from './objects/ghost/ghostGravity'
 import { dragonGravity } from './objects/dragon/dragonGravity'
-import { glockAmmoFromPlayerVsGhost } from './objects/ghost/glockAmmoFromPlayerVsGhost'
-
-import { glockAmmoFromPlayerVsDragon } from './objects/dragon/glockAmmoFromPlayerVsDragon'
-import { checkIfPlayerIsAlive } from './objects/player/checkIfPlayerIsAlive'
-import { drawMenuEquipment } from './Functions/MENU/dashboard/drawMenuEquipment'
 
 import { switchViewfinder } from './objects/player/movementPlayer/switchViefinder'
 import { glockAmmoVsWall } from './objects/GUN/glock/glockAmmoVsWall'
 import { dynamiteAmmoVsWall } from './objects/GUN/dynamite/dynamiteAmmoVsWall'
 import { dynamiteVsLivingCreature } from './objects/GUN/dynamite/dynamiteVsLivingCreature'
-import { goldenCoin } from './objects/ITEMSonMAP/goldenCoin/goldenCoin'
 import { playerTakeItemFromMap } from './objects/player/playerTakeItemFromMap'
-import { Zombie } from './objects/zombie/zombie'
 import { zombieGravity } from './objects/zombie/zombieGravity'
 import { zombieAttackPlayer } from './objects/zombie/zombieAttackPlayer'
-import { glockAmmoVsZombie } from './objects/zombie/glockAmmoVsZombie'
-import { drawPrimaryMenu } from './Functions/MENU/primaryMenu/drawPrimaryMenu'
+
+
 import { firstLevelArrangementWall } from './LEVEL/FIRST LEVEL/firstLevelArrangementWall'
-import { handleButton } from './Functions/MENU/primaryMenu/handleButton'
+
 import { monsterOnFirstLevel } from './LEVEL/FIRST LEVEL/monsterOnFirstLevel'
-import { secondLevelArrangementWall } from './LEVEL/secondLevel/secondLevelArrangementWall'
-import { monsterInSecondLevel } from './LEVEL/secondLevel/monsterInSecondLevel'
-import { canvasSettingsMenu } from './Functions/settingCanas'
-import fire from './fireBall.png'
 
 import { itemsOnFirstLevel } from './LEVEL/FIRST LEVEL/itemsOnFirstLevel'
 import { axeAttackHitWall } from './objects/GUN/axe/axeAttackHitWall'
+import { gravityItemsOnMap } from './objects/ITEMSonMAP/functionItemsOnMap/gravityItemsOnMap'
+import { soldierAttackPlayer } from './objects/soldier/soldierAttackPlayer'
+import { soldierGravity } from './objects/soldier/soldierGravity'
+import { whenBulletFromSoldierTouchWallOrPlayer } from './objects/soldier/whenBulletFromSoldierTouchWallOrPlayer'
+import { axeAttackMonster } from './objects/GUN/axe/axeAttackMonster'
+import { breathingOfPlayer } from './objects/player/breathingOfPlayer'
+import { handleButton } from './Functions/MENU/handlebutton'
+import { greetings } from './Functions/MENU/greetings'
+import {secondLevelArrangementWall} from './LEVEL/secondLevel/secondLevelArrangementWall'
+import {monsterInSecondLevel} from './LEVEL/secondLevel/monsterInSecondLevel'
+import {itemsOnSecondLvl} from './LEVEL/secondLevel/itemsOnSecondlvl'
+import { sheepGravity } from './objects/sheep/sheepGravity'
+import { glockAmmoVsMonster } from './objects/GUN/glock/glockAmmoVsMonster'
 
-const fireBall=new Image(100,100)
-fireBall.src=fire
-// import smokImg from './smok.png'
+const interFace=document.querySelector(".interFace")
 
 //LISTA ZADAN//
 //1//ZRobic tak by jedna funkcja obslugiwala wszystkie attaki z glocka w potwory//
 
-const menu=new menuObject()
-
+export const menu=new menuObject()
+//It need be develop in order to handle primary menu button start game etc...
 handleButton(menu)
 
-
-
-
-
+greetings()
 let can=canvasSettingsGame()
-let canMenu=canvasSettingsMenu()
+
+// greetings()
 
 const imgTitleFromMenu=[...document.querySelectorAll(".imgTitle")]
-const divsWithNumberAvailableTitleToBuildNew=[...document.querySelectorAll(".quantity")]
-export let player=new Player()
-movementPlayer(player,imgTitleFromMenu)
-drawMenuEquipment()
-let WALL=firstLevelArrangementWall(player,can)
+
+
+
+export let WALL=firstLevelArrangementWall(player,can)
 let MONSTER=monsterOnFirstLevel()
-let itemsOnMap=itemsOnFirstLevel()
+export let itemsOnMap=itemsOnFirstLevel()
+movementPlayer(player,imgTitleFromMenu,itemsOnMap)
 
-
-let zombieMove=0
-setInterval(()=>{
-zombieMove++
-if(zombieMove>7)
-{
-    zombieMove=0
-}
-},100)
-
-
-//Coin rotate
-let moveCoin=0
-setInterval(()=>{
-if(moveCoin==4){
-    moveCoin=0
-}
-moveCoin++
-
-
-},300)
-
-//How often dragon move his wings
-let changeImage=0
-setInterval(()=>{
-changeImage++
-if(changeImage>=3){
-    changeImage=0
-    
-}
-},150)
-//COUNTER is equivalent how often dragon attack from fire ball
-let counter=0
-setInterval(()=>{
-counter++
-if(counter>=3){
-    counter=0
-}
-},1000)
 
  const runApp=()=>{
-   if(menu.playGame===true){
-    can.ctx.drawImage(fireBall,0,0,can.C_W,can.C_H)
-if(menu.active==="1"){
-    
-    WALL=firstLevelArrangementWall(player,can)
-    MONSTER=monsterOnFirstLevel()
-    menu.active="null"
-    
-}
-if(menu.active==="2"){
+ 
+   if(menu.playGame==="game"){
+if(menu.level===1){
     WALL=secondLevelArrangementWall(player,can)
     MONSTER=monsterInSecondLevel()
-    menu.active="null"
+    itemsOnMap=itemsOnSecondLvl()
 }
 
 can.ctx.clearRect(0,0,can.C_W,can.C_H)
 //player
 player.draw(can)
-FireAtakFromPlayer(player,can)
+breathingOfPlayer(player)
 playerTakeItemFromMap(player,itemsOnMap)
 // AmmoVsWall(player,WALL,can)
 PLAYERGRAVITY(player,WALL,can)
-checkIfPlayerIsAlive(player)
+// checkIfPlayerIsAlive(player) ----- do usuniecia
 switchViewfinder(player)
 //////
 //****************** */
@@ -150,11 +97,7 @@ dynamiteAmmoVsWall(player,WALL,can)
 //pArrWallArray-particular array with set o wall
 WALL.forEach((pArrWallArray,wI,WALLarray)=>{
 pArrWallArray.forEach((title,pItitle,pArrWall)=>{
-    if(title.hp>0){
         title.draw(can)
-        
-    }
-
 })   
 })
 
@@ -164,29 +107,42 @@ MONSTER.forEach((pArrMonster,index,arrayMONSTER)=>{
         
         monster.movement()
         
-        // flyMonsterContactWall(WALL,MONSTER,can)
-       
    
         if(monster.name==="ghost"){
             monster.draw(can)
             ghostAttackPlayer(player,arr)
             ghostGravity(WALL,arr,can)
-            glockAmmoVsZombie(player,arr)
+          
         }
         if(monster.name==="dragon"){
-            monster.draw(can,changeImage)
+            monster.draw(can)
             dragonGravity(WALL,arr,can)
-            monster.attackFireBall(counter,can)
+            monster.attackFireBall(can)
             whenFireBallFromDragonTouchWallOrPlayer(monster,player,WALL,can,itemsOnMap)
             whenDragonTouchPlayer(player,arr)
-            glockAmmoVsZombie(player,arr)
+            glockAmmoVsMonster(player,arr)
         }
         if(monster.name==="zombie"){
-            monster.draw(can,zombieMove)
-            zombieGravity(WALL,arr)
+            monster.draw(can)
+            zombieGravity(WALL,arr,can)
             zombieAttackPlayer(player,arr)
-            glockAmmoVsZombie(player,arr)
+            glockAmmoVsMonster(player,arr)
 
+        }
+        if(monster.name==="soldier"){
+            monster.draw(can)
+            monster.shootFromGun(can)
+            soldierAttackPlayer(player,arr)
+            soldierGravity(WALL,arr,can)
+            glockAmmoVsMonster(player,arr)
+      whenBulletFromSoldierTouchWallOrPlayer(monster,player,WALL,can,itemsOnMap)
+           
+        }
+        if(monster.name==="sheep"){
+            monster.draw(can)
+          
+            sheepGravity(WALL,arr,can)
+            glockAmmoVsMonster(player,arr)
         }
  
 
@@ -197,7 +153,7 @@ MONSTER.forEach((pArrMonster,index,arrayMONSTER)=>{
 //MENU DASHBOARD
 
 
-
+FireAtakFromPlayer(player,can)
 
 
 //GUN
@@ -205,24 +161,24 @@ glockAmmoVsWall(player,WALL,can,itemsOnMap)
 axeAttackHitWall(player,WALL,can,itemsOnMap)
 dynamiteAmmoVsWall(player,WALL,can,itemsOnMap)
 dynamiteVsLivingCreature(MONSTER,player)
+axeAttackMonster(MONSTER,player)
 //ITEMS ON MAP
 // item.draw(can,moveCoin)
 if(itemsOnMap.length>0){
+    gravityItemsOnMap()
     itemsOnMap.forEach((item,i,arr)=>{
-    item.draw(can,moveCoin)
+    item.draw(can)
         
     
     })
 }
    }
-   if(menu.playGame===false){
-    drawPrimaryMenu(canMenu)
-   }
+
     requestAnimationFrame(runApp)
 }
 
 
-console.log(player.whatIsInHand)
+
 
 runApp()
 
