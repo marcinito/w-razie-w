@@ -10,8 +10,8 @@ export const glockAmmoVsWall=(player,WALL,can,itemsOnMap)=>{
     arrayWithTitle.forEach((title,tI,tArr)=>{
     
 
-        if(title.isHitBy==="glock"&&title.hp<0 || title.hp===0){
-        
+        if(title.isHitBy==="glock"&&title.hp<0 || title.hp===0&&title.isHitBy==="glock"){
+            
                 if(title.name==="plainWall"){
                     
                     if(itemsOnMap!==undefined){
@@ -35,9 +35,12 @@ export const glockAmmoVsWall=(player,WALL,can,itemsOnMap)=>{
                         itemsOnMap.push(new goldenCoin(title.posX,title.posY,title.size))
                     }
                 }
-             
-             
-                tArr.splice(tI,1)
+            
+                player.checkPositionLowestTileOnMap=true
+                setTimeout(()=>{
+                    player.checkPositionLowestTileOnMap=false
+                },10000)
+        tArr.splice(tI,1)
             
         }
         
@@ -50,10 +53,11 @@ export const glockAmmoVsWall=(player,WALL,can,itemsOnMap)=>{
         }
         else{
      
-        tArr[tI].hp-=1
-        tArr[tI].color="pink"
-        tArr[tI].isHitBy="glock"
-       
+        title.hp-=1
+        title.color="pink"
+        title.isHitBy="glock"
+        console.log(title.isHitBy)
+      
 
         
         bArr.splice(bArr[bI],1)

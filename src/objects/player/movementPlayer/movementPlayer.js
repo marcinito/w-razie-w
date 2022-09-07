@@ -1,3 +1,4 @@
+import { changeLevel, menu } from "../../../main"
 import { Glock } from "../../GUN/glock/glock"
 import { glockItems } from "../../ITEMSonMAP/glock/glockItems"
 import { magmaWall } from "../../WALL/magmaWall/magmaWall"
@@ -68,6 +69,8 @@ if(e.keyCode===81){
     giveBorderToUsingSlotBp(allSlot,allSlot[0])
     console.log(allSlot[0])
 displayItemInDetail(allSlot,player)
+console.log(player.backpack.machineGun.ammo)
+console.log(player.backpack.machineGun.amount,"!")
 
 
    }

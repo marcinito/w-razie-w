@@ -13,6 +13,7 @@ const quantityItem=document.querySelector(".quantityItem")
 
 const allSlot=[...document.querySelectorAll(".slotBp")]
 const ammoQuantity=[...document.querySelectorAll(".ammoQuantity")]
+
 export const updateEqDashboard=(nameOfItem,backpack,drop)=>{
 
     if(nameOfItem==="glock"){
@@ -42,6 +43,33 @@ export const updateEqDashboard=(nameOfItem,backpack,drop)=>{
         }
        }
     }
+    if(nameOfItem==="machineGun"){
+      if(drop==="drop"&&backpack.machineGun.ammo===0){
+      player.whatIsInHand=undefined
+        
+      }
+      for(let i=0;i<allSlot.length;i++){
+          if(allSlot[i].dataset.item===nameOfItem){
+            // showAmmo.textContent=backpack.glock.ammo
+            if(backpack.machineGun.ammo===0){
+          allSlot[i].src=background
+          allSlot[i].dataset.empty="true"
+          backpack.machineGun.itemInBp=false
+          allSlot[i].style.border="none"
+          allSlot[i].dataset.item=undefined
+          choosenItem.src=backgroundImg
+          showAmmo.textContent=""
+          imageAmmo.src=background
+          player.whatIsInHand=undefined
+          quantityItem.textContent=""
+         
+       
+          
+  
+            }
+          }
+         }
+      }
     if(nameOfItem==="dynamite"){
       if(drop==="drop"){backpack.dynamite.amount-=1}
         for(let i=0;i<allSlot.length;i++){
@@ -92,9 +120,10 @@ export const updateEqDashboard=(nameOfItem,backpack,drop)=>{
           if(nameOfItem==="plainWall"){
             if(drop==="drop"){backpack.plainWall.amount-=1}
             quantityItem.textContent=backpack.plainWall.amount
+            
             for(let i=0;i<allSlot.length;i++){
                 if(allSlot[i].dataset.item===nameOfItem){
-                  ammoQuantity[i].textContent=backpack.plainWall.amount
+                
                   if(backpack.plainWall.amount===0){
                 allSlot[i].src=background
              

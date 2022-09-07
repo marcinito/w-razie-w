@@ -1,0 +1,241 @@
+$height:0%;
+body{
+    background-color: black;
+    color:white;
+    max-width:100%;
+    height:100vh;
+    overflow:hidden;
+    box-sizing: border-box;
+    font-size:100px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    -webkit-text-stroke:1px red;
+    animation: full 5s linear forwards;
+    display:flex;
+ 
+    align-items: center;
+
+}
+.container{
+    
+    display:flex;
+    position:absolute;
+    left:50%;
+    transform:translate(-50%,0);
+    
+    height:20%;
+width:80%;
+
+
+    .tile{
+        width:100%;
+        height:15%;
+        text-align: center;
+        font-size:100px;
+      
+    }
+    .G{
+        animation: animateG 1s linear forwards;
+      
+    }
+    .A{
+        animation: animateA 2s linear forwards;
+    }
+    .M{
+        animation: animateM 1s ease-in forwards;
+    }
+    .E1{
+        animation: animateE1 2s ease-in forwards;
+    }
+    .O{
+        animation: animateO 1s ease-out forwards;
+    }
+    .V{
+        animation: animateV 2s ease-out forwards;
+    }
+    .E2{
+        animation: animateE2 1s linear forwards;
+    }
+    .R{
+        animation: animateR 2s ease-in forwards;
+    }
+}
+.container::before{
+    content:"";
+    position:absolute;
+    width:100%;
+    height:0.4%;
+    background-image: linear-gradient(to right,red ,yellow,orange,transparent 40%);
+    left:-100%;
+    animation:border 2s linear infinite;
+
+}
+.container::after{
+    content:"";
+    position:absolute;
+    width:100%;
+    height:0.4%;
+    background-image: linear-gradient(to right,red ,yellow,orange,transparent 40%);
+    left:-100%;
+    bottom:0;
+    animation:border2 2s linear infinite;
+
+}
+@keyframes border{
+    0%{
+        transform:translateX(0)
+    }
+    100%{
+        transform:translateX(500%)
+    }
+}
+@keyframes border2{
+    0%{
+        transform:translateX(2500px)
+    }
+    100%{
+        transform:translateX(0%)
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+@keyframes animateG {
+    0%{
+        transform:translate(-300px,$height)
+    }
+    20%{transform: scale(1.5);}
+    60%{transform:scale(0.7)}
+    100%{
+        transform:translate(0%,$height) scale(1)
+    }
+    
+}
+@keyframes animateA {
+    0%{
+        transform:translate(0%,-1000px)
+    }
+    100%{
+        transform:translate(0%,$height)
+    }
+    
+}
+@keyframes animateM {
+    0%{
+        transform:translate(0%,1000px)
+    }
+
+    100%{
+        transform:translate(0%,$height)
+    }
+    
+}
+@keyframes animateE1 {
+    0%{
+        transform:translate(-700px,-100px)
+    }
+    20%{transform:skewX(20deg)}
+    100%{
+        transform:translate(0%,$height)
+    }
+    
+}
+@keyframes animateO {
+    0%{
+        transform:translate(1000px,-100px)
+    }
+    50%{
+        transform:translate(30%,$height) rotate(180deg) 
+    }
+    80%{transform:rotate(360deg) }
+    100%{
+        transform:translate(0%,$height)
+    }
+    
+}
+@keyframes animateV {
+    0%{
+        transform:translate(-1000px,400px)
+    }
+    100%{
+        transform:translate(0%,$height)
+    }
+    
+}
+@keyframes animateE2 {
+    0%{
+        transform:translate(10px,-1000px)
+    }
+    100%{
+        transform:translate(0%,$height)
+    }
+    
+}
+@keyframes animateR {
+    0%{
+        transform:translate(-1000px,400px)
+    }
+    50%{
+        transform:translate(0%,$height)rotate(180deg)
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+    
+}
+@keyframes full{
+    0%{
+        -webkit-text-stroke:1px red
+    }
+    20%{
+        -webkit-text-stroke:2px orange;
+       font-weight: bold;
+    }
+    30%{
+        -webkit-text-stroke:3px blue
+    }
+    50%{
+        -webkit-text-stroke:4px red
+    }
+    70%{
+        -webkit-text-stroke:3px gold;
+       
+        
+    }
+    90%{
+        -webkit-text-stroke:2px magenta
+    }
+    100%{
+        -webkit-text-stroke:1px red;
+        font-weight: bold;
+    }
+}
+.spriteZombie{
+    position:absolute;
+    background-color:transparent;
+    width:10%;
+    height:20%;
+    
+    left:50%;
+    bottom: 10%;
+    z-index:20;
+    background-image: url("./stylesImage/gameoversprites.png");
+    
+    background-repeat: no-repeat;
+    width:calc(860px / 6);
+    height:192px;
+    animation: zombie 1s steps(6) forwards  infinite  ;
+  
+    
+}
+@keyframes zombie{
+    0%{background-position: 0;}
+ 100%{background-position: -860px;}
+}

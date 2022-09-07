@@ -1,5 +1,7 @@
+
 import { handleHp } from "../../../Functions/helpFunction/handleHp"
 import { monsterDropItem } from "../../../Functions/helpFunction/monsterDropItem"
+import { countNumberMonsterOnLeve } from "../../../LEVEL/CHANGE-LEVEl/countNumberMonsterOnLevel"
 import { itemsOnMap } from "../../../main"
 
 export const glockAmmoVsMonster=(player,arrayMonster)=>{
@@ -19,6 +21,7 @@ export const glockAmmoVsMonster=(player,arrayMonster)=>{
                     if(monster.hp<0){
                         monsterDropItem(monster,itemsOnMap)
                         arrayMONSTER.splice(indexMonster,1)
+                      countNumberMonsterOnLeve()
                     }
                 }
 

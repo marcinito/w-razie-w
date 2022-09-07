@@ -1,6 +1,8 @@
 import { random } from "../../Functions/helpFunction/random"
 import zombieSprite from './zombie.png'
 import zombieSprite2 from './zombieSprites.png'
+import { detectJump } from "../NPC/helperPlayer"
+import {can} from '../../main'
 let zombieImg=new Image(100,100)
 zombieImg.src=zombieSprite
 let zombieImg2=new Image(100,100)
@@ -13,6 +15,24 @@ if(zombieMove>7)
     zombieMove=0
 }
 },100)
+
+export class detectEdge{
+  constructor(){
+    this.posX=0
+    this.posY=0
+    this.size=20
+    this.colorArr=["red","blue","yellow","green"]
+    this.color=random(this.colorArr)
+    this.id=3424234234*Math.floor(Math.random()*10+23)
+    this.trigger=false
+
+  }
+  draw(can){
+    can.ctx.fillStyle=this.color
+    can.ctx.fillRect(this.posX,this.posY,this.size,this.size)
+  }
+}
+
 
 export class Zombie{
     constructor(posX,posY){
@@ -40,15 +60,37 @@ export class Zombie{
         this.hp=this.hpTotal
         this.percentageHp=this.size
         this.ratePercentage=this.size
-        
+//detect it is tile which check if monster can fall down , blok serve like break from invoke function
+        this.detectCreator=new detectEdge()
+       this.detect=this.detectCreator
+       this.blok=false
+       //detec jump
+       this.detectJump=new detectJump()
+       this.touchWall=false
+       this.jump=false
+       this.stopJump=false
+            
     }
 draw(can){
+
+        //detect jump
+        if(this.directionMove==="left"){
+          this.detectJump.posX=this.posX-20
+          this.detectJump.posY=this.posY-20     
+        }
+        if(this.directionMove==="right"){
+          this.detectJump.posX=this.posX+this.size
+          this.detectJump.posY=this.posY-20          
+        }
+  this.detectJump.draw(can)
+
+
     can.ctx.fillStyle=this.color
     can.ctx.fillRect(this.posX,this.posY-10,this.percentageHp,7)
     can.ctx.lineWidth=1
     can.ctx.strokeStyle="black"
     can.ctx.strokeRect(this.posX,this.posY-10,this.size,7)
-    can.ctx.strokeRect(this.posX,this.posY,this.size,this.size)
+    // can.ctx.strokeRect(this.posX,this.posY,this.size,this.size)
 if(this.directionMove==="right"){
 if(this.isDuringAttackPlayer==false&&this.doFall===false){
     if(zombieMove===0){
@@ -172,6 +214,7 @@ if(this.directionMove==="left"){
     }
 }
 if(this.directionMove==="right"){
+
     if(this.doFall===true){
         can.ctx.drawImage(this.image,340,325,100,155,this.posX,this.posY,this.size,this.size)
     }
@@ -181,19 +224,50 @@ if(this.directionMove==="left"){
         can.ctx.drawImage(this.image,840,502,100,155,this.posX,this.posY,this.size,this.size)
     }
 }
+  //detect verge
+  if(this.directionMove==="left"){
+    this.detect.posX=this.posX     
+  }
+  if(this.directionMove==="right"){
+    this.detect.posX=this.posX+this.size-this.detect.size     
+  }
+    this.detect.posY=this.posY+this.size-this.detect.size
+    
+    this.detect.draw(can)
+
+   
 }
     movement(){
-   
+      //JUMP
+      if(this.jump==true&&this.stopJump===false){
+        this.posY-=50
+        this.jump=false
+        
+      
+    }
     
         if(this.directionMove==="left"){
             this.posX-=this.speed
+            if(this.detect.trigger===true&&this.blok===false){
+              this.directionMove="right"
+              this.blok=true
+              setTimeout(()=>{
+                this.blok=false
+              },1000)
+            }
         }
      
      
         if(this.directionMove==="right"){
             this.posX+=this.speed
+            if(this.detect.trigger===true&&this.blok===false){
+              this.directionMove="left";this.blok=true;
+            setTimeout(()=>{
+              this.blok=false
+            },1000)
+          }
         }
-       
+        
 
     }
 }

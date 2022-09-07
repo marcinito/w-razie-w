@@ -28,7 +28,7 @@ if(item==="glock"){
    backpack.glock.bp[0].speedX=1
    itemsOnMap.push(backpack.glock.bp[0])
    backpack.glock.bp.splice(0,1)
-   countAmmoInGlockInPlayer(backpack,player.whatIsInHand)
+   countAmmoInGlockInPlayer(backpack,player.whatIsInHand,"glock")
    console.log(backpack.glock.ammo,"ammo")
 }
  if(directionMove==="right"){
@@ -41,7 +41,7 @@ if(item==="glock"){
    backpack.glock.bp[0].speedX=1
    itemsOnMap.push(backpack.glock.bp[0])
    backpack.glock.bp.splice(0,1)
-   countAmmoInGlockInPlayer(backpack,player.whatIsInHand)
+   countAmmoInGlockInPlayer(backpack,player.whatIsInHand,"glock")
 
   
 
@@ -52,6 +52,41 @@ if(item==="glock"){
       
     
 }
+if(item==="machineGun"){
+
+   if(directionMove==="left"){
+  
+     backpack.machineGun.bp[0].posX=player.posX-35
+     backpack.machineGun.bp[0].posY=player.posY-80
+   
+     backpack.machineGun.bp[0].layOnMap=true
+     backpack.machineGun.bp[0].direction=player.directionMove
+     backpack.machineGun.bp[0].isDrop=true
+     backpack.machineGun.bp[0].speedX=1
+     itemsOnMap.push(backpack.machineGun.bp[0])
+     backpack.machineGun.bp.splice(0,1)
+     countAmmoInGlockInPlayer(backpack,player.whatIsInHand,"machineGun")
+     console.log(backpack.machineGun.bp,"ammo")
+  }
+   if(directionMove==="right"){
+  
+     backpack.machineGun.bp[0].posX=player.posX+player.size+5
+     backpack.machineGun.bp[0].posY=player.posY-50
+     backpack.machineGun.bp[0].layOnMap=true
+     backpack.machineGun.bp[0].direction=player.directionMove
+     backpack.machineGun.bp[0].isDrop=true
+     backpack.machineGun.bp[0].speedX=1
+     itemsOnMap.push(backpack.machineGun.bp[0])
+     backpack.machineGun.bp.splice(0,1)
+     countAmmoInGlockInPlayer(backpack,player.whatIsInHand,"machineGun")
+  
+    
+  
+  }
+  
+        
+      
+  }
 if(item==="dynamite"){
       if(directionMove==="left"){ itemsOnMap.push(new dynamiteItems(player.posX-35,player.posY-51,true,directionMove))}
       if(directionMove==="right"){ itemsOnMap.push(new dynamiteItems(player.posX+35,player.posY-51,true,directionMove))}

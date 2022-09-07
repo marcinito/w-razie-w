@@ -10,6 +10,7 @@ import magmaWall from '../WALL/magmaWall/images/100MagmaBlock.png'
 import hpPotion from '../ITEMSonMAP/healthFluid/hpPotion.png'
 import jumpFluid from '../ITEMSonMAP/jumpFluid/jumpFluid.png'
 import meat from '../ITEMSonMAP/meat/Meat.png'
+import machineGun from '../ITEMSonMAP/machineGun/machineGun.png'
 import { countAmmoInGlockInPlayer } from './shorthandFunction/countAmmoInGlockInPlayer'
 import { countEnduranceInAxe } from './shorthandFunction/countEnduranceInAxe'
 
@@ -28,7 +29,7 @@ export const playerTakeItemFromMap=(player,itemsOnMap)=>{
                
                 for(let i=0;i<allSlot.length;i++){
                   if(allSlot[i].dataset.empty==="true"&&player.backpack.money.itemInBp===false){
-                    console.log("what")
+                  
                     allSlot[i].src=moneyImg
                     allSlot[i].dataset.item="goldenCoin"
                     player.backpack.money.itemInBp=true
@@ -46,7 +47,7 @@ export const playerTakeItemFromMap=(player,itemsOnMap)=>{
        
                 player.backpack.axe.bp.push(itemsFromMap)
             
-               console.log(player.backpack.axe.bp)
+           
                countEnduranceInAxe(player.backpack)
                
                 for(let i=0;i<allSlot.length;i++){
@@ -67,7 +68,7 @@ export const playerTakeItemFromMap=(player,itemsOnMap)=>{
               
                 itemsFromMap.isDrop=false
              
-                countAmmoInGlockInPlayer(player.backpack,player.whatIsInHand)
+                countAmmoInGlockInPlayer(player.backpack,player.whatIsInHand,"glock")
                
                
               
@@ -81,6 +82,37 @@ export const playerTakeItemFromMap=(player,itemsOnMap)=>{
                   
                     allSlot[i].dataset.item="glock"
                     player.backpack.glock.itemInBp=true
+                  
+                    allSlot[i].dataset.empty="false"
+                    break
+                   
+                  }
+             
+                
+                }
+                itemsOnMapArr.splice(indexItemsFromMap,1)
+                return
+              }
+              if(itemsFromMap.name==="machineGun"){
+                
+                player.backpack.machineGun.bp.push(itemsFromMap)
+              
+                itemsFromMap.isDrop=false
+             
+                countAmmoInGlockInPlayer(player.backpack,player.whatIsInHand,"machineGun")
+               
+               console.log(player.backpack.machineGun.bp,"bp")
+              
+             
+                for(let i=0;i<allSlot.length;i++){
+
+                  if(allSlot[i].dataset.empty==="true"&&player.backpack.machineGun.itemInBp===false){
+                    
+                  
+                    allSlot[i].src=machineGun
+                  
+                    allSlot[i].dataset.item="machineGun"
+                    player.backpack.machineGun.itemInBp=true
                   
                     allSlot[i].dataset.empty="false"
                     break
@@ -303,6 +335,11 @@ export const playerTakeItemFromMap=(player,itemsOnMap)=>{
                 return
               }
               if(itemsFromMap.name==="meat"){
+                
+                itemsFromMap.layOnMap=false
+                return
+              }
+              if(itemsFromMap.name==="machineGun"){
                 
                 itemsFromMap.layOnMap=false
                 return

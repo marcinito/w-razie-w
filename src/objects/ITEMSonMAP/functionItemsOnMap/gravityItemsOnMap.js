@@ -1,7 +1,9 @@
 import { itemsOnMap } from "../../../main"
 import { WALL } from "../../../main"
 export const gravityItemsOnMap=(speed)=>{
-itemsOnMap.forEach((item,index,arrayItemsOnMap)=>{
+itemsOnMap.forEach((item,index,arrItem)=>{
+ 
+
     if(item.isDrop===true){
         
         item.posY+=item.strenghtGravity
@@ -15,12 +17,15 @@ itemsOnMap.forEach((item,index,arrayItemsOnMap)=>{
                     }
                     else{
                      
-                     
+                   
                         
-                       if(title.direction==="horizontal"||title.direction==="vertical"){
+                    
                         //Touch top wall
                         if(item.posY+item.size>title.posY-2&&item.posY+item.size-5<title.posY
                         ){
+
+            
+
                             if(item.posX<title.posX+title.size||item.posX>title.posX){
                                 let deepCollision=item.posY+item.size-title.posY
                                 item.posY-=deepCollision
@@ -38,7 +43,7 @@ itemsOnMap.forEach((item,index,arrayItemsOnMap)=>{
                             let deepCollision=title.posX+title.size-item.posX
                             item.posX+=deepCollision+3
                             item.speedX=0
-                           
+                         
                             
                         }
                         //hit in left side of block
@@ -46,18 +51,20 @@ itemsOnMap.forEach((item,index,arrayItemsOnMap)=>{
                             let deepCollision=item.posX+item.size-title.posX
                             item.posX-=deepCollision+3
                             item.speedX=0
-                            
+                          
                         }
                         //top
                         if(item.posY<title.posY+title.size&&item.posY>title.posY+title.size/2&&item.posX>title.posX){}
                        
                     
-                       }
+                       
                       
                      
                     
                     
                     }
+                
+             
 
             })
         })

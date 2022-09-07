@@ -39,20 +39,20 @@ export class Axe{
         this.lifeCycleAttack+=1
    
         if(this.direction==="left"){
-            console.log("left")
+         
             
             can.ctx.drawImage(axeLeft,axeCounter*534,0,534,497,this.posX,this.posY,this.size,this.size)
         }
         if(this.direction==="right"){
-            console.log("right")
+        
             can.ctx.drawImage(axeRight,axeCounter*534,0,534,497,this.posX,this.posY,this.size,this.size)
         }
         if(this.direction==="down"){
-            console.log("down")
+    
             can.ctx.drawImage(axeLeft,axeCounter*534,0,534,497,this.posX,this.posY,this.size,this.size)
         }
         if(this.direction==="up"){
-            console.log("down")
+           
             can.ctx.drawImage(axeLeft,axeCounter*534,0,534,497,this.posX,this.posY,this.size,this.size)
         }
     }

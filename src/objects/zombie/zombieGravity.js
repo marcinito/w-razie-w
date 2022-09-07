@@ -1,25 +1,43 @@
+import { detecJumpCreature } from "../../Functions/helpFunction/detectJumpCreature"
+import { detectJumpCreature2 } from "../../Functions/helpFunction/detectJumpCreature2"
 import { random } from "../../Functions/helpFunction/random"
+import { player } from "../../main"
 import { zombieTouchAnotherZombie } from "./zombieTouchAnotherZombie"
-
+let score=0
+let nowaTablica=[]
 export const zombieGravity=(WALL,zombieArr,can)=>{
 //GRAVITY ZOMBIE
 zombieArr.forEach((zombie,i,arr)=>{
     zombie.posY+=zombie.strenghtGravity
     zombie.speed=0.5
     zombie.doFall=true
+    zombie.touchWall=false
+    // zombie.detect.trigger=true
 
 })
 
 
 WALL.forEach((particularArray,index,WALLarr)=>{
-particularArray.forEach((title,indexTitle,particularArrayArray)=>{
+  
+
+
+particularArray.forEach((title,indexTitle,arrTitle)=>{
+
+    
 
     zombieArr.forEach((zombie,indexZombie,zombieArray)=>{
-     
+        detecJumpCreature(zombie,title)
+    
+
+player.checkPositionLowestTileOnMap=false
+
+
+   
         if(title.posX>zombie.posX+zombie.size || title.posX+title.size<zombie.posX||
             title.posY>zombie.posY+zombie.size||title.posY+title.size<zombie.posY){
                 //no collision
             }
+         
             else{
                 //ZOMBIE WALK LEFT
                 if(title.direction==="horizontal"){
@@ -30,16 +48,22 @@ particularArray.forEach((title,indexTitle,particularArrayArray)=>{
                         zombie.posY-=deepCollision
                         zombie.doFall=false
                        zombie.speed=zombie.naturalSpeed
+                       zombie.stopJump=false
+                    
+                     
                        
                     
                     }
+                  
+                  
                
                     //LEFT MOVE ON HORIZONTAL
                     if(zombie.posX<title.posX+title.size&&zombie.posX>title.posX+title.size/2&&
-                    zombie.posY+zombie.size>title.posY+title.size+5){
+                    zombie.posY+zombie.size>title.posY+5){
                         let deepCollision=title.posX+title.size-zombie.posX
                         zombie.posX+=deepCollision+3
-                        zombie.directionMove="right"
+                     
+        detectJumpCreature2(zombie,"right")
                         
                     }
                     //RIGHT MOVE
@@ -47,10 +71,20 @@ particularArray.forEach((title,indexTitle,particularArrayArray)=>{
                     zombie.posY+zombie.size>title.posY+5){
                         let deepCollision=zombie.posX+zombie.size-title.posX
                         zombie.posX-=deepCollision
-                        zombie.directionMove="left"
+                       detectJumpCreature2(zombie,"left")
+                        
                     
-                       
+                      
                     }
+                    //jump
+                    if(zombie.posY<title.posY+title.size+3&&zombie.posY>title.posY+title.size/2){
+                        zombie.posY=title.posY+title.size+1
+                        title.color="black"
+
+                        zombie.stopJump=true
+                      
+                        title.color="red"
+                      }
                     
                 }
 
@@ -68,6 +102,7 @@ particularArray.forEach((title,indexTitle,particularArrayArray)=>{
                     let deepCollision=title.posX+title.size-zombie.posX
                     zombie.posX+=deepCollision
                     zombie.directionMove="right"
+                    console.log("left")
                    
 
                 }
@@ -77,17 +112,31 @@ particularArray.forEach((title,indexTitle,particularArrayArray)=>{
                     let deepCollision=zombie.posX+zombie.size-title.posX
                     zombie.posX-=deepCollision
                     zombie.directionMove="left"
+                    console.log("right")
                    
                 }
                }
                 
             }
+         //code serve as detect verge on map where monster need change direction in order not to fall to oblivion
+            // if(title.posX>zombie.detect.posX+zombie.detect.size || title.posX+title.size<zombie.detect.posX||
+            //     title.posY>zombie.detect.posY+zombie.detect.size||title.posY+title.size<zombie.detect.posY){
+                  
+                
+            //     }else{
+            //         if(zombie.detect.posY+zombie.detect.size>title.posY-1&&title.posY>zombie.detect.posY+zombie.detect.size/2){
+                    
+            //       zombie.detect.trigger=false         
+                                  
+            //         }
+            //     }
             if(zombie.posX<0){
                 zombie.directionMove="right"
             }
             if(zombie.posX+zombie.size>can.C_W){
                 zombie.directionMove="left"
             }
+           
 
     })
 

@@ -11,20 +11,17 @@ body{
     
     background-size: 100%;
     flex-direction: column;
-    max-height:100%;
-  
-    max-width:100%;
-    height:100%;
+ 
     left:0;
     overflow:hidden;
-    background-color:skyblue;
+    
    
    
     
    
     
 }
-
+//to delete
 .viewFinder{
     position:absolute;
     .viewFinderImg{
@@ -39,7 +36,9 @@ body{
 #canvas{
     border:1px solid black;
     position:absolute;
-    background-color: skyblue;
+    background-color: lighten(skyblue,0%);
+    width:100%;
+    height:90%;
     
     
     
@@ -48,20 +47,21 @@ body{
 .menuEq{
     width:70%;
     height:5%;
-    background-color: orange;
+   
     position: absolute;
     bottom:5%;
     left:50%;
     transform:translateX(-50%);
     opacity:1;
+    
   
 
 .insideBp{
     width:80%;
     height:150%;
     background-color: brown;
-    
-    border:5px solid black;
+    position:absolute;
+  
   
   display:flex;
    
@@ -94,16 +94,17 @@ body{
  }
  .skills{
     width:35%;
-    height:350%;
+    height:300%;
     background-image:conic-gradient(darkblue,skyblue, blue);
     position:absolute;
-    right:-15%;
-    top:-170%;
+    right:-35%;
+    top:-180%;
     border-top-right-radius: 40%;
     border-top-left-radius: 5%;
     border-bottom-left-radius: 5%;
     border-bottom-right-radius: 5%;
-    border:5px solid ;
+    border:5px solid  yellow;
+ 
    
     .choosenItem{
         width:78%;
@@ -271,6 +272,14 @@ body{
         top:50%;
         right:0;
     }
+    .lifeSpan{
+        position:absolute;
+        bottom:2%;
+        width:30%;
+        height:20%;
+        border:2px solid blue;
+        background-color: green;
+    }
 }
 
 }
@@ -407,6 +416,40 @@ justify-content: center;
         }
     }
 
+}
+.windowAlert{
+    width:50%;
+    height:30%;
+    border:23px groove brown;
+    background-image:linear-gradient(darkblue,darken(yellow,10%),red);
+    position:absolute;
+    left:50%;
+    transform:translate(-50%,20%);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-size:50px;
+    text-align: center;
+    color:white;
+    text-shadow: 2px 2px blue;
+    opacity:0;
+    z-index:-100
+
+}
+.promotionDiv{
+    width:80%;
+    height:80%;
+    position:absolute;
+    border:10px groove blue;
+    background: lightgreen;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    font-size:50px;
+    text-shadow: 2px 2px yellow;
+    -webkit-text-stroke:1px red;
+    opacity:0;    
+    z-index:-120
 }
 @keyframes drive{
     from{

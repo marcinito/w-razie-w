@@ -5,7 +5,7 @@ export class Glock{
         this.size=10
         this.color="black"
         this.name="glock"
-        this.strenghtAttack=9.7
+        this.strenghtAttack=29.7
         this.directionAttack=directionAttack
         
     }

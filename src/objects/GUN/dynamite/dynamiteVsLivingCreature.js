@@ -1,5 +1,7 @@
+
 import { handleHp } from "../../../Functions/helpFunction/handleHp"
 import { monsterDropItem } from "../../../Functions/helpFunction/monsterDropItem"
+import { countNumberMonsterOnLeve } from "../../../LEVEL/CHANGE-LEVEl/countNumberMonsterOnLevel"
 import { itemsOnMap } from "../../../main"
 export const dynamiteVsLivingCreature=(MONSTER,player)=>{
 //DYNAMITE HIT MONSTER
@@ -18,14 +20,14 @@ player.dynamitsArray.forEach((dynamite,indexDynamit,arrayDynamit)=>{
            
           if(dynamite.timeToExplode<0){
             monster.hp-=dynamite.strenghtAttack
-            console.log(monster)
-            console.log(monster.hp)
+        
                monster.percentageHp-=handleHp(dynamite.strenghtAttack,monster)
           }
                     
                     if(monster.hp<0){
                         monsterDropItem(monster,itemsOnMap)
                         arrMonster.splice(indexMonster,1)
+                       countNumberMonsterOnLeve()
                     }
         }
 })

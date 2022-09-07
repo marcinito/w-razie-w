@@ -12,8 +12,8 @@ export const axeAttackHitWall=(player,WALL,can,itemsOnMap)=>{
    WALL.forEach((arrayWithTitle,index,fullArrOfWall)=>{
    arrayWithTitle.forEach((title,tI,tArr)=>{
    
-    if(title.isHitBy==="axe"&&title.hp<0 || title.hp===0){
-        console.log("dziala")
+    if(title.isHitBy==="axe"&&title.hp<0 || title.hp===0&&title.isHitBy==="axe"){
+     title.size=100
         if(title.name==="plainWall"){
                     
             if(itemsOnMap!==undefined){
@@ -38,10 +38,14 @@ export const axeAttackHitWall=(player,WALL,can,itemsOnMap)=>{
                 itemsOnMap.push(new goldenCoin(title.posX,title.posY,title.size))
             }
         }
-     
-     
-     
+    
+        player.checkPositionLowestTileOnMap=true
+        setTimeout(()=>{
+            player.checkPositionLowestTileOnMap=false
+        },20)
         tArr.splice(tI,1)
+      
+    
     
 }
     
@@ -50,7 +54,7 @@ export const axeAttackHitWall=(player,WALL,can,itemsOnMap)=>{
         
    if(axe.posX+axe.size<title.posX || axe.posX>title.posX+title.size||
        axe.posY>title.posY+title.size || axe.posY+axe.size<title.posY){
-           
+          
        }
        else{
     
@@ -58,11 +62,9 @@ export const axeAttackHitWall=(player,WALL,can,itemsOnMap)=>{
     title.color="pink"
     title.isHitBy="axe"
       
-    //    if(title.hp<1){
-    //     title.hp=0
-    //    }
+
        
-       console.log(title.hp)
+   
        
        
        

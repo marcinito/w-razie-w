@@ -19,6 +19,15 @@ export const displayItemInDetail=(allSlot,player)=>{
                 quantityItem.textContent=player.backpack.glock.amount
                 
             }
+            if(player.whatIsInHand==="machineGun"){
+                showAmmo.textContent=player.backpack.machineGun.ammo
+                imageAmmo.style.opacity=1
+                imageAmmo2.style.opacity=0
+                imageAmmo.src=bulletsImg
+                quantityItem.textContent=player.backpack.machineGun.amount
+                console.log("wykonuje sie")
+                
+            }
             if(player.whatIsInHand==="axe"){
                 imageAmmo.style.opacity=0
                 imageAmmo2.style.opacity=1

@@ -10,7 +10,6 @@ if(player.counterExtraJump>0){
 timer.style.opacity=1
 click+=36
     player.counterExtraJump-=1
-    console.log(player.counterExtraJump,"tic tack")
 clack.style.transform=`rotateZ(${click}deg)`
 }else{
     timer.style.opacity=0

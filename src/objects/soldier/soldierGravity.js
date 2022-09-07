@@ -1,4 +1,7 @@
+import { detecJumpCreature } from "../../Functions/helpFunction/detectJumpCreature"
+import { detectJumpCreature2 } from "../../Functions/helpFunction/detectJumpCreature2"
 import { random } from "../../Functions/helpFunction/random"
+import { dontFallDownFromTitle } from "../shortHandFunction/dontFallDwonFromTitle"
 import { zombieTouchAnotherZombie } from "../zombie/zombieTouchAnotherZombie"
 
 export const soldierGravity=(WALL,soldierArr,can)=>{
@@ -6,6 +9,10 @@ export const soldierGravity=(WALL,soldierArr,can)=>{
 soldierArr.forEach((soldier,i,arr)=>{
     soldier.posY+=soldier.strenghtGravity
     soldier.doFall=true
+    // soldier.detect.trigger=true
+    soldier.touchWall=false
+    soldier.stopJump=false
+    
    
     
 
@@ -16,6 +23,7 @@ WALL.forEach((particularArray,index,WALLarr)=>{
 particularArray.forEach((title,indexTitle,particularArrayArray)=>{
 
     soldierArr.forEach((soldier,indexSoldier,soldierArray)=>{
+        detecJumpCreature(soldier,title)
      
         if(title.posX>soldier.posX+soldier.size || title.posX+title.size<soldier.posX||
             title.posY>soldier.posY+soldier.size||title.posY+title.size<soldier.posY){
@@ -30,6 +38,7 @@ particularArray.forEach((title,indexTitle,particularArrayArray)=>{
                         let deepCollision=soldier.posY+soldier.size-title.posY
                         soldier.posY-=deepCollision
                         soldier.doFall=false
+                        soldier.jumpStop=false
                        
                        
                     
@@ -37,10 +46,10 @@ particularArray.forEach((title,indexTitle,particularArrayArray)=>{
                
                     //LEFT MOVE ON HORIZONTAL
                     if(soldier.posX<title.posX+title.size&&soldier.posX>title.posX+title.size/2&&
-                    soldier.posY+soldier.size>title.posY+title.size+5){
+                    soldier.posY+soldier.size>title.posY+5){
                         let deepCollision=title.posX+title.size-soldier.posX
                         soldier.posX+=deepCollision+3
-                        soldier.directionMove="right"
+                        detectJumpCreature2(soldier,"right")
                         
                     }
                     //RIGHT MOVE
@@ -48,10 +57,21 @@ particularArray.forEach((title,indexTitle,particularArrayArray)=>{
                     soldier.posY+soldier.size>title.posY+5){
                         let deepCollision=soldier.posX+soldier.size-title.posX
                         soldier.posX-=deepCollision
-                        soldier.directionMove="left"
+                        detectJumpCreature2(soldier,"left")
                     
                        
                     }
+                    //jump
+            
+                    if(soldier.posY<title.posY+title.size+3&&soldier.posY>title.posY+title.size/2){
+                        soldier.posY=title.posY+title.size+1
+                        title.color="black"
+
+                        soldier.stop=true
+                      
+                        title.color="red"
+                      }
+                    
                     
                 }
 
@@ -83,6 +103,8 @@ particularArray.forEach((title,indexTitle,particularArrayArray)=>{
                }
                 
             }
+            //  //code serve as detect verge on map where monster need change direction in order not to fall to oblivion
+            // dontFallDownFromTitle(title,soldier)
             if(soldier.posX<0){
                 soldier.directionMove="right"
             }

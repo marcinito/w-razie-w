@@ -8,5 +8,6 @@ export class menuObject{
         this.active="firstLevel"
         this.click=0
         this.level=0
+        this.numberOfMonster=0
     }
 }

@@ -13,7 +13,10 @@ entry:{
     },
     instruction:{
       import:'./src/instruction.js',
-    
+
+    },
+    gameover:{
+      import:'./src/gameover.js',
 
     }
 },
@@ -36,7 +39,13 @@ plugins:[
       chunks:['instruction'],
 
    }),
-   
+   new HtmlWebpackPlugin({
+    template:'./src/gameover.html',
+    filename:"gameover.html",
+    inject:"body",
+    chunks:['gameover'],
+
+ }),
 ],
 module: {
     rules: [

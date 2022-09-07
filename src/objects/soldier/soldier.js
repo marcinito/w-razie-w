@@ -1,6 +1,8 @@
 import soldierImg from './solideSprites.png'
 import fireFromSoldierImg from './fireFromSoldierImg.png'
 import { bulletFromSoldierGun } from './bulletFromSoldierGun'
+import { detectEdge } from '../zombie/zombie'
+import { detectJump } from '../NPC/helperPlayer'
 
 const fireFromSoldier=new Image(100,100)
 fireFromSoldier.src=fireFromSoldierImg
@@ -50,8 +52,15 @@ export class Soldier{
         this.ratePercentage=this.size
         //gun
         this.arrayWithBullet=[]
-        
-
+        //detect it is tile which check if monster can fall down , blok serve like break from invoke function
+        this.detectCreator=new detectEdge()
+        this.detect=this.detectCreator
+        this.blok=false
+               //detec jump
+       this.detectJump=new detectJump()
+       this.touchWall=false
+       this.jump=false
+       this.jumpStop=false
 
     }
     draw(can,changeImage){
@@ -259,17 +268,58 @@ export class Soldier{
         }
      }
    
+//detect verge
+if(this.directionMove==="left"){
+    this.detect.posX=this.posX     
+  }
+  if(this.directionMove==="right"){
+    this.detect.posX=this.posX+this.size-this.detect.size     
+  }
+    this.detect.posY=this.posY+this.size-this.detect.size
+    
+    this.detect.draw(can)
+     //detect jump
+     if(this.directionMove==="left"){
+        this.detectJump.posX=this.posX-20
+        this.detectJump.posY=this.posY-40     
+      }
+      if(this.directionMove==="right"){
+        this.detectJump.posX=this.posX+this.size
+        this.detectJump.posY=this.posY-40          
+      }
+this.detectJump.draw(can)
+
     }
     
         movement(){
-                if(this.directionMove==="left"){
-                    this.posX-=this.speed
+            //jump
+            if(this.jump==true&&this.stopJump===false){
+                this.posY-=50
+                this.jump=false
+                
+              
+            }
+            if(this.directionMove==="left"){
+                this.posX-=this.speed
+                if(this.detect.trigger===true&&this.blok===false){
+                  this.directionMove="right"
+                  this.blok=true
+                  setTimeout(()=>{
+                    this.blok=false
+                  },1000)
                 }
-             
-             
-                if(this.directionMove==="right"){
-                        this.posX+=this.speed
-                }
+            }
+         
+         
+            if(this.directionMove==="right"){
+                this.posX+=this.speed
+                if(this.detect.trigger===true&&this.blok===false){
+                  this.directionMove="left";this.blok=true;
+                setTimeout(()=>{
+                  this.blok=false
+                },1000)
+              }
+            }
             }
 
     

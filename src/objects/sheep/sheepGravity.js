@@ -1,7 +1,11 @@
+import { dontFallDownFromTitle } from "../shortHandFunction/dontFallDwonFromTitle"
+
 export const sheepGravity=(WALL,sheepArr,can)=>{
 sheepArr.forEach((sheep,index,arrSheep)=>{
    sheep.posY+=sheep.strenghtGravity
    sheep.doFall=true
+   sheep.detect.trigger=true
+   
 })
 WALL.forEach((particularArray,index,WALLarr)=>{
     particularArray.forEach((title,indexTitle,particularArrayArray)=>{
@@ -28,7 +32,7 @@ WALL.forEach((particularArray,index,WALLarr)=>{
                    
                         //LEFT MOVE ON HORIZONTAL
                         if(sheep.posX<title.posX+title.size&&sheep.posX>title.posX+title.size/2&&
-                        sheep.posY+sheep.size>title.posY+title.size+5){
+                        sheep.posY+sheep.size>title.posY+5){
                             let deepCollision=title.posX+title.size-sheep.posX
                             sheep.posX+=deepCollision+3
                             sheep.directionMove="right"
@@ -74,6 +78,8 @@ WALL.forEach((particularArray,index,WALLarr)=>{
                    }
                     
                 }
+                 //code serve as detect verge on map where monster need change direction in order not to fall to oblivion
+                 dontFallDownFromTitle(title,sheep)
                 if(sheep.posX<0){
                     sheep.directionMove="right"
                 }

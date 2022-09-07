@@ -1,6 +1,8 @@
 
+
 import { handleHp } from "../../../Functions/helpFunction/handleHp"
 import { monsterDropItem } from "../../../Functions/helpFunction/monsterDropItem"
+import { countNumberMonsterOnLeve } from "../../../LEVEL/CHANGE-LEVEl/countNumberMonsterOnLevel"
 import { itemsOnMap } from "../../../main"
 export const  axeAttackMonster=(MONSTER,player)=>{
     player.axeArray.forEach((axe,axeIndex,axeArr)=>{
@@ -19,6 +21,7 @@ export const  axeAttackMonster=(MONSTER,player)=>{
                     if(monster.hp<0){
                         monsterDropItem(monster,itemsOnMap)
                     particularArrayArr.splice(monsterIndex,1)
+                    countNumberMonsterOnLeve()
                     }
                 }
 

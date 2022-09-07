@@ -1,19 +1,26 @@
 import { Dynamite } from "../GUN/dynamite/dynamite"
 import { Glock } from "../GUN/glock/glock"
 import { Axe } from "../GUN/axe/axe"
+import treatmentImg from './treatmentImg.png'
+import { makeWall } from "../../Functions/makeWall"
+import { plainWall } from "../WALL/plainWall/plainWall"
+const treatment=new Image(100,100)
+treatment.src=treatmentImg
 import playerImageFile from './playerSprite.png'
 import { updateEqDashboard } from "./shorthandFunction/updateEqDashboard"
 import { countAmmoInGlockInPlayer } from "./shorthandFunction/countAmmoInGlockInPlayer"
 import { displayItemInDetail } from "./shorthandFunction/displayItemInDetail"
 import { countEnduranceInAxe } from "./shorthandFunction/countEnduranceInAxe"
-
-const clack=document.querySelector(".clack")
+import { menu } from "../../main"
+const lifeSpan=document.querySelector(".lifeSpan")
 const playerImage=new Image(100,100)
 playerImage.src=playerImageFile
 export class Player{
     constructor(){
-        this.posX=300
-        this.posY=20
+        if(menu.level===0){
+         this.posX=
+         this.posY=100
+        }
         this.size=40.7
         this.color="blue"
         //IMAGE PLAYER
@@ -53,6 +60,8 @@ export class Player{
    this.ratePercentage=50
    //quantity live
    this.quantityLive=3
+   //visual effect of treatment
+   this.effect=0
 
 
      //backpack
@@ -60,8 +69,9 @@ export class Player{
      this.backpack={
       money:{amount:20,itemInBp:false},
       axe:{amount:0,itemInBp:false,ammo:"∞",bp:[],totalEndurance:0},
-      glock:{amount:100,itemInBp:false,bp:[],ammo:100000},
-      dynamite:{amount:0,itemInBp:false,ammo:"BOMB",},
+      glock:{amount:0,itemInBp:false,bp:[],ammo:0,flag:true},
+      machineGun:{amount:0,itemInBp:false,bp:[],ammo:0,flag:true},
+      dynamite:{amount:1212,itemInBp:false,ammo:"BOMB",},
       solidWall:{amount:0,itemInBp:false,ammo:0,},
       plainWall:{amount:0,itemInBp:false,ammo:0,},
       magmaWall:{amount:0,itemInBp:false,ammo:0,},
@@ -73,29 +83,40 @@ export class Player{
 
    //BUILDIN NEW BLOCK
     this.mode=true
-   this.blockToBuild=[]
+   this.blockToBuild=[new plainWall(100,100,0,"red","horizontal")]
        //gun
-    
        this.bulletGlockArray=[]
        this.dynamitsArray=[]
        this.axeArray=[]
+       //switch for checking what a position is lowest tile on map
+       this.checkPositionLowestTileOnMap=false
   
        
        
 
     }
     draw(can){
- 
+ lifeSpan.textContent=this.quantityLive
       can.ctx.fillStyle="green"
         can.ctx.fillRect(this.posX,this.posY-25,this.percentageHp,10)
         can.ctx.lineWidth=1
         can.ctx.strokeStyle="black"
         can.ctx.strokeRect(this.posX,this.posY-25,50,10)
- 
+        //treatment
+      
+    if(this.treatment===true){
+this.effect++
+  if(this.effect%10===0||this.effect%10===9||this.effect%10===11||this.effect%10===12||this.effect%10===13||this.effect%10===14){
+    can.ctx.drawImage(treatment,this.posX-10,this.posY-10,this.size+20,this.size+10)
+  }
+
+    }
      can.ctx.strokeRect(this.posX,this.posY,this.size,this.size)
      if(this.directionMove==="up" || this.directionMove==="down"){
       can.ctx.drawImage(this.image,0,0,250,230,this.posX,this.posY,this.size,this.size)
+    
       
+
      }
      if(this.directionMove==="left"){
    
@@ -133,6 +154,7 @@ export class Player{
            
             if(this.stop===false){
               this.posY-=this.powerJump
+              console.log("dziala")
              }
             
             setTimeout(()=>{
@@ -155,6 +177,7 @@ export class Player{
                      if(this.extraJump===true){
                       setTimeout(()=>{
                         if(this.stop===false){
+                        
                           this.posY-=this.powerJump
                          }
                          if(this.extraJump===true){
@@ -171,6 +194,7 @@ export class Player{
                                   setTimeout(()=>{
                                     if(this.stop===false){
                                       this.posY-=this.powerJump
+                                    
                                      }
                                   },20)
                                  }
@@ -262,18 +286,42 @@ if(this.whatIsInHand==="axe"){
 }
 if(this.whatIsInHand==="glock"){
  
-  if(this.backpack.glock.ammo>0){
+  if(this.backpack.glock.ammo>0&&this.backpack.glock.flag===true){
     
     this.bulletGlockArray.push(new Glock(this.posX,this.posY,this.directionMove))
     this.backpack.glock.bp[0].ammo-=1
+    this.backpack.glock.flag=false
+    setTimeout(()=>{
+      this.backpack.glock.flag=true
+    },500)
     if( this.backpack.glock.bp[0].ammo===0){
       this.backpack.glock.bp.splice(0,1)
       this.backpack.glock.amount-=1
     }
 
   }
-countAmmoInGlockInPlayer(this.backpack,this.whatIsInHand)
+countAmmoInGlockInPlayer(this.backpack,this.whatIsInHand,"glock")
 updateEqDashboard("glock",this.backpack)
+
+}
+if(this.whatIsInHand==="machineGun"){
+ 
+  if(this.backpack.machineGun.ammo>0&&this.backpack.machineGun.flag===true){
+    
+    this.bulletGlockArray.push(new Glock(this.posX,this.posY,this.directionMove))
+    this.backpack.machineGun.bp[0].ammo-=1
+    this.backpack.machineGun.flag=false
+    setTimeout(()=>{
+      this.backpack.machineGun.flag=true
+    },100)
+    if( this.backpack.machineGun.bp[0].ammo===0){
+      this.backpack.machineGun.bp.splice(0,1)
+      this.backpack.machineGun.amount-=1
+    }
+
+  }
+countAmmoInGlockInPlayer(this.backpack,this.whatIsInHand,"machineGun")
+updateEqDashboard("machineGun",this.backpack)
 
 }
 if(this.whatIsInHand==="dynamite"){
@@ -288,6 +336,11 @@ if(this.whatIsInHand==="hpPotion"){
     this.hp=this.hpTotal
     this.percentageHp=50
     this.backpack.hpPotion.amount-=1
+    this.treatment=true
+    setTimeout(()=>{
+     this.treatment=false
+    },3000)
+
     updateEqDashboard("hpPotion",this.backpack)
   }
 }
@@ -307,18 +360,18 @@ if(this.whatIsInHand==="jumpFluid"){
     updateEqDashboard("jumpFluid",this.backpack)
   }
 }
+
 if(this.whatIsInHand==="meat"){
 
   if(this.backpack.meat.amount>0){
   
      this.backpack.meat.amount-=1
      this.hp+=50 
-  
+     this.treatment=true
+     setTimeout(()=>{
+      this.treatment=false
+     },3000)
 
- 
-
-
-    
     updateEqDashboard("meat",this.backpack)
   }
 }

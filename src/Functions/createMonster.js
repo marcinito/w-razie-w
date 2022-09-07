@@ -1,10 +1,10 @@
-export const createMonster=(object,howMany,coordiante)=>{
+export const createMonster=(object,howMany,coordinate)=>{
     let arrMonster=[]
-    console.log(coordiante)
-if(howMany===coordiante.length){
+   
+if(howMany===coordinate.length){
     for(let i=0;i<howMany;i++){
         
-        arrMonster.push(new object(coordiante[i].x,coordiante[i].y))
+        arrMonster.push(new object(coordinate[i].x,coordinate[i].y))
     }
 }else{
     console.log("You have to specify equal amount coordinates and number of monster")
