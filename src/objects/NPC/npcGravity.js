@@ -1,6 +1,5 @@
-import { detecJumpCreature } from "../../Functions/helpFunction/detectJumpCreature"
-import { detectJumpCreature2 } from "../../Functions/helpFunction/detectJumpCreature2"
-
+import { detecJumpCreature } from "../MONSTER/FUNCTION/detectJumpCreature"
+import { detectJumpCreature2 } from "../MONSTER/FUNCTION/detectJumpCreature2"
 export const npcGravity=(npc,WALL,can)=>{
     npc.posY+=npc.strenghtGravity
     npc.strenghtGravity=3

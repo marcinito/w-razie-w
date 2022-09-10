@@ -45,10 +45,11 @@ export class Player{
         this.right=true
  
         //JUMP HANDLE
-   this.powerJump=20
+   this.powerJump=20//-strenght of jump how many player move to up when jump
    this.counterJump=0
-   this.stop=false
-    this.counterExtraJump=0
+   this.stop=false//-is becoming active when player meet obstacle when jump its blok his jumping
+    this.counterExtraJump=0 //-is serve as timer how many second player can jump higher than usually
+    this.extraJump=false//it tell if player have acces to jump higher than usually
     
   
 
@@ -293,7 +294,7 @@ if(this.whatIsInHand==="glock"){
     this.backpack.glock.flag=false
     setTimeout(()=>{
       this.backpack.glock.flag=true
-    },500)
+    },1)
     if( this.backpack.glock.bp[0].ammo===0){
       this.backpack.glock.bp.splice(0,1)
       this.backpack.glock.amount-=1

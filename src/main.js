@@ -11,19 +11,18 @@ import { movementPlayer } from './objects/player/movementPlayer/movementPlayer'
 import { FireAtakFromPlayer } from './objects/player/FireAtakFromPlayer'
 import { menuObject } from './objects/menuObject'
 import { PLAYERGRAVITY } from './objects/player/PLAYERGRAVITY'
-import { ghostAttackPlayer } from './objects/ghost/GhostAttackPlayer'
-import { whenFireBallFromDragonTouchWallOrPlayer } from './objects/dragon/whenFireBallFromDragonTouchWallOrPlayer'
-import { whenDragonTouchPlayer } from './objects/dragon/whenDragonTouchPlayer'
-import { ghostGravity } from './objects/ghost/ghostGravity'
-import { dragonGravity } from './objects/dragon/dragonGravity'
+import { ghostAttackPlayer } from './objects/MONSTER/ghost/GhostAttackPlayer'
+import { whenFireBallFromDragonTouchWallOrPlayer } from './objects/MONSTER/dragon/whenFireBallFromDragonTouchWallOrPlayer'
+import { whenDragonTouchPlayer } from './objects/MONSTER/dragon/whenDragonTouchPlayer'
+import { ghostGravity } from './objects/MONSTER/ghost/ghostGravity'
+import { dragonGravity } from './objects/MONSTER/dragon/dragonGravity'
 
-import { switchViewfinder } from './objects/player/movementPlayer/switchViefinder'
 import { glockAmmoVsWall } from './objects/GUN/glock/glockAmmoVsWall'
 import { dynamiteAmmoVsWall } from './objects/GUN/dynamite/dynamiteAmmoVsWall'
 import { dynamiteVsLivingCreature } from './objects/GUN/dynamite/dynamiteVsLivingCreature'
 import { playerTakeItemFromMap } from './objects/player/playerTakeItemFromMap'
-import { zombieGravity } from './objects/zombie/zombieGravity'
-import { zombieAttackPlayer } from './objects/zombie/zombieAttackPlayer'
+import { zombieGravity } from './objects/MONSTER/zombie/zombieGravity'
+import { zombieAttackPlayer } from './objects/MONSTER/zombie/zombieAttackPlayer'
 
 
 import { firstLevelArrangementWall } from './LEVEL/FIRST LEVEL/firstLevelArrangementWall'
@@ -33,15 +32,15 @@ import { monsterOnFirstLevel } from './LEVEL/FIRST LEVEL/monsterOnFirstLevel'
 import { itemsOnFirstLevel } from './LEVEL/FIRST LEVEL/itemsOnFirstLevel'
 import { axeAttackHitWall } from './objects/GUN/axe/axeAttackHitWall'
 import { gravityItemsOnMap } from './objects/ITEMSonMAP/functionItemsOnMap/gravityItemsOnMap'
-import { soldierAttackPlayer } from './objects/soldier/soldierAttackPlayer'
-import { soldierGravity } from './objects/soldier/soldierGravity'
-import { whenBulletFromSoldierTouchWallOrPlayer } from './objects/soldier/whenBulletFromSoldierTouchWallOrPlayer'
+import { soldierAttackPlayer } from './objects/MONSTER/soldier/soldierAttackPlayer'
+import { soldierGravity } from './objects/MONSTER/soldier/soldierGravity'
+import { whenBulletFromSoldierTouchWallOrPlayer } from './objects/MONSTER/soldier/whenBulletFromSoldierTouchWallOrPlayer'
 import { axeAttackMonster } from './objects/GUN/axe/axeAttackMonster'
 import { breathingOfPlayer } from './objects/player/breathingOfPlayer'
 import { handleButton } from './Functions/MENU/handlebutton'
 import { greetings } from './Functions/MENU/greetings'
 
-import { sheepGravity } from './objects/sheep/sheepGravity'
+import { sheepGravity } from './objects/MONSTER/sheep/sheepGravity'
 import { glockAmmoVsMonster } from './objects/GUN/glock/glockAmmoVsMonster'
 import { checkIfPlayerIsAlive } from './objects/player/checkIfPlayerIsAlive'
 import { woodenBoxGravity } from './objects/WALL/woodenBox/woodenBoxGravity'
@@ -51,6 +50,8 @@ import { itemsOnSecondLvl } from './LEVEL/secondLevel/itemsOnSecondlvl'
 import { countNumberMonsterOnLeve } from './LEVEL/CHANGE-LEVEl/countNumberMonsterOnLevel'
 import { helperPlayer } from './objects/NPC/helperPlayer'
 import { npcGravity } from './objects/NPC/npcGravity'
+
+
 
 const promotionDiv=document.querySelector(".promotionDiv")
 const canvas=document.getElementById("canvas")
@@ -92,7 +93,7 @@ export let changeLevel=()=>{
                         countNumberMonsterOnLeve()
                     }
 }
-export let NPC=[new helperPlayer(600,200)]
+export let NPC=[]
 export let WALL=firstLevelArrangementWall(player,can)
 export let MONSTER=monsterOnFirstLevel()
 export let itemsOnMap=itemsOnFirstLevel()
@@ -112,7 +113,7 @@ playerTakeItemFromMap(player,itemsOnMap)
 // AmmoVsWall(player,WALL,can)
 PLAYERGRAVITY(player,WALL,can)
 // checkIfPlayerIsAlive(player) ----- do usuniecia
-switchViewfinder(player)
+
 //////
 //****************** */
 //GUN

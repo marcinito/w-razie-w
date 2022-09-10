@@ -1,8 +1,8 @@
 
-import { handleHp } from "../../../Functions/helpFunction/handleHp"
-import { monsterDropItem } from "../../../Functions/helpFunction/monsterDropItem"
+import { handleHp } from "../../../Functions/shorthandFunction/handleHp"
 import { countNumberMonsterOnLeve } from "../../../LEVEL/CHANGE-LEVEl/countNumberMonsterOnLevel"
 import { itemsOnMap } from "../../../main"
+import { monsterDropItem } from "../../MONSTER/FUNCTION/monsterDropItem"
 
 export const glockAmmoVsMonster=(player,arrayMonster)=>{
     

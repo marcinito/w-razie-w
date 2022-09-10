@@ -1,7 +1,7 @@
 
 
-import { handleHp } from "../../../Functions/helpFunction/handleHp"
-import { monsterDropItem } from "../../../Functions/helpFunction/monsterDropItem"
+import { handleHp } from "../../../Functions/shorthandFunction/handleHp"
+import { monsterDropItem } from "../../MONSTER/FUNCTION/monsterDropItem"
 import { countNumberMonsterOnLeve } from "../../../LEVEL/CHANGE-LEVEl/countNumberMonsterOnLevel"
 import { itemsOnMap } from "../../../main"
 export const  axeAttackMonster=(MONSTER,player)=>{
