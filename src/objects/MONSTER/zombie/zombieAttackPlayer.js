@@ -1,10 +1,13 @@
 import { handleHp } from "../../../Functions/shorthandFunction/handleHp"
+import { monsterTurnWhenPlayerIsBehindHisBack } from "../FUNCTION/monsterTurnWhenPlayesIsBehindHisBack"
 
 export const zombieAttackPlayer=(player,arrZombie)=>{
     arrZombie.forEach((zombie,iZombie,zArr)=>{
        let dX=zombie.posX-player.posX
        let  dY=zombie.posY-player.posY
         let hypotenuse=dX*dX+dY*dY
+
+        monsterTurnWhenPlayerIsBehindHisBack(zombie,dX)
         hypotenuse=Math.floor(Math.sqrt(hypotenuse))
        if(hypotenuse<70&&zombie.directionMove==="right"){
         zombie.speed=0

@@ -9,5 +9,6 @@ export class menuObject{
         this.click=0
         this.level=0
         this.numberOfMonster=0
+        this.navigation="home"
     }
 }

@@ -37,7 +37,8 @@ export class Soldier{
         this.naturalSpeed=1
         this.speed=0
         this.strenghtGravity=3
-        this.strenghtAttack=1
+        this.strenghtAttack=0.3
+        this.strenghtAttackFromGun=10
 
         //DIRECTION
         this.directionArr=["left","right"]
@@ -73,7 +74,7 @@ export class Soldier{
         can.ctx.lineWidth=1
         can.ctx.strokeStyle="black"
         can.ctx.strokeRect(this.posX,this.posY-10,this.size,7)
-        can.ctx.strokeRect(this.posX,this.posY,this.size,this.size)
+        // can.ctx.strokeRect(this.posX,this.posY,this.size,this.size)
       
         if(this.doFall===true&&this.directionMove==="left"){
             can.ctx.drawImage(soldier,566,663,85,108,this.posX,this.posY,this.size,this.size)

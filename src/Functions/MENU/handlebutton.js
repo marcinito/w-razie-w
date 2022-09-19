@@ -1,31 +1,20 @@
 import { greetings } from "./greetings"
-
+import { items } from "./items"
 
 const startGame=document.querySelector(".startGame")
 const mainMenu=document.querySelector(".mainMenu")
 const pause=document.querySelector(".pause")
-const instruction=document.querySelector(".aInstruction")
 const windowAlert=document.querySelector(".windowAlert")
-
+//all element below concern small nav
+const smallTab=[...document.querySelectorAll(".tab")]
+const itemsTable=document.querySelector(".items")
+const story=document.querySelector(".story")
+const instruction=document.querySelector(".instruction")
 
 export const handleButton=(menu)=>{
 
     startGame.addEventListener("click",()=>{
-    
-    //     let differenceInWidth=screen.width-window.innerWidth
-    // console.log(differenceInWidth)
-    //     if(differenceInWidth<200){
-    //         menu.playGame="game"
-    //     mainMenu.style.opacity=0
-    //     mainMenu.style.zIndex=-100
-    //     }else{
-    //        windowAlert.style.opacity=1
-    //        windowAlert.style.zIndex=100
-    //        setTimeout(()=>{
-    //         windowAlert.style.opacity=0
-    //         windowAlert.style.zIndex=-100
-    //        },3000)
-    //     }
+
         menu.playGame="game"
         mainMenu.style.opacity=0
         mainMenu.style.zIndex=-100
@@ -42,7 +31,39 @@ export const handleButton=(menu)=>{
         greetings()
         
     })
-instruction.addEventListener("click",()=>{
-    menu.playGame="menu"
+
+
+//
+smallTab.forEach((tab,i,arr)=>{
+  
+    tab.addEventListener("click",()=>{
+    smallTab.forEach((el)=>{
+        el.style.backgroundColor="gray"
+        el.style.borderStyle="none"
+    })
+     
+        if(tab.textContent==="items"){
+            tab.style.backgroundColor="red"
+            itemsTable.style.display="block"
+            instruction.style.display=`none`
+            story.style.display=`none`
+            
+
+        }
+        else if(tab.textContent==="story"){
+            tab.style.backgroundColor="red"
+            story.style.display=`block`
+            itemsTable.style.display=`none`
+            instruction.style.display=`none`
+        }
+        else if(tab.textContent==="instruction"){
+            tab.style.backgroundColor="red"
+            story.style.display=`none`
+            itemsTable.style.display=`none`
+            instruction.style.display=`block`
+           
+        }
+    })
 })
+
 }

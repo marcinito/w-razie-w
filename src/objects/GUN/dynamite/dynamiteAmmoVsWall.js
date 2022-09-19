@@ -1,8 +1,10 @@
+import { itemsOnMap } from "../../../main"
 import { goldenCoin } from "../../ITEMSonMAP/goldenCoin/goldenCoin"
 import { magmaWallItems } from "../../ITEMSonMAP/magmaWall/magmaWallItems"
 import { plainWallItems } from "../../ITEMSonMAP/plainWall/plainWallItems"
 import { solidWallItems } from "../../ITEMSonMAP/solidWall/solidWallItems"
-export const dynamiteAmmoVsWall=(player,WALL,can,itemsOnMap)=>{
+
+export const dynamiteAmmoVsWall=(player,WALL,can)=>{
     //DYNAMITE VS WALL
     
     let dynamitsArray=player.dynamitsArray
@@ -13,41 +15,18 @@ arrayWithTitle.forEach((title,tI,tArr)=>{
     if(title.hp<0&&title.isHitBy==="dynamite"){
           
         if(title.name==="goldWall"){
-         
-           
-            
-        if(itemsOnMap!==undefined){
-           
             itemsOnMap.push(new goldenCoin(title.posX,title.posY,title.size))
         }
-  
-        
-           
-        }
         if(title.name==="solidWall"){
-          
-            if(itemsOnMap!==undefined){
-           
                 itemsOnMap.push(new solidWallItems(title.posX,title.posY,title.size))
-            }
-      
         }
         if(title.name==="plainWall"){
-       
-            if(itemsOnMap!==undefined){
-           
                 itemsOnMap.push(new plainWallItems(title.posX,title.posY,title.size))
-            }
-      
         }
         if(title.name==="magmaWall"){
-       
-            if(itemsOnMap!==undefined){
-           
                 itemsOnMap.push(new magmaWallItems(title.posX,title.posY,title.size))
-            }
-      
         }
+      
         tArr.splice(tI,1)
     
     

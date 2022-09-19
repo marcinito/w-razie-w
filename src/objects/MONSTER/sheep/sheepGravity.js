@@ -10,7 +10,7 @@ sheepArr.forEach((sheep,index,arrSheep)=>{
    sheep.posY+=sheep.strenghtGravity
    sheep.doFall=true
    sheep.touchWall=false
-   sheep.detect.trigger=true
+//    sheep.detect.trigger=true
    
 })
 WALL.forEach((particularArray,index,WALLarr)=>{

@@ -21,6 +21,7 @@ zombieImg2.src=zombieSprite2
 let zombieMove=0
 setInterval(()=>{
 zombieMove++
+
 if(zombieMove>7)
 {
     zombieMove=0
@@ -219,12 +220,12 @@ if(this.directionMove==="left"){
     this.detect.posX=this.posX-20     
   }
   if(this.directionMove==="right"){
-    this.detect.posX=this.posX+this.size-this.detect.size+20     
+    this.detect.posX=this.posX+this.size-this.detect.size+20
   }
   checkIfMonsterCanGoFurther(this.detect,this.posY,this.size,this.speed,this.directionMove)
     this.detect.draw(can)
 
-// checkIfMonsterCanGoFurther(this.detect)
+
     
 }
     movement(){

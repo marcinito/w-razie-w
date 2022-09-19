@@ -1,6 +1,7 @@
-import { changeLevel, menu } from "../../../main"
+import { can, changeLevel, menu } from "../../../main"
 import { Glock } from "../../GUN/glock/glock"
 import { glockItems } from "../../ITEMSonMAP/glock/glockItems"
+import { brickWall } from "../../WALL/brickWall/brickWall"
 import { magmaWall } from "../../WALL/magmaWall/magmaWall"
 import { plainWall } from "../../WALL/plainWall/plainWall"
 import { solidWall } from "../../WALL/solidWall/solidWall"
@@ -9,6 +10,7 @@ import { displayItemInDetail } from "../shorthandFunction/displayItemInDetail"
 import { dropItemFromBpOnMap } from "../shorthandFunction/dropItemFromBpOnMap"
 import { giveBorderToUsingSlotBp } from "../shorthandFunction/giveBorderToUsingSlotBp"
 import { updateEqDashboard } from "../shorthandFunction/updateEqDashboard"
+import { setPositionTileOnMap } from "./setPositionTileOnMap"
 
 
 const allSlot=[...document.querySelectorAll(".slotBp")]
@@ -16,7 +18,6 @@ const allSlot=[...document.querySelectorAll(".slotBp")]
 //QUERY FROM HTML
 
 
-const POINTER=document.querySelector(".viewFinderImg")
 
 export const movementPlayer=(player,imgTitleFromMenu,itemsOnMap)=>{
     
@@ -69,8 +70,7 @@ if(e.keyCode===81){
     giveBorderToUsingSlotBp(allSlot,allSlot[0])
     console.log(allSlot[0])
 displayItemInDetail(allSlot,player)
-console.log(player.backpack.machineGun.ammo)
-console.log(player.backpack.machineGun.amount,"!")
+
 
 
    }
@@ -167,25 +167,33 @@ console.log(player.backpack.machineGun.amount,"!")
     })
     let ex
     let ey
+  let point
+  
     window.addEventListener("click",(e)=>{
         //PLAIN WALL IS BUILDING
   
             if(player.whatIsInHand==="solidWall"&&player.backpack.solidWall.amount>0){
-            player.blockToBuild.push(new solidWall(ex-30,ey-30,65,"red","horizontal"))
+            player.blockToBuild.push(new solidWall(point.x-30,point.y-30,65,"red","horizontal"))
             player.backpack.solidWall.amount-=1
          
             updateEqDashboard("solidWall",player.backpack)
             }
             if(player.whatIsInHand==="plainWall"&&player.backpack.plainWall.amount>0){
-                player.blockToBuild.push(new plainWall(ex-30,ey-30,65,"red","horizontal"))
+                
+                player.blockToBuild.push(new plainWall(point.x-30,point.y-30,65,"red","horizontal"))
                 player.backpack.plainWall.amount-=1
                 updateEqDashboard("plainWall",player.backpack)
                 }
                 if(player.whatIsInHand==="magmaWall"&&player.backpack.magmaWall.amount>0){
-                    player.blockToBuild.push(new magmaWall(ex-30,ey-30,65,"red","horizontal"))
+                    player.blockToBuild.push(new magmaWall(point.x-30,point.y-30,65,"red","horizontal"))
                     player.backpack.magmaWall.amount-=1
                     updateEqDashboard("magmaWall",player.backpack)
                     }
+                    if(player.whatIsInHand==="brickWall"&&player.backpack.magmaWall.amount>0){
+                        player.blockToBuild.push(new brickWall(point.x-30,point.y-30,65,"red","horizontal"))
+                        player.backpack.magmaWall.amount-=1
+                        updateEqDashboard("brickWall",player.backpack)
+                        }
                 
           
        
@@ -194,12 +202,10 @@ console.log(player.backpack.machineGun.amount,"!")
     
 
     window.addEventListener("mousemove",(e)=>{
-      
-        POINTER.style.left=e.x -15 +"px"
-        POINTER.style.top=e.y - 15+"px"
         ex=e.x
         ey=e.y
-    
+  
+        point=setPositionTileOnMap(ex,ey)
     })
   
 }

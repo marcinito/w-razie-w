@@ -11,7 +11,7 @@ let distance=detect.posY-posY+size
     if(detect.trigger===true){
         detect.posY+=detect.speed
         
-        if(distance>300){
+        if(distance>300||detect.posY>can.C_H){
             detect.avoidFallInChasm=true
             console.log("dziala")
       

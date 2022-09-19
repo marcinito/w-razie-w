@@ -1,9 +1,11 @@
 import { player } from "../../../main"
 import { AxeItems } from "../../ITEMSonMAP/axe/axe"
+import { brickWallItems } from "../../ITEMSonMAP/brickWall/brickWall"
 import { dynamiteItems } from "../../ITEMSonMAP/dynamite/dynamieItems"
 import { glockItems } from "../../ITEMSonMAP/glock/glockItems"
 import { goldenCoin } from "../../ITEMSonMAP/goldenCoin/goldenCoin"
 import { healthFluidItems } from "../../ITEMSonMAP/healthFluid/healthFluid"
+import { helperSpawnRuna } from "../../ITEMSonMAP/helperRuna/helperRuna"
 import { jumpFluidItems } from "../../ITEMSonMAP/jumpFluid/jumpFluidItems"
 import { magmaWallItems } from "../../ITEMSonMAP/magmaWall/magmaWallItems"
 import { Meat } from "../../ITEMSonMAP/meat/meat"
@@ -148,6 +150,10 @@ if(item==="dynamite"){
       if(directionMove==="left"){ itemsOnMap.push(new magmaWallItems(player.posX-55,player.posY-51,65,true,directionMove))}
       if(directionMove==="right"){ itemsOnMap.push(new magmaWallItems(player.posX+55,player.posY-51,65,true,directionMove))}
    }
+   if(item==="brickWall"){
+      if(directionMove==="left"){ itemsOnMap.push(new brickWallItems(player.posX-55,player.posY-51,65,true,directionMove))}
+      if(directionMove==="right"){ itemsOnMap.push(new brickWallItems(player.posX+55,player.posY-51,65,true,directionMove))}
+   }
    if(item==="jumpFluid"){
       if(directionMove==="left"){ itemsOnMap.push(new jumpFluidItems(player.posX-35,player.posY-51,true,directionMove))}
       if(directionMove==="right"){ itemsOnMap.push(new jumpFluidItems(player.posX+35,player.posY-51,true,directionMove))}
@@ -156,6 +162,11 @@ if(item==="dynamite"){
    if(item==="meat"){
       if(directionMove==="left"){ itemsOnMap.push(new Meat(player.posX-35,player.posY-51,true,directionMove))}
       if(directionMove==="right"){ itemsOnMap.push(new Meat(player.posX+35,player.posY-51,true,directionMove))}
+    
+   }
+   if(item==="helperRuna"){
+      if(directionMove==="left"){ itemsOnMap.push(new helperSpawnRuna(player.posX-35,player.posY-71,true,directionMove))}
+      if(directionMove==="right"){ itemsOnMap.push(new helperSpawnRuna(player.posX+35,player.posY-71,true,directionMove))}
     
    }
 

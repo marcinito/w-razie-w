@@ -14,7 +14,7 @@ export const glockAmmoVsMonster=(player,arrayMonster)=>{
                     //NO COLLISION
                 }
                 else{
-                    
+                   
                     monster.hp-=bullet.strenghtAttack
                     monster.percentageHp-=handleHp(bullet.strenghtAttack,monster)
                     arrayBullet.splice(indexBullet,1)

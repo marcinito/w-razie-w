@@ -1,9 +1,10 @@
+import { can } from '../../main'
 import transitionImg from './transitionEffect.png'
 const transition=new Image(100,100)
 transition.src=transitionImg
 export class transitionEffect{
     constructor(){
-        this.posX=Math.floor(Math.random()*window.innerWidth)
+        this.posX=Math.floor(Math.random()*can.C_W+40)
         this.posY=Math.floor(Math.random()*100)
         this.size=40
         this.color="yellow"

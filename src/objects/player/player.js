@@ -11,7 +11,9 @@ import { updateEqDashboard } from "./shorthandFunction/updateEqDashboard"
 import { countAmmoInGlockInPlayer } from "./shorthandFunction/countAmmoInGlockInPlayer"
 import { displayItemInDetail } from "./shorthandFunction/displayItemInDetail"
 import { countEnduranceInAxe } from "./shorthandFunction/countEnduranceInAxe"
-import { menu } from "../../main"
+import { menu, NPC, player } from "../../main"
+import { helperPlayer } from "../NPC/helperPlayer/helperPlayer"
+import { handleHp } from "../../Functions/shorthandFunction/handleHp"
 const lifeSpan=document.querySelector(".lifeSpan")
 const playerImage=new Image(100,100)
 playerImage.src=playerImageFile
@@ -54,11 +56,10 @@ export class Player{
   
 
    //HP
-   this.hpTotal=100
-   this.hp=100
-   this.percentageHp=50
-   //ratePercentage serve as on what number is count "percent" for example 20*50/hpTotal
-   this.ratePercentage=50
+   this.hpTotal=100//hp total tell what is maximum hp player
+   this.hp=this.hpTotal
+   this.percentageHp=50// percentageHp tell how many percent hp player have
+   this.ratePercentage=50// ratePercentage set value for "percent" in this case percent means 50
    //quantity live
    this.quantityLive=3
    //visual effect of treatment
@@ -75,10 +76,12 @@ export class Player{
       dynamite:{amount:1212,itemInBp:false,ammo:"BOMB",},
       solidWall:{amount:0,itemInBp:false,ammo:0,},
       plainWall:{amount:0,itemInBp:false,ammo:0,},
+      brickWall:{amount:0,itemInBp:false,ammo:0,},
       magmaWall:{amount:0,itemInBp:false,ammo:0,},
       hpPotion:{amount:0,itemInBp:false,ammo:0,},
       jumpFluid:{amount:0,itemInBp:false,ammo:0,},
       meat:{amount:0,itemInBp:false,ammo:0,},
+      helperRuna:{amount:0,itemInBp:false,ammo:0,},
      }
 
 
@@ -91,14 +94,26 @@ export class Player{
        this.axeArray=[]
        //switch for checking what a position is lowest tile on map
        this.checkPositionLowestTileOnMap=false
-  
-       
-       
-
+       this.deadEffect=false
     }
     draw(can){
+    
  lifeSpan.textContent=this.quantityLive
-      can.ctx.fillStyle="green"
+    let percentHp=this.hp/this.hpTotal*this.ratePercentage
+if(percentHp>25){
+    
+  can.ctx.fillStyle="green"
+}
+else if(percentHp<28&& percentHp>12){
+    
+  can.ctx.fillStyle="yellow"
+
+}
+else if(percentHp<11){
+    
+  can.ctx.fillStyle="red"
+
+}
         can.ctx.fillRect(this.posX,this.posY-25,this.percentageHp,10)
         can.ctx.lineWidth=1
         can.ctx.strokeStyle="black"
@@ -119,7 +134,7 @@ this.effect++
       
 
      }
-     if(this.directionMove==="left"){
+     if(this.directionMove==="left"&&this.deadEffect===false){
    
       can.ctx.drawImage(this.image,this.animation,500,250,220,this.posX,this.posY,this.size,this.size)
     
@@ -127,13 +142,22 @@ this.effect++
         this.animation=0
       }
      }
-     if(this.directionMove==="right")
+     if(this.directionMove==="right"&&this.deadEffect===false){
    
      can.ctx.drawImage(this.image,this.animation,750,250,220,this.posX,this.posY,this.size,this.size)
     
      if(this.animation>=1000){
        this.animation=0
      }
+     if(this.deadEffect===true&&this.directionMove==="right"||this.directionMove==="left"){
+   
+      can.ctx.drawImage(this.image,this.animation,750,250,220,this.posX,this.posY,this.size,this.size)
+     
+      if(this.animation>=1000){
+        this.animation=0
+      }
+     }
+    }
     }
     moveUp(){
   this.stop=false
@@ -345,7 +369,7 @@ if(this.whatIsInHand==="hpPotion"){
     updateEqDashboard("hpPotion",this.backpack)
   }
 }
-
+//code from here operate in playerbreathing
 if(this.whatIsInHand==="jumpFluid"){
 
   if(this.backpack.jumpFluid.amount>0){
@@ -368,12 +392,22 @@ if(this.whatIsInHand==="meat"){
   
      this.backpack.meat.amount-=1
      this.hp+=50 
+     this.percentageHp+=handleHp(50,player)
      this.treatment=true
      setTimeout(()=>{
       this.treatment=false
      },3000)
 
     updateEqDashboard("meat",this.backpack)
+  }
+}
+if(this.whatIsInHand==="helperRuna"){
+
+  if(this.backpack.helperRuna.amount>0){
+  
+     this.backpack.helperRuna.amount-=1
+    NPC.push(new helperPlayer(this.posX,this.posY-20))
+    updateEqDashboard("helperRuna",this.backpack)
   }
 }
 }

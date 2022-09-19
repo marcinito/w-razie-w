@@ -4,16 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bahianita&family=Inconsolata:wght@200;400&family=Inspiration&family=Rubik:wght@300&display=swap" rel="stylesheet">
     <title>LuRcH</title>
 </head>
 <body>
-    <img class="bodys">
-    <div class="viewFinder">
-        <img class='viewFinderImg'/>
-    </div>
+    
+        
+
+ 
     <canvas id="canvas"></canvas>
     
     <div class="menuEq">
@@ -64,22 +65,184 @@
       
        
         <section class="interFace">
-            <div class="announcement">
+            <div class="announcement"></div>
+            <div class="board">
+                <nav><div class="itemTab tab">items</div>
+                    <div class="storyTab tab">story</div><div class="instr tab">instruction</div>
+                </nav>
+                <div class="items">
+                    <h1>Items in GaMe</h1>
+                    <table class="tableItems">
+                        <tr class="axe">
+                            <td class="appearance"><img src="./objects/ITEMSonMAP/axe/axe.png"/><p>axe</p></td>
+                            <td class="describe">Weapon short-range</td>
+                        </tr>
+                        <tr class="glock">
+                            <td class="appearance"><img src="./objects/ITEMSonMAP/glock/glockItems.png"/><p>glock</p></td>
+                            <td class="describe">Slow frequency weapon long-range</td>
+                        </tr>
+                        <tr class="hpPotion">
+                            <td class="appearance"><img src="./objects/ITEMSonMAP/healthFluid/hpPotion.png"/><p>health potion</p></td>
+                            <td class="describe">Drink which treat your bound</td>
+                        </tr>
+                        <tr class="helper">
+                            <td class="appearance"><img src="./objects/ITEMSonMAP/helperRuna/helperRuna.png"/><p>helper</p></td>
+                            <td class="describe">Runa creates helper which help you duelling with monster</td>
+                        </tr>
+                        <tr class="jumpFluid">
+                            <td class="appearance"><img src="./objects/ITEMSonMAP/jumpFluid/jumpFluid.png"/><p>jump fluid</p></td>
+                            <td class="describe">Drink which allow you jump higher during 10 seconds.</td>
+                        </tr>
+                     
+                        <tr class="meat">
+                            <td class="appearance"><img src="./objects/ITEMSonMAP/meat/Meat.png"/><p>meat</p></td>
+                            <td class="describe">Meat from monster give you back your health</td>
+                        </tr>
+                        <tr class="machineGun">
+                            <td class="appearance"><img src="./objects/ITEMSonMAP/machineGun/machineGun.png" style="width:60%"/><p>machine gun</p></td>
+                            <td class="describe">Fast frequency long-range weapon</td>
+                        </tr>
+                        <tr class="dynamite">
+                            <td class="appearance"><img src="./objects/GUN//dynamite/TnT.png" style="width:60%"/><p>dynamite</p></td>
+                            <td class="describe">heavy bomb, it's hurt only monster</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="story">
+                    <h1>Begining of LurCh World</h1>
+                    <p>Timmy hero of this game, had been living in quiet and peaceful land.He was farmer and liked spend his time on
+                         meadow absorb
+                        take care about his sheep.In free time he had been watching blue sky and thought about world around.Sometimes
+                         he could hear 
+                        strange noise from under the ground but didn't care about it.He thought that maybe soil is hungry etc.
+                        In his dimensional creature like him have another concept about wordl because their planet structure and space has diffrent
+                        law than human earth.The most fameous scientis was Alber Soquare which discovered that "LurCh"
+                         wordl basic molecule has shape of Square and connect with other moleculs and form bigger element.His famous 
+                         pattern is a2.Timmy heard about it but didn't pay to much attention to it.It wasn't his business, he doesn't know what he
+                          will 
+                         eat for dinner why he should interest thing like this?Better question was what he will eat?
+                         Day passed and he was happy.
+
+
+                         ...but one mornning something terrible happend 
+                         He wasn't be able to find his one sheep , went abroad his farm and found out ...
+
+                    </p>
+                </div>
+                
+                    <div class="instruction">
+                        <table style="width:90%" class="primaryTable">
+                         <tr>
+                            <th class="thMovement">Movement<img src="./stylesImage/instruction/Boots_of_Haste.png" class="img"/></th>
+                            <td class="tdMovement"><div class="secondTable">
+                                <table>
+                                <tr>
+                                    <th>right</th>
+                                    <td>→</td>
+                                </tr>
+                                <tr>
+                                    <th>left</th>
+                                    <td>←</td>
+                                </tr>
+                                <tr>
+                                    <th>jump</th>
+                                    <td>↑</td>
+                                </tr>
+                             </table>
+                            </div></td>
+                            <td  class="tdMovement">If you want move to <span class="span2">right</span> click <span>→</span> 
+                                ,move <span class="span2">left</span>
+                                 <span>←</span> in order to <span class="span2">jump</span> click <span>↑</span> on you keyboard</td>
+                            
+                            
+                         </tr>
+                        
+                         <tr>
+                            <th class="thAttack">Attack direction<img src="./stylesImage/instruction/arrowsKeyboard.png" class="img"/></th>
+                            <td  class="tdAttack">
+                                In order to choose attack direction use the same key which you use to movement
+                            </td>
+                                 <td class="tdAttack"><div class="secondTable">
+                                    <table>
+                                    <tr>
+                                        <th>attack right</th>
+                                        <td>→</td>
+                                    </tr>
+                                    <tr>
+                                        <th>attack left</th>
+                                        <td>←</td>
+                                    </tr>
+                                    <tr>
+                                        <th>attack up</th>
+                                        <td>↑</td>
+                                    </tr>
+                                    <tr>
+                                        <th>attack down</th>
+                                        <td>↓</td>
+                                    </tr>
+                                 </table>
+                                </div></td>
+                            
+                         </tr>
+                         <tr>
+                            <th class="thDrop">Drop items<img src="./objects/ITEMSonMAP/meat/Meat.png" class="img"/></th>
+                            <td  class="tdDrop">
+                                Do you need more space in your backpack?Click <span>G</span> to make more free space.
+                            </td>
+                                 <td class="tdDrop"><div class="secondTable">
+                                    <table>
+                                    <tr>
+                                        <th>drop item</th>
+                                        <td>G</td>
+                                    </tr>
+                                    
+                                 </table>
+                                </div></td>
+                            
+                         </tr>
+                         <tr>
+                            <th class="thtakeItem">Take items<img src="./objects/ITEMSonMAP/goldenCoin/moneyBag.png" class="img"/></th>
+                            <td  class="tdtakeItem" colspan="2">
+                               If you want take item from map, you need only touch it with character
+                            </td>
+                            
+                            
+                         </tr>
+                         <tr>
+                            <th class="thbuildWall">Build new wall<img src="./objects/WALL//magmaWall/images/100MagmaBlock.png" class="img"/></th>
+                            <td  class="tdbuildWall" colspan="2">
+                               <span>1</span>.Focus your mouse on chose place <span>2</span>.Click left button on mouse or space
+                            </td>
+                            
+                            
+                         </tr>
+                         <tr>
+                            <th class="thuseItem">Use item
+                            <div></div>
+                            </th>
+                            <td  class="tduseItem" colspan="2">
+                               1.Choose item from backpack by click specific number from keyboard 2.Click "space"
+                            </td>
+                            
+                            
+                         </tr>
+                        </table>
+                             
+                            
+                              
+                             </div>
                 
             </div>
         </section>
         <nav class="panelOption">
             <button class="btn startGame">Start Game</button>
-            <a href="/instruction.html" target="_blank" class="aInstruction" >Instruction</a>
-            <button class="btn">Story</button>
-            <button class="btn">Settings</button>
+            
+        
         </nav>
         <div class="windowAlert">
             You need have full screen to play the game
         </div>
-        <div class="promotionDiv">
-            You advanced to the next level
-        </div>
+     
     </div>
 
  

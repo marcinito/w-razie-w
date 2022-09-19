@@ -11,6 +11,7 @@ import { movementPlayer } from './objects/player/movementPlayer/movementPlayer'
 import { FireAtakFromPlayer } from './objects/player/FireAtakFromPlayer'
 import { menuObject } from './objects/menuObject'
 import { PLAYERGRAVITY } from './objects/player/PLAYERGRAVITY'
+
 import { ghostAttackPlayer } from './objects/MONSTER/ghost/GhostAttackPlayer'
 import { whenFireBallFromDragonTouchWallOrPlayer } from './objects/MONSTER/dragon/whenFireBallFromDragonTouchWallOrPlayer'
 import { whenDragonTouchPlayer } from './objects/MONSTER/dragon/whenDragonTouchPlayer'
@@ -42,14 +43,18 @@ import { greetings } from './Functions/MENU/greetings'
 
 import { sheepGravity } from './objects/MONSTER/sheep/sheepGravity'
 import { glockAmmoVsMonster } from './objects/GUN/glock/glockAmmoVsMonster'
-import { checkIfPlayerIsAlive } from './objects/player/checkIfPlayerIsAlive'
-import { woodenBoxGravity } from './objects/WALL/woodenBox/woodenBoxGravity'
+
+
 import { secondLevelArrangementWall } from './LEVEL/secondLevel/secondLevelArrangementWall'
 import { monsterInSecondLevel } from './LEVEL/secondLevel/monsterInSecondLevel'
 import { itemsOnSecondLvl } from './LEVEL/secondLevel/itemsOnSecondlvl'
-import { countNumberMonsterOnLeve } from './LEVEL/CHANGE-LEVEl/countNumberMonsterOnLevel'
-import { helperPlayer } from './objects/NPC/helperPlayer'
+
 import { npcGravity } from './objects/NPC/npcGravity'
+
+import { helperAttackWall } from './objects/NPC/helperPlayer/helperAttackWall'
+import { helperAttackMonster } from './objects/NPC/helperPlayer/helperAttackMonster'
+import { playerIsTreating } from './objects/NPC/helperPlayer/playerIsTreating'
+
 
 
 
@@ -61,16 +66,14 @@ const menuEq=document.querySelector(".menuEq")
 //LISTA ZADAN//
 //1//ZRobic tak by jedna funkcja obslugiwala wszystkie attaki z glocka w potwory//
 
-window.addEventListener("resize",()=>{
-    location.reload()
-})
+
 //It need be develop in order to handle primary menu button start game etc...
 handleButton(menu)
 
 greetings()
 export let can=canvasSettingsGame()
 
-// greetings()
+
 
 
 const imgTitleFromMenu=[...document.querySelectorAll(".imgTitle")]
@@ -79,18 +82,18 @@ export let transitionArray=[]
 
 export let changeLevel=()=>{
     if(menu.level===1){
-        console.log("wykonalo sie")
+      
                 WALL=secondLevelArrangementWall(player,can)
                 MONSTER=monsterInSecondLevel()
                 itemsOnMap=itemsOnSecondLvl()
-                countNumberMonsterOnLeve()
+                
             }
             if(menu.level===2){
-                console.log("wykonalo sie")
+                
                         WALL=firstLevelArrangementWall(player,can)
                         MONSTER=monsterInSecondLevel()
                         itemsOnMap=itemsOnSecondLvl()
-                        countNumberMonsterOnLeve()
+                      
                     }
 }
 export let NPC=[]
@@ -100,14 +103,14 @@ export let itemsOnMap=itemsOnFirstLevel()
 movementPlayer(player,imgTitleFromMenu,itemsOnMap)
 console.log(MONSTER)
  const runApp=()=>{
- 
+    
    if(menu.playGame==="game"){
 
 
 can.ctx.clearRect(0,0,can.C_W,can.C_H)
 //player
 player.draw(can)
-checkIfPlayerIsAlive(player)
+
 breathingOfPlayer(player)
 playerTakeItemFromMap(player,itemsOnMap)
 // AmmoVsWall(player,WALL,can)
@@ -126,9 +129,7 @@ WALL.forEach((pArrWallArray,wI,WALLarray)=>{
 
 pArrWallArray.forEach((title,pItitle,pArrWall)=>{
         title.draw(can)
-        if(title.name==="wodenBox"){
-            woodenBoxGravity()
-        }
+    
 
 })   
 })
@@ -137,11 +138,12 @@ pArrWallArray.forEach((title,pItitle,pArrWall)=>{
 MONSTER.forEach((pArrMonster,index,arrayMONSTER)=>{
     pArrMonster.forEach((monster,i,arr)=>{
         if(monster.name==="ghost"){
+            
             monster.draw(can)
             ghostAttackPlayer(player,arr)
             ghostGravity(WALL,arr,can)
             monster.movement()
-          
+            glockAmmoVsMonster(player,arr)
         }
         if(monster.name==="dragon"){
             monster.movement()
@@ -162,6 +164,7 @@ MONSTER.forEach((pArrMonster,index,arrayMONSTER)=>{
 
         }
         if(monster.name==="soldier"){
+            
             monster.movement()
             monster.draw(can)
             monster.shootFromGun(can)
@@ -182,9 +185,29 @@ MONSTER.forEach((pArrMonster,index,arrayMONSTER)=>{
 
     })
 })
+//NPC
 NPC.forEach((npc,index,arrNpc)=>{
-    npc.draw(can)
+   
+    
     npcGravity(npc,WALL,can)
+    
+    if(npc.name==="helperPlayer"){
+        npc.movement()
+        npc.draw(can)
+        npc.magicUse()
+        helperAttackWall(WALL,npc.arrayWithMagic)
+        helperAttackMonster(MONSTER,NPC)
+        playerIsTreating(NPC)
+        MONSTER.forEach((pA)=>{
+            pA.forEach((el)=>{
+                if(el.name==="dragon"||el.name==="ghost"){
+                    npc.skyAttack=true
+                }
+            })
+        })
+      
+    
+    }
 })
 
 FireAtakFromPlayer(player,can)

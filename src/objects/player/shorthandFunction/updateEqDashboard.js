@@ -277,5 +277,52 @@ export const updateEqDashboard=(nameOfItem,backpack,drop)=>{
                             }
                            }
                         }
+                        if(nameOfItem==="helperRuna"){
+                          if(drop==="drop"){backpack.helperRuna.amount-=1
+                         
+                          }
+                          quantityItem.textContent=backpack.helperRuna.amount
+        
+                          for(let i=0;i<allSlot.length;i++){
+                              if(allSlot[i].dataset.item===nameOfItem){
+                               
+                                if(backpack.meat.amount===0){
+                              allSlot[i].src=background
+                              choosenItem.src=backgroundImg
+                              allSlot[i].dataset.empty="true"
+                              backpack.helperRuna.itemInBp=false
+                              allSlot[i].style.border="none"
+                              allSlot[i].dataset.item=undefined
+                              player.whatIsInHand=undefined
+                              showAmmo.textContent=""
+                              quantityItem.textContent=""
+                                  console.log(allSlot[i])
+                                }
+                              }
+                             }
+                          }
+                          if(nameOfItem==="brickWall"){
+                            if(drop==="drop"){backpack.brickWall.amount-=1}
+                            quantityItem.textContent=backpack.brickWall.amount
+                            for(let i=0;i<allSlot.length;i++){
+                                if(allSlot[i].dataset.item===nameOfItem){
+                                  
+                                  if(backpack.brickWall.amount===0){
+                                allSlot[i].src=background
+                               
+                                allSlot[i].dataset.empty="true"
+                                backpack.brickWall.itemInBp=false
+                                choosenItem.src=backgroundImg
+                                allSlot[i].style.border="none"
+                                allSlot[i].dataset.item=undefined
+                                showAmmo.textContent=""
+                                imageAmmo.src=background
+                                player.whatIsInHand=undefined
+                                quantityItem.textContent=""
+                                    console.log(allSlot[i])
+                                  }
+                                }
+                               }
+                            }
      
 }

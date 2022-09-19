@@ -1,9 +1,10 @@
+import { itemsOnMap } from "../../../main"
 import { goldenCoin } from "../../ITEMSonMAP/goldenCoin/goldenCoin"
 import { magmaWallItems } from "../../ITEMSonMAP/magmaWall/magmaWallItems"
 import { plainWallItems } from "../../ITEMSonMAP/plainWall/plainWallItems"
 import { solidWallItems } from "../../ITEMSonMAP/solidWall/solidWallItems"
 
-export const glockAmmoVsWall=(player,WALL,can,itemsOnMap)=>{
+export const glockAmmoVsWall=(player,WALL,can)=>{
    
     let bulletArr=player.bulletGlockArray
     WALL.forEach((arrayWithTitle,index,fullArrOfWall)=>{
@@ -11,11 +12,14 @@ export const glockAmmoVsWall=(player,WALL,can,itemsOnMap)=>{
     
 
         if(title.isHitBy==="glock"&&title.hp<0 || title.hp===0&&title.isHitBy==="glock"){
-            
+      
                 if(title.name==="plainWall"){
-                    
+                   console.log(itemsOnMap)
+               
                     if(itemsOnMap!==undefined){
                         itemsOnMap.push(new plainWallItems(title.posX,title.posY,title.size))
+                        console.log("plain wall")
+                       
                     }
                 }
                 if(title.name==="solidWall"){
@@ -36,10 +40,7 @@ export const glockAmmoVsWall=(player,WALL,can,itemsOnMap)=>{
                     }
                 }
             
-                player.checkPositionLowestTileOnMap=true
-                setTimeout(()=>{
-                    player.checkPositionLowestTileOnMap=false
-                },10000)
+            
         tArr.splice(tI,1)
             
         }
@@ -54,9 +55,8 @@ export const glockAmmoVsWall=(player,WALL,can,itemsOnMap)=>{
         else{
      
         title.hp-=1
-        title.color="pink"
         title.isHitBy="glock"
-        console.log(title.isHitBy)
+       
       
 
         

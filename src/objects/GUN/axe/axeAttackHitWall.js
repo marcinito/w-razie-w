@@ -1,10 +1,11 @@
+import { itemsOnMap } from "../../../main"
 import { goldenCoin } from "../../ITEMSonMAP/goldenCoin/goldenCoin"
 import { magmaWallItems } from "../../ITEMSonMAP/magmaWall/magmaWallItems"
 import { plainWallItems } from "../../ITEMSonMAP/plainWall/plainWallItems"
 import { solidWallItems } from "../../ITEMSonMAP/solidWall/solidWallItems"
 
 
-export const axeAttackHitWall=(player,WALL,can,itemsOnMap)=>{
+export const axeAttackHitWall=(player,WALL,can)=>{
   
 
    ////////////////////////
@@ -15,28 +16,20 @@ export const axeAttackHitWall=(player,WALL,can,itemsOnMap)=>{
     if(title.isHitBy==="axe"&&title.hp<0 || title.hp===0&&title.isHitBy==="axe"){
      title.size=100
         if(title.name==="plainWall"){
-                    
-            if(itemsOnMap!==undefined){
                 itemsOnMap.push(new plainWallItems(title.posX,title.posY,title.size))
-            }
         }
         if(title.name==="solidWall"){
             
-            if(itemsOnMap!==undefined){
+          
                 itemsOnMap.push(new solidWallItems(title.posX,title.posY,title.size))
-            }
+            
         }
         if(title.name==="magmaWall"){
-            console.log(itemsOnMap,"magam,")
-            if(itemsOnMap!==undefined){
                 itemsOnMap.push(new magmaWallItems(title.posX,title.posY,title.size))
-            }
+        
         }
         if(title.name==="goldWall"){
-           
-            if(itemsOnMap!==undefined){
                 itemsOnMap.push(new goldenCoin(title.posX,title.posY,title.size))
-            }
         }
     
         player.checkPositionLowestTileOnMap=true

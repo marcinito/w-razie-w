@@ -45,21 +45,28 @@ export const displayItemInDetail=(allSlot,player)=>{
                 showAmmo.textContent=""
                 quantityItem.textContent=player.backpack.solidWall.amount
                 imageAmmo.src=keyImg
-                imageAmmo.style.opacity=1
+                imageAmmo.style.opacity=0
                 imageAmmo2.style.opacity=0
             }
             if(player.whatIsInHand==="magmaWall"){
                 showAmmo.textContent=""
                 quantityItem.textContent=player.backpack.magmaWall.amount
                 imageAmmo.src=keyImg
-                imageAmmo.style.opacity=1
+                imageAmmo.style.opacity=0
                 imageAmmo2.style.opacity=0
             }
             if(player.whatIsInHand==="plainWall"){
                 showAmmo.textContent=""
                 quantityItem.textContent=player.backpack.plainWall.amount
                 imageAmmo.src=keyImg
-                imageAmmo.style.opacity=1
+                imageAmmo.style.opacity=0
+                imageAmmo2.style.opacity=0
+            }
+            if(player.whatIsInHand==="brickWall"){
+                showAmmo.textContent=""
+                quantityItem.textContent=player.backpack.brickWall.amount
+                imageAmmo.src=keyImg
+                imageAmmo.style.opacity=0
                 imageAmmo2.style.opacity=0
             }
             if(player.whatIsInHand==="goldenCoin"){
@@ -88,6 +95,13 @@ export const displayItemInDetail=(allSlot,player)=>{
                 imageAmmo2.style.opacity=0
                 showAmmo.textContent=""
                 quantityItem.textContent=player.backpack.meat.amount
+                
+            }
+            if(player.whatIsInHand==="helperRuna"){
+                imageAmmo.style.opacity=0
+                imageAmmo2.style.opacity=0
+                showAmmo.textContent=""
+                quantityItem.textContent=player.backpack.helperRuna.amount
                 
             }
            

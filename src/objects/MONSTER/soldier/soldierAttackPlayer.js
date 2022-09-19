@@ -1,6 +1,10 @@
 import { handleHp } from "../../../Functions/shorthandFunction/handleHp"
+import { monsterTurnWhenPlayerIsBehindHisBack } from "../FUNCTION/monsterTurnWhenPlayesIsBehindHisBack"
+
 import {bulletFromSoldierGun} from '../soldier/bulletFromSoldierGun'
+
 let counter=0
+
 export const soldierAttackPlayer=(player,arrSoldier)=>{
 counter++
 
@@ -22,6 +26,10 @@ counter++
 
         let dX=soldier.posX-player.posX
         let  dY=soldier.posY-player.posY
+//when player is behind back of monster monster turn to player and attack his
+
+monsterTurnWhenPlayerIsBehindHisBack(soldier,dX)
+
          let hypotenuse=dX*dX+dY*dY
          hypotenuse=Math.floor(Math.sqrt(hypotenuse))
         if(hypotenuse<40&&soldier.directionMove==="right"){
