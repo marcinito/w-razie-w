@@ -34,7 +34,7 @@ export class Soldier{
         this.sizeX=60
         this.name="soldier"
         this.color="orange"
-        this.naturalSpeed=1
+        this.naturalSpeed=2
         this.speed=0
         this.strenghtGravity=3
         this.strenghtAttack=0.3
@@ -51,7 +51,7 @@ export class Soldier{
         //OUTFIT
    
         //hp
-        this.hpTotal=100
+        this.hpTotal=10220
         this.hp=this.hpTotal
         this.percentageHp=this.size
         this.ratePercentage=this.size
@@ -74,7 +74,7 @@ export class Soldier{
         can.ctx.lineWidth=1
         can.ctx.strokeStyle="black"
         can.ctx.strokeRect(this.posX,this.posY-10,this.size,7)
-        // can.ctx.strokeRect(this.posX,this.posY,this.size,this.size)
+        can.ctx.strokeRect(this.posX,this.posY,this.size,this.size)
       
         if(this.doFall===true&&this.directionMove==="left"){
             can.ctx.drawImage(soldier,566,663,85,108,this.posX,this.posY,this.size,this.size)

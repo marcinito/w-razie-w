@@ -1,4 +1,4 @@
-export const detectJumpPosition=(directionMove,detectJump,posX,posY,size,can,X,Y)=>{
+export const detectJumpPosition=(directionMove,detectJump,posX,posY,size,can,X)=>{
   
     if(directionMove==="left"){
         detectJump.posX=posX-X

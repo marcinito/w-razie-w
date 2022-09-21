@@ -6,11 +6,11 @@ import { dontFallDownFromTitle } from "../FUNCTION/dontFallDwonFromTitle"
 import { zombieTouchAnotherZombie } from "../zombie/zombieTouchAnotherZombie"
 
 export const soldierGravity=(WALL,soldierArr,can)=>{
-//GRAVITY ZOMBIE
+
 soldierArr.forEach((soldier,i,arr)=>{
+    soldier.speed=0.5
     soldier.posY+=soldier.strenghtGravity
     soldier.doFall=true
-    // soldier.detect.trigger=true
     soldier.touchWall=false
     soldier.stopJump=false
     soldier.detect.trigger=true
@@ -38,10 +38,11 @@ particularArray.forEach((title,indexTitle,particularArrayArray)=>{
                     if(soldier.posY+soldier.size>title.posY-1&&title.posY>soldier.posY+soldier.size/2){
                         // zombie.posY-=zombie.strenghtGravity
                         let deepCollision=soldier.posY+soldier.size-title.posY
+                        soldier.speed=soldier.naturalSpeed
                         soldier.posY-=deepCollision
                         soldier.doFall=false
                         soldier.jumpStop=false
-                       
+                       console.log(soldier.speed,"speed")
                        
                     
                     }

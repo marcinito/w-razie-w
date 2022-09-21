@@ -4,10 +4,11 @@ import zombieSprite2 from './zombieSprites.png'
 
 
 import { random } from '../../../Functions/shorthandFunction/random'
-import { detectJump } from '../objects/detectJump'
+
 import { detectJumpPosition } from '../FUNCTION/detectJumpPosition'
 import { checkIfMonsterCanGoFurther } from '../FUNCTION/detectVerge/checkIfCreatureCanGoFurther'
 import { detectEdge } from '../objects/detectEdge'
+import { detectJump } from '../objects/detectJump'
 
 
 
@@ -40,7 +41,7 @@ export class Zombie{
         this.size=this.naturalSize
         this.color="darkgreen"
         this.name="zombie"
-        this.naturalSpeed=1
+        this.naturalSpeed=4
         this.speed=0
        
         this.strenghtGravity=3
@@ -67,12 +68,15 @@ export class Zombie{
        this.touchWall=false
        this.jump=false
        this.stopJump=false
+
+      //zombie touch other zombie
+      this.touchOtherZombie=false
             
     }
 draw(can){
 
-        //detect jump
-        detectJumpPosition(this.directionMove,this.detectJump,this.posX,this.posY,this.size,can,20,20)
+        //its set position block which is sensor
+        detectJumpPosition(this.directionMove,this.detectJump,this.posX,this.posY,this.size,can,20)
 
 
 
@@ -217,10 +221,10 @@ if(this.directionMove==="left"){
 }
   //detect verge position//////////////////////////////////////////
   if(this.directionMove==="left"){
-    this.detect.posX=this.posX-20     
+    this.detect.posX=this.posX-40     
   }
   if(this.directionMove==="right"){
-    this.detect.posX=this.posX+this.size-this.detect.size+20
+    this.detect.posX=this.posX+this.size-this.detect.size+40
   }
   checkIfMonsterCanGoFurther(this.detect,this.posY,this.size,this.speed,this.directionMove)
     this.detect.draw(can)
@@ -244,7 +248,9 @@ if(this.directionMove==="left"){
          
               this.directionMove="right"
                
-              
+              setTimeout(()=>{
+                this.detect.avoidFallInChasm=false
+              },1000)
                 
               this.blok=true
         
@@ -261,7 +267,9 @@ if(this.directionMove==="left"){
             this.posX+=this.speed
             if(this.detect.trigger===true&&this.blok===false&&this.detect.avoidFallInChasm===true){
              
-       
+              setTimeout(()=>{
+                this.detect.avoidFallInChasm=false
+              },1000)
              
               this.directionMove="left"
              

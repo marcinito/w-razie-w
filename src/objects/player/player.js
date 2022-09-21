@@ -14,6 +14,7 @@ import { countEnduranceInAxe } from "./shorthandFunction/countEnduranceInAxe"
 import { menu, NPC, player } from "../../main"
 import { helperPlayer } from "../NPC/helperPlayer/helperPlayer"
 import { handleHp } from "../../Functions/shorthandFunction/handleHp"
+import sculeImg from '../../stylesImage/deadImg.png'
 const lifeSpan=document.querySelector(".lifeSpan")
 const playerImage=new Image(100,100)
 playerImage.src=playerImageFile
@@ -56,7 +57,7 @@ export class Player{
   
 
    //HP
-   this.hpTotal=100//hp total tell what is maximum hp player
+   this.hpTotal=80//hp total tell what is maximum hp player
    this.hp=this.hpTotal
    this.percentageHp=50// percentageHp tell how many percent hp player have
    this.ratePercentage=50// ratePercentage set value for "percent" in this case percent means 50
@@ -98,7 +99,7 @@ export class Player{
     }
     draw(can){
     
- lifeSpan.textContent=this.quantityLive
+
     let percentHp=this.hp/this.hpTotal*this.ratePercentage
 if(percentHp>25){
     
@@ -404,7 +405,7 @@ if(this.whatIsInHand==="meat"){
 if(this.whatIsInHand==="helperRuna"){
 
   if(this.backpack.helperRuna.amount>0){
-  
+    console.log(this.backpack.helperRuna.amount)
      this.backpack.helperRuna.amount-=1
     NPC.push(new helperPlayer(this.posX,this.posY-20))
     updateEqDashboard("helperRuna",this.backpack)

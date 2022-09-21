@@ -10,12 +10,12 @@ export const firstLevelArrangementWall=(player,can)=>{
     let tablica=
 [
 
-    makeWall(plainWall,4,900,can.C_H-510,65,"orange","horizontal"),
+    makeWall(plainWall,20,500,can.C_H-510,65,"orange","horizontal"),
+    makeWall(goldWall,1,500,can.C_H-510,65,"orange","horizontal"),
     // makeWall(plainWall,4,300,can.C_H-525,65,"orange","horizontal"),
-    makeWall(plainWall,20,10,can.C_H-460,65,"orange","horizontal"),
-    makeWall(plainWall,20,10,can.C_H-260,65,"orange","horizontal"),
-    makeWall(plainWall,20,10,can.C_H-160,65,"orange","horizontal"),
-    makeWall(brickWall,20,10,can.C_H-360,65,"orange","horizontal"),
+    makeWall(plainWall,13,10,can.C_H-460,65,"orange","horizontal"),
+ 
+
 
  
 

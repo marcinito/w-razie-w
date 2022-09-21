@@ -1,7 +1,11 @@
 import { menu, player } from "../../main"
+import deadImg from '../../stylesImage/deadImg.png'
 const clack=document.querySelector(".clack")
 const timer=document.querySelector('.timer')
 const canvas=document.querySelector("canvas")
+const amountLife=document.querySelector(".amountLife")
+const amountLifeImg=document.querySelector(".amountLifeImg")
+import heartImg from '../../stylesImage/liveImage.png'
 let click=0
 
 setInterval(()=>{
@@ -18,18 +22,28 @@ clack.style.transform=`rotateZ(${click}deg)`
 
 },1000)
 
-
+amountLifeImg.src=heartImg
 export const breathingOfPlayer=()=>{
+    amountLife.textContent=player.quantityLive
+
+
+
     if(player.hp<0 || player.hp==0){
         player.quantityLive-=1
         canvas.style.backgroundColor="red"
+        amountLifeImg.src=deadImg
+        
+
         setTimeout(()=>{
             canvas.style.backgroundColor="skyblue"
+          
             setTimeout(()=>{
                 canvas.style.backgroundColor="red"
+                
                 setTimeout(()=>{
                     canvas.style.backgroundColor="skyblue"
-                },100)
+                    amountLifeImg.src=heartImg
+                },500)
             },100)
 
         },100)

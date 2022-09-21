@@ -1,5 +1,6 @@
 
 import { handleHp } from "../../../Functions/shorthandFunction/handleHp"
+import { NPC } from "../../../main"
 import { goldenCoin } from "../../ITEMSonMAP/goldenCoin/goldenCoin"
 import { magmaWallItems } from "../../ITEMSonMAP/magmaWall/magmaWallItems"
 import { plainWallItems } from "../../ITEMSonMAP/plainWall/plainWallItems"
@@ -54,5 +55,23 @@ export const whenBulletFromSoldierTouchWallOrPlayer=(monster,player,WALL,can,ite
                 console.log(player.hp,"after")
         
             }
+    })
+    //when hit npc
+    monster.arrayWithBullet.forEach((bullet,indexBullet,arrWithBullet)=>{
+     NPC.forEach((npc,indexNpc,arrNpc)=>{
+     
+        if(npc.posX+npc.size<bullet.posX || npc.posX>bullet.posX+bullet.size ||
+            npc.posY+npc.size<bullet.posY || npc.posY>bullet.posY+bullet.size){
+        
+            }
+            else{
+                console.log(npc.hp,"before")
+                npc.hp-=monster.strenghtAttackFromGun
+                arrWithBullet.splice(indexBullet,1)
+                npc.percentageHp-=handleHp(monster.strenghtAttackFromGun,npc)
+                console.log(npc.hp,"after")
+        
+            }
+     })
     })
 }

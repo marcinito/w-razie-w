@@ -10,6 +10,7 @@ window.addEventListener("keydown",(e)=>{
         window.location="./index.html"
     }
 })
+
 setTimeout(()=>{
     let displayNewLetter=setInterval(()=>{
         counter++

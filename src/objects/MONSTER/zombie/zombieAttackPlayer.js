@@ -9,6 +9,7 @@ export const zombieAttackPlayer=(player,arrZombie)=>{
 
         monsterTurnWhenPlayerIsBehindHisBack(zombie,dX)
         hypotenuse=Math.floor(Math.sqrt(hypotenuse))
+    
        if(hypotenuse<70&&zombie.directionMove==="right"){
         zombie.speed=0
        
@@ -16,7 +17,7 @@ export const zombieAttackPlayer=(player,arrZombie)=>{
             player.percentageHp-=handleHp(zombie.strenghtAttack,player)
            
         zombie.isDuringAttackPlayer=true
-        zombie.inRangeOfPlayer=true
+   
  
        }
        else if(hypotenuse<40&&zombie.directionMove==="left"){
@@ -30,12 +31,12 @@ export const zombieAttackPlayer=(player,arrZombie)=>{
         zombie.inRangeOfPlayer=true
  
        }
-       else{
-        
-        
+       else if(hypotenuse>71){
+         
         zombie.isDuringAttackPlayer=false
-        zombie.inRangeOfPlayer=false
+       
        }
+
         
     })
 

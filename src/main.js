@@ -54,17 +54,14 @@ import { npcGravity } from './objects/NPC/npcGravity'
 import { helperAttackWall } from './objects/NPC/helperPlayer/helperAttackWall'
 import { helperAttackMonster } from './objects/NPC/helperPlayer/helperAttackMonster'
 import { playerIsTreating } from './objects/NPC/helperPlayer/playerIsTreating'
+import { zombieAttackNpc } from './objects/NPC/zombieAttackNpc'
+import { soldierAttackNpc } from './objects/NPC/soldierAttackNpc'
 
 
 
 
-const promotionDiv=document.querySelector(".promotionDiv")
-const canvas=document.getElementById("canvas")
 
-const menuEq=document.querySelector(".menuEq")
 
-//LISTA ZADAN//
-//1//ZRobic tak by jedna funkcja obslugiwala wszystkie attaki z glocka w potwory//
 
 
 //It need be develop in order to handle primary menu button start game etc...
@@ -76,7 +73,7 @@ export let can=canvasSettingsGame()
 
 
 
-const imgTitleFromMenu=[...document.querySelectorAll(".imgTitle")]
+
 
 export let transitionArray=[]
 
@@ -100,8 +97,7 @@ export let NPC=[]
 export let WALL=firstLevelArrangementWall(player,can)
 export let MONSTER=monsterOnFirstLevel()
 export let itemsOnMap=itemsOnFirstLevel()
-movementPlayer(player,imgTitleFromMenu,itemsOnMap)
-console.log(MONSTER)
+movementPlayer(player,itemsOnMap)
  const runApp=()=>{
     
    if(menu.playGame==="game"){
@@ -115,13 +111,7 @@ breathingOfPlayer(player)
 playerTakeItemFromMap(player,itemsOnMap)
 // AmmoVsWall(player,WALL,can)
 PLAYERGRAVITY(player,WALL,can)
-// checkIfPlayerIsAlive(player) ----- do usuniecia
 
-//////
-//****************** */
-//GUN
-glockAmmoVsWall(player,WALL,can)
-dynamiteAmmoVsWall(player,WALL,can)
 
 //wall
 //pArrWallArray-particular array with set o wall
@@ -160,6 +150,7 @@ MONSTER.forEach((pArrMonster,index,arrayMONSTER)=>{
             zombieGravity(WALL,arr,can)
             zombieAttackPlayer(player,arr)
             glockAmmoVsMonster(player,arr)
+            zombieAttackNpc(NPC,arr)
            
 
         }
@@ -168,9 +159,10 @@ MONSTER.forEach((pArrMonster,index,arrayMONSTER)=>{
             monster.movement()
             monster.draw(can)
             monster.shootFromGun(can)
-            soldierAttackPlayer(player,arr)
             soldierGravity(WALL,arr,can)
+            soldierAttackPlayer(player,arr)
             glockAmmoVsMonster(player,arr)
+            soldierAttackNpc(NPC,arr)
       whenBulletFromSoldierTouchWallOrPlayer(monster,player,WALL,can,itemsOnMap)
            
         }
@@ -205,6 +197,10 @@ NPC.forEach((npc,index,arrNpc)=>{
                 }
             })
         })
+        if(npc.hp<0){
+            arrNpc.splice(index,1)
+        }
+        
       
     
     }
@@ -212,11 +208,12 @@ NPC.forEach((npc,index,arrNpc)=>{
 
 FireAtakFromPlayer(player,can)
 //GUN
-glockAmmoVsWall(player,WALL,can,itemsOnMap)
 axeAttackHitWall(player,WALL,can,itemsOnMap)
 dynamiteAmmoVsWall(player,WALL,can,itemsOnMap)
 dynamiteVsLivingCreature(MONSTER,player)
 axeAttackMonster(MONSTER,player)
+glockAmmoVsWall(player,WALL,can)
+dynamiteAmmoVsWall(player,WALL,can)
 //ITEMS ON MAP
 // item.draw(can,moveCoin)
 if(itemsOnMap.length>0){

@@ -19,7 +19,7 @@ const allSlot=[...document.querySelectorAll(".slotBp")]
 
 
 
-export const movementPlayer=(player,imgTitleFromMenu,itemsOnMap)=>{
+export const movementPlayer=(player,itemsOnMap)=>{
     
     window.addEventListener("keydown",(e)=>{
        
@@ -68,7 +68,6 @@ if(e.keyCode===81){
    if(allSlot[0].dataset.empty!=="true"){
     player.whatIsInHand=allSlot[0].dataset.item
     giveBorderToUsingSlotBp(allSlot,allSlot[0])
-    console.log(allSlot[0])
 displayItemInDetail(allSlot,player)
 
 
@@ -81,7 +80,6 @@ displayItemInDetail(allSlot,player)
         if(allSlot[1].dataset.empty!=="true"){
             player.whatIsInHand=allSlot[1].dataset.item
             giveBorderToUsingSlotBp(allSlot,allSlot[1])
-            console.log(allSlot[1])
         displayItemInDetail(allSlot,player)
            }
 
@@ -91,7 +89,6 @@ displayItemInDetail(allSlot,player)
         if(allSlot[2].dataset.empty!=="true"){
             player.whatIsInHand=allSlot[2].dataset.item
             giveBorderToUsingSlotBp(allSlot,allSlot[2])
-            console.log(allSlot[2])
         displayItemInDetail(allSlot,player)
            }
 
@@ -101,7 +98,6 @@ displayItemInDetail(allSlot,player)
         if(allSlot[3].dataset.empty!=="true"){
             player.whatIsInHand=allSlot[3].dataset.item
             giveBorderToUsingSlotBp(allSlot,allSlot[3])
-            console.log(allSlot[3])
         displayItemInDetail(allSlot,player)
            }
 
@@ -112,7 +108,7 @@ displayItemInDetail(allSlot,player)
         if(allSlot[4].dataset.empty!=="true"){
             player.whatIsInHand=allSlot[4].dataset.item
             giveBorderToUsingSlotBp(allSlot,allSlot[4])
-            console.log(allSlot[4])
+
         displayItemInDetail(allSlot,player)
            }
      }
@@ -121,7 +117,6 @@ displayItemInDetail(allSlot,player)
         if(allSlot[5].dataset.empty!=="true"){
             player.whatIsInHand=allSlot[5].dataset.item
             giveBorderToUsingSlotBp(allSlot,allSlot[5])
-            console.log(allSlot[5])
         displayItemInDetail(allSlot,player)
            }
 
@@ -132,7 +127,6 @@ displayItemInDetail(allSlot,player)
         if(allSlot[6].dataset.empty!=="true"){
             player.whatIsInHand=allSlot[6].dataset.item
             giveBorderToUsingSlotBp(allSlot,allSlot[6])
-            console.log(allSlot[6])
         displayItemInDetail(allSlot,player)
            }
 
@@ -143,7 +137,6 @@ displayItemInDetail(allSlot,player)
         if(allSlot[7].dataset.empty!=="true"){
             player.whatIsInHand=allSlot[7].dataset.item
             giveBorderToUsingSlotBp(allSlot,allSlot[7])
-            console.log(allSlot[7])
         displayItemInDetail(allSlot,player)
            }
 

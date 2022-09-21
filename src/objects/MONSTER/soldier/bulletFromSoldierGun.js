@@ -8,7 +8,7 @@ export class bulletFromSoldierGun{
         this.size=5
         this.color="black"
         this.direction=direction
-        this.speed=2
+        this.speed=7
         this.color="red"
         this.image=bullet
     }

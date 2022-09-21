@@ -6,7 +6,7 @@ export class detectJump{
         this.posY=1
         this.size=20
    
-        this.color="red"
+        this.color="transparent"
        
     }
     draw(can){

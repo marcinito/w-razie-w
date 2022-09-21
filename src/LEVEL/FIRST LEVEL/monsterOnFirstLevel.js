@@ -1,10 +1,7 @@
-
-import { Zombie } from "../../objects/MONSTER/zombie/zombie"
 import { createMonster } from "../../Functions/createMonster"
-import { Dragon } from "../../objects/dragon/dragon"
-import { Soldier } from "../../objects/MONSTER/soldier/soldier"
 import { Sheep } from "../../objects/MONSTER/sheep/sheep"
-import { Ghost } from "../../objects/ghost/ghost"
+import { Soldier } from "../../objects/MONSTER/soldier/soldier"
+import { Zombie } from "../../objects/MONSTER/zombie/zombie"
 
 export const monsterOnFirstLevel=()=>{
     let array=[
@@ -15,9 +12,23 @@ export const monsterOnFirstLevel=()=>{
     // createMonster(Soldier,1,[{x:500,y:200}]),
     // createMonster(Ghost,1,[{x:100,y:200}]),
  
-    createMonster(Zombie,1,[{x:100,y:200}]),
-
+    // createMonster(Sheep,1,[{x:100,y:200}]),
+    // createMonster(Soldier,1,[{x:100,y:200}]),
+    // createMonster(Zombie,21,[{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200}]),
+    // createMonster(Soldier,21,[{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200}]),
+    // createMonster(Sheep,21,[{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200},{x:200,y:200}]),
+    
+    // createMonster(Soldier,1,[{x:140,y:200}]),
+    createMonster(Soldier,1,[{x:140,y:200}]),
+    // createMonster(Zombie,5,[{x:140,y:200},{x:140,y:200},{x:140,y:200},{x:140,y:200},{x:140,y:200}])
+    // createMonster(Zombie,1,[{x:150,y:200}]),
+    // createMonster(Zombie,1,[{x:110,y:200}]),
+    // createMonster(Zombie,1,[{x:130,y:200}]),
     // createMonster(Zombie,1,[{x:100,y:200}]),
+ 
+
+    // createMonster(Sheep,1,[{x:100,y:200}]),
+    // createMonster(Sheep,1,[{x:100,y:200}]),
     // createMonster(Dragon,1,[{x:100,y:200}]),
 
     // createMonster(Sheep,1,[{x:600,y:200}]),

@@ -278,15 +278,13 @@ export const updateEqDashboard=(nameOfItem,backpack,drop)=>{
                            }
                         }
                         if(nameOfItem==="helperRuna"){
-                          if(drop==="drop"){backpack.helperRuna.amount-=1
-                         
-                          }
+                          if(drop==="drop"){backpack.helperRuna.amount-=1}
                           quantityItem.textContent=backpack.helperRuna.amount
         
                           for(let i=0;i<allSlot.length;i++){
                               if(allSlot[i].dataset.item===nameOfItem){
                                
-                                if(backpack.meat.amount===0){
+                                if(backpack.helperRuna.amount===0){
                               allSlot[i].src=background
                               choosenItem.src=backgroundImg
                               allSlot[i].dataset.empty="true"
@@ -301,6 +299,10 @@ export const updateEqDashboard=(nameOfItem,backpack,drop)=>{
                               }
                              }
                           }
+
+
+
+
                           if(nameOfItem==="brickWall"){
                             if(drop==="drop"){backpack.brickWall.amount-=1}
                             quantityItem.textContent=backpack.brickWall.amount

@@ -15,7 +15,9 @@ import machineGun from '../ITEMSonMAP/machineGun/machineGun.png'
 import { countAmmoInGlockInPlayer } from './shorthandFunction/countAmmoInGlockInPlayer'
 import { countEnduranceInAxe } from './shorthandFunction/countEnduranceInAxe'
 import brickWall from '../WALL/brickWall/images/brickWall100.png'
+import { displayItemInDetail } from './shorthandFunction/displayItemInDetail'
 //player take item from map and put it in backpack in first free place
+
 export const playerTakeItemFromMap=(player,itemsOnMap)=>{
     itemsOnMap.forEach((itemsFromMap,indexItemsFromMap,itemsOnMapArr)=>{
   
@@ -27,6 +29,7 @@ export const playerTakeItemFromMap=(player,itemsOnMap)=>{
               if(itemsFromMap.name==="goldenCoin"){
             
                 player.backpack.money.amount++
+            
                
                 for(let i=0;i<allSlot.length;i++){
                   if(allSlot[i].dataset.empty==="true"&&player.backpack.money.itemInBp===false){
@@ -102,7 +105,7 @@ export const playerTakeItemFromMap=(player,itemsOnMap)=>{
              
                 countAmmoInGlockInPlayer(player.backpack,player.whatIsInHand,"machineGun")
                
-               console.log(player.backpack.machineGun.bp,"bp")
+             
               
              
                 for(let i=0;i<allSlot.length;i++){
@@ -293,6 +296,7 @@ export const playerTakeItemFromMap=(player,itemsOnMap)=>{
               if(itemsFromMap.name==="helperRuna"){
                 player.backpack.helperRuna.amount+=1
                 for(let i=0;i<allSlot.length;i++){
+                  //block below work when it is first item in this sort in our bp
                   if(allSlot[i].dataset.empty==="true"&&player.backpack.helperRuna.itemInBp===false){
                     allSlot[i].src=helperRuna
                     allSlot[i].dataset.item="helperRuna"
@@ -309,6 +313,7 @@ export const playerTakeItemFromMap=(player,itemsOnMap)=>{
                 
 
               }
+              displayItemInDetail(allSlot,player)
               itemsOnMapArr.splice(indexItemsFromMap,1)
         }
 

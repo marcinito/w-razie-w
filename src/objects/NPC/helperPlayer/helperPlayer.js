@@ -39,10 +39,10 @@ export class helperPlayer{
         this.arrayWithMagic=[]
         this.name="helperPlayer"
         //hp
-        this.hpTotal=300
+        this.hpTotal=100
         this.hp=this.hpTotal
         this.percentageHp=50
-        this.ratepercentageHp=50
+        this.ratePercentage=50
     }
     draw(can){
 

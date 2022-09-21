@@ -11,9 +11,9 @@ counter++
     arrSoldier.forEach((soldier,iSoldier,sArr)=>{
        
 //Shooting
-        if(counter%300===0&&soldier.isDuringAttackPlayer===false){
+        if(counter%500===0&&soldier.isDuringAttackPlayer===false){
             soldier.heIsShooting=true
-            soldier.sizeX=80
+            soldier.sizeX=60
             soldier.speed=0
             soldier.arrayWithBullet.push(new bulletFromSoldierGun(soldier.posX,soldier.posY+soldier.size/2,soldier.directionMove))
             setTimeout(()=>{
@@ -33,23 +33,30 @@ monsterTurnWhenPlayerIsBehindHisBack(soldier,dX)
          let hypotenuse=dX*dX+dY*dY
          hypotenuse=Math.floor(Math.sqrt(hypotenuse))
         if(hypotenuse<40&&soldier.directionMove==="right"){
-            soldier.speed=0
+          soldier.speed=0
              player.hp-=soldier.strenghtAttack
              player.percentageHp-=handleHp(soldier.strenghtAttack,player)
          soldier.isDuringAttackPlayer=true
+         console.log(soldier.speed,"numeracy")
         }
         else if(hypotenuse<40&&soldier.directionMove==="left"){
             soldier.speed=0
          player.hp-=soldier.strenghtAttack
          player.percentageHp-=handleHp(soldier.strenghtAttack,player)
          soldier.isDuringAttackPlayer=true
-         soldier.inRangeOfPlayer=true
+         console.log(soldier.speed)
+      
   
         }
-        else if(soldier.heIsShooting===false){
-            soldier.speed=soldier.naturalSpeed
-         soldier.isDuringAttackPlayer=false
-        }
+     
+        else if(hypotenuse>55){
+        
+         
+            soldier.isDuringAttackPlayer=false
+           
+           }
+      
+         
          
      })
  

@@ -1,6 +1,7 @@
 import { detecJumpCreature } from "../FUNCTION/detectJumpCreature"
 import { detectJumpCreature2 } from "../FUNCTION/detectJumpCreature2"
 import { dontFallDownFromTitle } from "../FUNCTION/dontFallDwonFromTitle"
+import { zombieTouchAnotherZombie } from "../zombie/zombieTouchAnotherZombie"
 
 
 
@@ -10,7 +11,7 @@ sheepArr.forEach((sheep,index,arrSheep)=>{
    sheep.posY+=sheep.strenghtGravity
    sheep.doFall=true
    sheep.touchWall=false
-//    sheep.detect.trigger=true
+   sheep.detect.trigger=true
    
 })
 WALL.forEach((particularArray,index,WALLarr)=>{
@@ -42,7 +43,7 @@ WALL.forEach((particularArray,index,WALLarr)=>{
                         if(sheep.posX<title.posX+title.size&&sheep.posX>title.posX+title.size/2&&
                         sheep.posY+sheep.size>title.posY+5){
                             let deepCollision=title.posX+title.size-sheep.posX
-                            sheep.posX+=deepCollision+3
+                            sheep.posX+=deepCollision
                            detectJumpCreature2(sheep,"right")
                             
                         }
@@ -102,4 +103,5 @@ WALL.forEach((particularArray,index,WALLarr)=>{
     
     
     })
+    zombieTouchAnotherZombie(sheepArr)
 }

@@ -6,16 +6,15 @@ import { dontFallDownFromTitle } from "../FUNCTION/dontFallDwonFromTitle"
 
 import { zombieTouchAnotherZombie } from "./zombieTouchAnotherZombie"
 
-let score=0
-let nowaTablica=[]
+
 export const zombieGravity=(WALL,zombieArr,can)=>{
-//GRAVITY ZOMBIE
 zombieArr.forEach((zombie,i,arr)=>{
     zombie.posY+=zombie.strenghtGravity
     zombie.speed=0.5
     zombie.doFall=true
     zombie.touchWall=false
     zombie.detect.trigger=true
+    zombie.stopJump=false
     
   
 
@@ -32,8 +31,7 @@ particularArray.forEach((title,indexTitle,arrTitle)=>{
 
     zombieArr.forEach((zombie,indexZombie,zombieArray)=>{
         detecJumpCreature(zombie,title)
-        if(zombie.touchWall)zombie.detectJump.color="red"
-        if(!zombie.touchWall)zombie.detectJump.color="blue"
+     
 
 
         
@@ -68,8 +66,8 @@ particularArray.forEach((title,indexTitle,arrTitle)=>{
                     if(zombie.posX<title.posX+title.size&&zombie.posX>title.posX+title.size/2&&
                     zombie.posY+zombie.size>title.posY+5){
                         let deepCollision=title.posX+title.size-zombie.posX
-                        zombie.posX+=deepCollision+3
-                     
+                        zombie.posX+=deepCollision
+                    
         detectJumpCreature2(zombie,"right")
                         
                     }
@@ -79,6 +77,7 @@ particularArray.forEach((title,indexTitle,arrTitle)=>{
                         let deepCollision=zombie.posX+zombie.size-title.posX
                         zombie.posX-=deepCollision
                        detectJumpCreature2(zombie,"left")
+                      
                         
                     
                       
@@ -86,11 +85,11 @@ particularArray.forEach((title,indexTitle,arrTitle)=>{
                     //jump
                     if(zombie.posY<title.posY+title.size+3&&zombie.posY>title.posY+title.size/2){
                         zombie.posY=title.posY+title.size+1
-                        title.color="black"
+                       
 
                         zombie.stopJump=true
                       
-                        title.color="red"
+                      
                       }
                     
                 }

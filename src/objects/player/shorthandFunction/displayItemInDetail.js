@@ -4,13 +4,22 @@ const imageAmmo=document.querySelector(".imageAmmo")
 const imageAmmo2=document.querySelector(".imageAmmo2")
 const choosenItem=document.querySelector(".choosenItemImg")
 const quantityItem=document.querySelector(".quantityItem")
+
 import bulletsImg from '../../ITEMSonMAP/glock/bulletsImage.png'
 import keyImg from '../../ITEMSonMAP/solidWall/imageBuilding.png'
 import goldenBag from '../../ITEMSonMAP/goldenCoin/moneyBag.png'
+import background from './bgc.png'
 export const displayItemInDetail=(allSlot,player)=>{
     allSlot.forEach((el)=>{
         if(el.dataset.item===player.whatIsInHand){
-            choosenItem.src=el.src
+          
+            choosenItem.style.opacity=1
+         
+                choosenItem.src=background
+                if(el.src.length>2)choosenItem.src=el.src
+                
+            
+           
             if(player.whatIsInHand==="glock"){
                 showAmmo.textContent=player.backpack.glock.ammo
                 imageAmmo.style.opacity=1
@@ -25,7 +34,7 @@ export const displayItemInDetail=(allSlot,player)=>{
                 imageAmmo2.style.opacity=0
                 imageAmmo.src=bulletsImg
                 quantityItem.textContent=player.backpack.machineGun.amount
-                console.log("wykonuje sie")
+              
                 
             }
             if(player.whatIsInHand==="axe"){
@@ -36,7 +45,7 @@ export const displayItemInDetail=(allSlot,player)=>{
                 
             }
             if(player.whatIsInHand==="dynamite"){
-                showAmmo.textContent=player.backpack.dynamite.ammo
+                showAmmo.textContent=""
                 quantityItem.textContent=player.backpack.dynamite.amount
                 imageAmmo.style.opacity=0
                 imageAmmo2.style.opacity=0
@@ -45,21 +54,21 @@ export const displayItemInDetail=(allSlot,player)=>{
                 showAmmo.textContent=""
                 quantityItem.textContent=player.backpack.solidWall.amount
                 imageAmmo.src=keyImg
-                imageAmmo.style.opacity=0
+               
                 imageAmmo2.style.opacity=0
             }
             if(player.whatIsInHand==="magmaWall"){
                 showAmmo.textContent=""
                 quantityItem.textContent=player.backpack.magmaWall.amount
                 imageAmmo.src=keyImg
-                imageAmmo.style.opacity=0
+                
                 imageAmmo2.style.opacity=0
             }
             if(player.whatIsInHand==="plainWall"){
                 showAmmo.textContent=""
                 quantityItem.textContent=player.backpack.plainWall.amount
                 imageAmmo.src=keyImg
-                imageAmmo.style.opacity=0
+            
                 imageAmmo2.style.opacity=0
             }
             if(player.whatIsInHand==="brickWall"){
@@ -79,7 +88,7 @@ export const displayItemInDetail=(allSlot,player)=>{
             if(player.whatIsInHand==="jumpFluid"){
                 showAmmo.textContent=""
                 quantityItem.textContent=player.backpack.jumpFluid.amount
-                imageAmmo.src=
+               
                 imageAmmo.style.opacity=0
                 imageAmmo2.style.opacity=0
             }
