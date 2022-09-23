@@ -5,6 +5,8 @@ export const detecJumpCreature=(creature,title)=>{
 
         }else{
             creature.touchWall=true
+    
            
         }
+       
 }

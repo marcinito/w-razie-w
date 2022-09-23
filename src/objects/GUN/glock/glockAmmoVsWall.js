@@ -1,8 +1,15 @@
+import { random } from "../../../Functions/shorthandFunction/random"
 import { itemsOnMap } from "../../../main"
+import { brickWallItems } from "../../ITEMSonMAP/brickWall/brickWall"
+import { dynamiteItems } from "../../ITEMSonMAP/dynamite/dynamieItems"
+import { glockItems } from "../../ITEMSonMAP/glock/glockItems"
 import { goldenCoin } from "../../ITEMSonMAP/goldenCoin/goldenCoin"
+import { jumpFluidItems } from "../../ITEMSonMAP/jumpFluid/jumpFluidItems"
+import { machineGunItems } from "../../ITEMSonMAP/machineGun/machineGunItems"
 import { magmaWallItems } from "../../ITEMSonMAP/magmaWall/magmaWallItems"
 import { plainWallItems } from "../../ITEMSonMAP/plainWall/plainWallItems"
 import { solidWallItems } from "../../ITEMSonMAP/solidWall/solidWallItems"
+
 
 export const glockAmmoVsWall=(player,WALL,can)=>{
    
@@ -14,34 +21,33 @@ export const glockAmmoVsWall=(player,WALL,can)=>{
         if(title.isHitBy==="glock"&&title.hp<0 || title.hp===0&&title.isHitBy==="glock"){
       
                 if(title.name==="plainWall"){
-                   console.log(itemsOnMap)
-               
-                    if(itemsOnMap!==undefined){
                         itemsOnMap.push(new plainWallItems(title.posX,title.posY,title.size))
-                        console.log("plain wall")
-                       
-                    }
                 }
                 if(title.name==="solidWall"){
-                    
-                    if(itemsOnMap!==undefined){
                         itemsOnMap.push(new solidWallItems(title.posX,title.posY,title.size))
-                    }
                 }
                 if(title.name==="magmaWall"){
-                    if(itemsOnMap!==undefined){
+                   
                         itemsOnMap.push(new magmaWallItems(title.posX,title.posY,title.size))
-                    }
                 }
                 if(title.name==="goldWall"){
-                   
-                    if(itemsOnMap!==undefined){
                         itemsOnMap.push(new goldenCoin(title.posX,title.posY,title.size))
-                    }
+                    
                 }
+                if(title.name==="brickWall"){
+                    itemsOnMap.push(new brickWallItems(title.posX,title.posY,title.size))
+                
+            }
+            if(title.name==="woodenWall"){
+                   let itemToDrop=[dynamiteItems,machineGunItems,glockItems,jumpFluidItems]
+                   
+                itemsOnMap.push(new itemToDrop[Math.floor(Math.random()*itemToDrop.length)](title.posX,title.posY,title.size,"true"))
+            
+        }
             
             
         tArr.splice(tI,1)
+        
             
         }
         

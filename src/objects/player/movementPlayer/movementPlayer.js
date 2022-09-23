@@ -164,7 +164,7 @@ displayItemInDetail(allSlot,player)
   
     window.addEventListener("click",(e)=>{
         //PLAIN WALL IS BUILDING
-  
+console.log(point)
             if(player.whatIsInHand==="solidWall"&&player.backpack.solidWall.amount>0){
             player.blockToBuild.push(new solidWall(point.x-30,point.y-30,65,"red","horizontal"))
             player.backpack.solidWall.amount-=1
@@ -182,7 +182,7 @@ displayItemInDetail(allSlot,player)
                     player.backpack.magmaWall.amount-=1
                     updateEqDashboard("magmaWall",player.backpack)
                     }
-                    if(player.whatIsInHand==="brickWall"&&player.backpack.magmaWall.amount>0){
+                    if(player.whatIsInHand==="brickWall"&&player.backpack.brickWall.amount>0){
                         player.blockToBuild.push(new brickWall(point.x-30,point.y-30,65,"red","horizontal"))
                         player.backpack.magmaWall.amount-=1
                         updateEqDashboard("brickWall",player.backpack)

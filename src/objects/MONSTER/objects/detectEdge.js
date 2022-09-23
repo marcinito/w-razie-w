@@ -5,7 +5,7 @@ export class detectEdge{
       this.size=20
      
       this.speed=10
-      this.color="transparent"
+      this.color="yellow"
       this.trigger=true
       this.avoidFallInChasm=false
   

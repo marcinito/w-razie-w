@@ -1,5 +1,6 @@
 
-import { random } from '../../Functions/helpFunction/random'
+
+import { random } from '../../../Functions/shorthandFunction/random'
 import dragonImg from '../dragon/dragon.png'
 import {FireBallAttackFromMonster} from '../dragon/fireBallAttackFromMonster'
 

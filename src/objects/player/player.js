@@ -20,10 +20,15 @@ const playerImage=new Image(100,100)
 playerImage.src=playerImageFile
 export class Player{
     constructor(){
+
         if(menu.level===0){
-         this.posX=
-         this.posY=100
+         this.posX=386
+         this.posY=623
         }
+        if(menu.level===1){
+          this.posX=286
+          this.posY=203
+         }
         this.size=40.7
         this.color="blue"
         //IMAGE PLAYER
@@ -57,7 +62,7 @@ export class Player{
   
 
    //HP
-   this.hpTotal=80//hp total tell what is maximum hp player
+   this.hpTotal=2000  //hp total tell what is maximum hp player
    this.hp=this.hpTotal
    this.percentageHp=50// percentageHp tell how many percent hp player have
    this.ratePercentage=50// ratePercentage set value for "percent" in this case percent means 50
@@ -79,6 +84,7 @@ export class Player{
       plainWall:{amount:0,itemInBp:false,ammo:0,},
       brickWall:{amount:0,itemInBp:false,ammo:0,},
       magmaWall:{amount:0,itemInBp:false,ammo:0,},
+      woodenWall:{amount:0,itemInBp:false,ammo:0,},
       hpPotion:{amount:0,itemInBp:false,ammo:0,},
       jumpFluid:{amount:0,itemInBp:false,ammo:0,},
       meat:{amount:0,itemInBp:false,ammo:0,},
@@ -94,7 +100,7 @@ export class Player{
        this.dynamitsArray=[]
        this.axeArray=[]
        //switch for checking what a position is lowest tile on map
-       this.checkPositionLowestTileOnMap=false
+   
        this.deadEffect=false
     }
     draw(can){

@@ -17,12 +17,13 @@ let animation=0//Number which describes what part image display
 let rangeAnimation=11//Number describes what number of parts is in image
 
 setInterval(()=>{
+   
     if(animation>rangeAnimation)animation=0
-animation++
+    animation++
 
 },100)
 
-let intervalShotFromGun=0
+
 
 
 
@@ -30,8 +31,9 @@ export class Soldier{
     constructor(posX,posY){
         this.posX=posX
         this.posY=posY
-        this.size=50
-        this.sizeX=60
+        this.size=60
+        this.sizeX=80
+     
         this.name="soldier"
         this.color="orange"
         this.naturalSpeed=2
@@ -46,12 +48,13 @@ export class Soldier{
         this.isDuringAttackPlayer=false
         this.doFall=false//It serve to draw zombie when he is in air it shows that zombie "fall"
         this.image=soldier
+        this.image2=fireFromSoldier
         this.heIsShooting=false
    
         //OUTFIT
    
         //hp
-        this.hpTotal=10220
+        this.hpTotal=300
         this.hp=this.hpTotal
         this.percentageHp=this.size
         this.ratePercentage=this.size
@@ -65,7 +68,8 @@ export class Soldier{
        this.detectJump=new detectJump()
        this.touchWall=false
        this.jump=false
-       this.jumpStop=false
+       this.stopJump=false
+       this.waitForNextJump=false
 
     }
     draw(can,changeImage){
@@ -123,6 +127,7 @@ export class Soldier{
         if(animation===12){
             can.ctx.drawImage(soldier,1494,19,85,100,this.posX,this.posY,this.size,this.size)
         }
+       
      }
      //attack knife right
      if(this.directionMove==="right"&&this.isDuringAttackPlayer===true&&this.heIsShooting===false){
@@ -150,9 +155,10 @@ export class Soldier{
         if(animation===7){
             can.ctx.drawImage(this.image,826,startY,95,sizeY,this.posX,this.posY,this.size,this.size)
         }
+       
      }
      //walking left
-     if(this.directionMove==="left"&&this.isDuringAttackPlayer===false&&this.heIsShooting===false){
+    if(this.directionMove==="left"&&this.isDuringAttackPlayer===false&&this.heIsShooting===false){
         rangeAnimation=11
         let startY=150
         let sizeY=102
@@ -192,6 +198,7 @@ export class Soldier{
         if(animation===12){
             can.ctx.drawImage(this.image,1494,startY,85,sizeY,this.posX,this.posY,this.size,this.size)
         }
+       
      }
      //Attack knife left
      if(this.directionMove==="left"&&this.isDuringAttackPlayer===true&&this.heIsShooting===false){
@@ -217,63 +224,74 @@ export class Soldier{
             can.ctx.drawImage(this.image,689,startY,71,sizeY,this.posX,this.posY,this.size,this.size)
         }
         if(animation===7){
-            can.ctx.drawImage(this.image,826,startY,84,sizeY,this.posX,this.posY,this.size,this.size)
+            can.ctx.drawImage(this.image,818,startY,85,sizeY,this.posX,this.posY,this.size,this.size)
         }
+        
      }
      //SHOT RIGHT
      if(this.directionMove==="right"&&this.isDuringAttackPlayer===false&&this.heIsShooting===true){
+      
         rangeAnimation=5
         let startY=2
         let sizeY=105
         if(animation===1){
-            can.ctx.drawImage(fireFromSoldier,21,2,128,108,this.posX,this.posY,this.sizeX,this.size)
+        
+            can.ctx.drawImage(this.image2,21,2,128,108,this.posX,this.posY,this.sizeX,this.size)
         }
         if(animation===2){
-            can.ctx.drawImage(fireFromSoldier,160,startY,132,sizeY,this.posX,this.posY,this.sizeX,this.size)
+         
+            can.ctx.drawImage(this.image2,160,startY,132,sizeY,this.posX,this.posY,this.sizeX,this.size)
         }
         if(animation===3){
-            can.ctx.drawImage(fireFromSoldier,330,startY,136,sizeY,this.posX,this.posY,this.sizeX,this.size)
+         
+            can.ctx.drawImage(this.image2,330,startY,136,sizeY,this.posX,this.posY,this.sizeX,this.size)
             
 
         }
         if(animation===4){
-            can.ctx.drawImage(fireFromSoldier,490,startY,122,sizeY,this.posX,this.posY,this.sizeX,this.size)
+        
+            can.ctx.drawImage(this.image2,490,startY,122,sizeY,this.posX,this.posY,this.sizeX,this.size)
             
         }
         if(animation===5){
-            can.ctx.drawImage(fireFromSoldier,645,startY,95,sizeY,this.posX,this.posY,this.sizeX,this.size)
+
+            can.ctx.drawImage(this.image2,645,startY,95,sizeY,this.posX,this.posY,this.sizeX,this.size)
           
         }
         if(animation===6){
-            can.ctx.drawImage(fireFromSoldier,780,startY,99,sizeY,this.posX,this.posY,this.sizeX,this.size)
+            can.ctx.drawImage(this.image2,780,startY,99,sizeY,this.posX,this.posY,this.sizeX,this.size)
         }
+    
      }
      //Shoot Left
-     if(this.directionMove==="left"&&this.isDuringAttackPlayer===false&&this.heIsShooting===true){
+   if(this.directionMove==="left"&&this.isDuringAttackPlayer===false&&this.heIsShooting===true){
+  
         rangeAnimation=5
         let startY=132
         let sizeY=105
+        console.log()
         if(animation===1){
-            can.ctx.drawImage(fireFromSoldier,0,132,98,107,this.posX,this.posY,this.sizeX,this.size)
+            can.ctx.drawImage(this.image2,0,startY,98,107,this.posX,this.posY,this.sizeX,this.size)
         }
         if(animation===2){
-            can.ctx.drawImage(fireFromSoldier,139,startY,97,sizeY,this.posX,this.posY,this.sizeX,this.size)
+            can.ctx.drawImage(this.image2,139,startY,97,sizeY,this.posX,this.posY,this.sizeX,this.size)
         }
         if(animation===3){
-            can.ctx.drawImage(fireFromSoldier,251,startY,124,sizeY,this.posX,this.posY,this.sizeX,this.size)
+            can.ctx.drawImage(this.image2,251,startY,124,sizeY,this.posX,this.posY,this.sizeX,this.size)
            
         }
         if(animation===4){
-            can.ctx.drawImage(fireFromSoldier,395,startY,136,sizeY,this.posX,this.posY,this.sizeX,this.size)
+            can.ctx.drawImage(this.image2,395,startY,136,sizeY,this.posX,this.posY,this.sizeX,this.size)
         }
         if(animation===5){
-            can.ctx.drawImage(fireFromSoldier,550,startY,135,sizeY,this.posX,this.posY,this.sizeX,this.size)
+            can.ctx.drawImage(this.image2,550,startY,135,sizeY,this.posX,this.posY,this.sizeX,this.size)
         }
         if(animation===6){
-            can.ctx.drawImage(fireFromSoldier,715,startY,130,sizeY,this.posX,this.posY,this.sizeX,this.size)
+            can.ctx.drawImage(this.image2,715,startY,130,sizeY,this.posX,this.posY,this.sizeX,this.size)
         }
+      
      }
-   
+
 //detect verge
 if(this.directionMove==="left"){
     this.detect.posX=this.posX-30     
@@ -285,19 +303,21 @@ if(this.directionMove==="left"){
     checkIfMonsterCanGoFurther(this.detect,this.posY,this.size)
     this.detect.draw(can)
      //detect jump
-     detectJumpPosition(this.directionMove,this.detectJump,this.posX,this.posY,this.size,can,20,40)
+    
+     detectJumpPosition(this.directionMove,this.detectJump,this.posX,this.posY,this.size,can,20,90)
 
 
     }
     
         movement(){
-            //jump
+        
             if(this.jump==true&&this.stopJump===false){
-                this.posY-=50
-                this.jump=false
-                
+ 
+        this.posY-=20
+              this.jump=false
               
-            }
+            
+          }
             if(this.directionMove==="left"){
                 this.posX-=this.speed
                 if(this.detect.trigger===true&&this.blok===false&&this.detect.avoidFallInChasm===true){

@@ -17,9 +17,10 @@ zA.forEach((el,i,arr)=>{
                 //no collision
             }
             else{
-              
+             
             if(el.detect.trigger==false){
                 el.directionMove=random(arrayDirection)
+           
             }
                
             

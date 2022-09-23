@@ -26,7 +26,9 @@ constructor(posX,posY){
     this.color="aquamarine"
     
     this.name="sheep"
-    this.speed=1
+    this.naturalSpeed=2
+    this.speed=this.naturalSpeed
+  
     this.strenghtGravity=1
     this.doFall=true
     this.image=sheep
@@ -61,6 +63,7 @@ draw(can){
     can.ctx.fillStyle=this.color
     can.ctx.fillRect(this.posX,this.posY-10,this.percentageHp,5)
     can.ctx.strokeRect(this.posX,this.posY-10,this.size,5)
+    can.ctx.strokeRect(this.posX,this.posY,this.size,this.size)
     if(this.directionMove==="right"){
         can.ctx.drawImage(this.image,animation*100,8,95,80,this.posX,this.posY,this.size,this.size)
     }
@@ -78,12 +81,14 @@ draw(can){
     
     this.detect.draw(can)
     //detect jump
-detectJumpPosition(this.directionMove,this.detectJump,this.posX,this.posY,this.size,can,20,30)
+detectJumpPosition(this.directionMove,this.detectJump,this.posX,this.posY,this.size,can,20,90)
 }
 movement(){
         //JUMP
+     
         if(this.jump==true&&this.stopJump===false){
-          this.posY-=50
+
+       this.posY-=20
           this.jump=false
           
         

@@ -41,8 +41,8 @@ particularArray.forEach((title,indexTitle,particularArrayArray)=>{
                         soldier.speed=soldier.naturalSpeed
                         soldier.posY-=deepCollision
                         soldier.doFall=false
-                        soldier.jumpStop=false
-                       console.log(soldier.speed,"speed")
+                        soldier.stopJump=false
+                      
                        
                     
                     }
@@ -51,8 +51,10 @@ particularArray.forEach((title,indexTitle,particularArrayArray)=>{
                     if(soldier.posX<title.posX+title.size&&soldier.posX>title.posX+title.size/2&&
                     soldier.posY+soldier.size>title.posY+5){
                         let deepCollision=title.posX+title.size-soldier.posX
-                        soldier.posX+=deepCollision+3
+                        soldier.posX+=deepCollision
+                      
                         detectJumpCreature2(soldier,"right")
+                        
                         
                     }
                     //RIGHT MOVE
@@ -60,7 +62,9 @@ particularArray.forEach((title,indexTitle,particularArrayArray)=>{
                     soldier.posY+soldier.size>title.posY+5){
                         let deepCollision=soldier.posX+soldier.size-title.posX
                         soldier.posX-=deepCollision
+                        
                         detectJumpCreature2(soldier,"left")
+                        
                     
                        
                     }
@@ -70,7 +74,7 @@ particularArray.forEach((title,indexTitle,particularArrayArray)=>{
                         soldier.posY=title.posY+title.size+1
                         title.color="black"
 
-                        soldier.stop=true
+                        soldier.stopJump=true
                       
                         title.color="red"
                       }

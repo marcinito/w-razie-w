@@ -8,9 +8,10 @@ import { zombieTouchAnotherZombie } from "../zombie/zombieTouchAnotherZombie"
 
 export const sheepGravity=(WALL,sheepArr,can)=>{
 sheepArr.forEach((sheep,index,arrSheep)=>{
+    sheep.speed=0.5
    sheep.posY+=sheep.strenghtGravity
    sheep.doFall=true
-   sheep.touchWall=false
+
    sheep.detect.trigger=true
    
 })
@@ -33,7 +34,9 @@ WALL.forEach((particularArray,index,WALLarr)=>{
                             let deepCollision=sheep.posY+sheep.size-title.posY
                             sheep.posY-=deepCollision
                             sheep.doFall=false
-                            sheep.stopJump=false
+                          sheep.speed=sheep.naturalSpeed
+                          sheep.stopJump=false
+                          
                            
                            
                         
@@ -44,7 +47,9 @@ WALL.forEach((particularArray,index,WALLarr)=>{
                         sheep.posY+sheep.size>title.posY+5){
                             let deepCollision=title.posX+title.size-sheep.posX
                             sheep.posX+=deepCollision
-                           detectJumpCreature2(sheep,"right")
+                        
+                           detectJumpCreature2(sheep,"right",title)
+                           
                             
                         }
                         //RIGHT MOVE
@@ -52,10 +57,23 @@ WALL.forEach((particularArray,index,WALLarr)=>{
                         sheep.posY+sheep.size>title.posY+5){
                             let deepCollision=sheep.posX+sheep.size-title.posX
                             sheep.posX-=deepCollision
-                          detectJumpCreature2(sheep,"left")
+                           
+                          detectJumpCreature2(sheep,"left",title)
                         
                            
                         }
+                       //jum[]
+                        if(sheep.posY<title.posY+title.size+3&&sheep.posY>title.posY+title.size/2){
+                            sheep.posY=title.posY+title.size+1
+                            title.color="black"
+                            console.log("stop")
+                            sheep.stopJump=true
+                          
+                            title.color="red"
+                          }
+                  
+                  
+                      
                         
                     }
     

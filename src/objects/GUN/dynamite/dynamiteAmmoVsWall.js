@@ -1,5 +1,11 @@
 import { itemsOnMap } from "../../../main"
+import { brickWallItems } from "../../ITEMSonMAP/brickWall/brickWall"
+import { dynamiteItems } from "../../ITEMSonMAP/dynamite/dynamieItems"
+import { glockItems } from "../../ITEMSonMAP/glock/glockItems"
 import { goldenCoin } from "../../ITEMSonMAP/goldenCoin/goldenCoin"
+import { healthFluidItems } from "../../ITEMSonMAP/healthFluid/healthFluid"
+import { jumpFluidItems } from "../../ITEMSonMAP/jumpFluid/jumpFluidItems"
+import { machineGunItems } from "../../ITEMSonMAP/machineGun/machineGunItems"
 import { magmaWallItems } from "../../ITEMSonMAP/magmaWall/magmaWallItems"
 import { plainWallItems } from "../../ITEMSonMAP/plainWall/plainWallItems"
 import { solidWallItems } from "../../ITEMSonMAP/solidWall/solidWallItems"
@@ -26,7 +32,14 @@ arrayWithTitle.forEach((title,tI,tArr)=>{
         if(title.name==="magmaWall"){
                 itemsOnMap.push(new magmaWallItems(title.posX,title.posY,title.size))
         }
-      
+        if(title.name==="brickWall"){
+            itemsOnMap.push(new brickWallItems(title.posX,title.posY,title.size))
+    }
+    if(title.name==="woodenWall"){
+        let itemToDrop=[dynamiteItems,machineGunItems,glockItems,jumpFluidItems]
+                   
+        itemsOnMap.push(new itemToDrop[Math.floor(Math.random()*itemToDrop.length)](title.posX,title.posY,title.size,"true"))
+}
         tArr.splice(tI,1)
     
     

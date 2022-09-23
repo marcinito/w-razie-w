@@ -219,7 +219,29 @@ export const playerTakeItemFromMap=(player,itemsOnMap)=>{
                 if(allSlot[i].dataset.empty==="true"&&player.backpack.brickWall.itemInBp===false){
                   allSlot[i].src=brickWall
                   allSlot[i].dataset.item=itemsFromMap.name
-                  player.backpack.magmaWall.itemInBp=true
+                  player.backpack.brickWall.itemInBp=true
+                  
+                  allSlot[i].dataset.empty="false"
+               
+                  break
+                 
+                }
+            
+                
+              }
+              
+
+            }
+            if(itemsFromMap.name==="woodenWall"){
+              player.backpack.woodenWall.amount+=1
+           
+
+             
+              for(let i=0;i<allSlot.length;i++){
+                if(allSlot[i].dataset.empty==="true"&&player.backpack.woodenWall.itemInBp===false){
+                  allSlot[i].src=brickWall
+                  allSlot[i].dataset.item=itemsFromMap.name
+                  player.backpack.woodenWall.itemInBp=true
                   
                   allSlot[i].dataset.empty="false"
                

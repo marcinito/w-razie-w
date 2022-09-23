@@ -7,25 +7,31 @@ import { can } from "../../../../main"
 //in order avoid fall in down ,its prevent dead monster from nature force in game and force player to kill them by herself
 export const checkIfMonsterCanGoFurther=(detect,posY,size)=>{
 let distance=detect.posY-posY+size
- //detect.trigger is true when detect objects dont touch title 
+
+  //detect.trigger is false when player is on ground and is not any gap on his way in very near range
+    
+ if(detect.trigger===false)
+ {
+
+   detect.posY=posY+size-detect.size
+   
+ } 
+  //detect.trigger is true when detect objects dont touch title
     if(detect.trigger===true){
+      
         detect.posY+=detect.speed
         
-        if(distance>300||detect.posY>can.C_H){
+        if(distance>340||detect.posY>can.C_H){
+          console.log("distance detect more than 300")
             detect.avoidFallInChasm=true
             
-      
+  
           }
           if(detect.posY>can.C_H){
             detect.posY=posY+size-detect.size
           }
         return
     }
- //detect.trigger is false when player is on ground and is not any gap on his way in very near range
-      if(detect.trigger===false)
-        {
-          detect.posY=posY+size-detect.size
-          
-        }
+
        
 }

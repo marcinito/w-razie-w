@@ -27,7 +27,7 @@ export class helperPlayer{
         this.directionArr=["left","right"]
         this.directionMove=random(this.directionArr)
         this.directionMemory=this.directionMove
-        this.speed=2
+        this.speed=3
         this.strenghtGravity=0.1
         this.skyAttack=false//when fly monster are on map helper will attack up direction
         this.stop=false
@@ -43,9 +43,11 @@ export class helperPlayer{
         this.hp=this.hpTotal
         this.percentageHp=50
         this.ratePercentage=50
+
+        this.counter=0
     }
     draw(can){
-
+        this.counter++
         can.ctx.fillStyle="green"
         can.ctx.fillRect(this.posX,this.posY-25,this.percentageHp,10)
         can.ctx.lineWidth=1
@@ -133,7 +135,7 @@ export class helperPlayer{
                     can.ctx.drawImage(this.image,497,startY,127,height,this.posX,this.posY,this.size,this.size)
                 }
                setTimeout(()=>{
-                this.speed=1
+                this.speed=3
                 this.attack=false
                },1000)
             
@@ -167,14 +169,16 @@ export class helperPlayer{
       if(distanceFromPlayer<-300){
         this.directionMove="right"
       }
-      
-      
-        if(this.directionMove==="right"){
-            this.posX+=this.speed
-        }
-        if(this.directionMove==="left"){
-            this.posX-=this.speed
-        }
+   
+
+        
+    if(this.directionMove==="right"){
+        this.posX+=this.speed
+    }
+    if(this.directionMove==="left"){
+        this.posX-=this.speed
+    }
+  
     }
     magicUse(){
 if(Math.floor(Math.random()*50)===19&&this.attack===false){

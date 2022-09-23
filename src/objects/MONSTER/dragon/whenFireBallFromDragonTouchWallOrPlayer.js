@@ -1,4 +1,5 @@
 import { handleHp } from "../../../Functions/shorthandFunction/handleHp"
+import { NPC } from "../../../main"
 import { goldenCoin } from "../../ITEMSonMAP/goldenCoin/goldenCoin"
 import { magmaWallItems } from "../../ITEMSonMAP/magmaWall/magmaWallItems"
 import { plainWallItems } from "../../ITEMSonMAP/plainWall/plainWallItems"
@@ -57,6 +58,23 @@ monster.fireBall.forEach((ball,indexBall,arrWithFireBall)=>{
             player.percentageHp-=handleHp(monster.attack.player,player)
     
         }
+})
+
+//If fire ball hit NPC
+monster.fireBall.forEach((ball,indexBall,arrWithFireBall)=>{
+NPC.forEach((npc,index,arr)=>{
+    if(npc.posX+npc.size<ball.posX || npc.posX>ball.posX+ball.size ||
+        npc.posY+npc.size<ball.posY || npc.posY>ball.posY+ball.size){
+    
+        }
+        else{
+    
+            npc.hp-=monster.attack.player
+            arrWithFireBall.splice(indexBall,1)
+            npc.percentageHp-=handleHp(monster.attack.player,npc)
+    
+        }
+})
 })
 
 }

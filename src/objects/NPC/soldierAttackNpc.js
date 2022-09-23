@@ -43,10 +43,19 @@ monsterTurnWhenPlayerIsBehindHisBack(soldier,dX)
        
       
         }
-        else if(hypotenuse>60){
+     
+        else if(hypotenuse>71&&hypotenuse<73&&soldier.directionMove==="right"){
+         
+            
             soldier.isDuringAttackPlayer=false
-      
+           
            }
+           else if(hypotenuse>41&&hypotenuse<73&&soldier.directionMove==="left"){
+            
+               
+               soldier.isDuringAttackPlayer=false
+              
+              }
       
       
          

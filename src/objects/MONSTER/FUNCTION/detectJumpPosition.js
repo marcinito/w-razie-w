@@ -1,12 +1,14 @@
-export const detectJumpPosition=(directionMove,detectJump,posX,posY,size,can,X)=>{
+export const detectJumpPosition=(directionMove,detectJump,posX,posY,size,can,X,Y)=>{
   
     if(directionMove==="left"){
         detectJump.posX=posX-X
-        detectJump.posY=posY+size-90       
+        detectJump.posY=posY+size-Y
       }
-      if(directionMove==="right"){
+      else if(directionMove==="right"){
+     
         detectJump.posX=posX+size
-        detectJump.posY=posY+size-90         
+        detectJump.posY=posY+size-Y
+                 
       }
   detectJump.draw(can)
 }

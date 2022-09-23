@@ -56,6 +56,7 @@ import { helperAttackMonster } from './objects/NPC/helperPlayer/helperAttackMons
 import { playerIsTreating } from './objects/NPC/helperPlayer/playerIsTreating'
 import { zombieAttackNpc } from './objects/NPC/zombieAttackNpc'
 import { soldierAttackNpc } from './objects/NPC/soldierAttackNpc'
+import { whenDragonTouchNpc } from './objects/NPC/whenDragonTouchNpc'
 
 
 
@@ -143,6 +144,7 @@ MONSTER.forEach((pArrMonster,index,arrayMONSTER)=>{
             whenFireBallFromDragonTouchWallOrPlayer(monster,player,WALL,can,itemsOnMap)
             whenDragonTouchPlayer(player,arr)
             glockAmmoVsMonster(player,arr)
+            whenDragonTouchNpc(NPC,arr)
         }
         if(monster.name==="zombie"){
             monster.movement()
@@ -151,6 +153,7 @@ MONSTER.forEach((pArrMonster,index,arrayMONSTER)=>{
             zombieAttackPlayer(player,arr)
             glockAmmoVsMonster(player,arr)
             zombieAttackNpc(NPC,arr)
+            
            
 
         }

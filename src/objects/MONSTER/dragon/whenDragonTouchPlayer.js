@@ -1,4 +1,6 @@
 import { handleHp } from "../../../Functions/shorthandFunction/handleHp"
+import { random } from "../../../Functions/shorthandFunction/random"
+import { NPC } from "../../../main"
 
 
 
@@ -11,9 +13,13 @@ export const whenDragonTouchPlayer=(player,dragonArray)=>{
 //No coliision
 
   }else{
-    dragon.posY-=100
-    player.hp-=dragon.attack.whenTouchPlayer
-    player.percentageHp-=handleHp(dragon.attack.whenTouchPlayer,player)
+if(dragon.directionMove!=="up"){
+  dragon.directionMove=random(dragon.directionArr)
+  dragon.posY-=100
+  player.hp-=dragon.attack.whenTouchPlayer
+  player.percentageHp-=handleHp(dragon.attack.whenTouchPlayer,player)
+}
+  
   }
 
 

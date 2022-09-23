@@ -8,7 +8,7 @@ export const dontFallDownFromTitle=(monster,title)=>{
           
         
         }else{
-            if(monster.detect.posY+monster.detect.size>title.posY-1&&title.posY>monster.detect.posY+monster.detect.size/2){
+            if(monster.detect.posY+monster.detect.size>title.posY-1&&title.posY>monster.detect.posY){
           
           monster.detect.trigger=false  
             

@@ -48,11 +48,11 @@ export const whenBulletFromSoldierTouchWallOrPlayer=(monster,player,WALL,can,ite
         
             }
             else{
-                console.log(player.hp,"before")
+             
                 player.hp-=monster.strenghtAttackFromGun
                 arrWithBullet.splice(indexBullet,1)
                 player.percentageHp-=handleHp(monster.strenghtAttackFromGun,player)
-                console.log(player.hp,"after")
+             
         
             }
     })
@@ -65,11 +65,11 @@ export const whenBulletFromSoldierTouchWallOrPlayer=(monster,player,WALL,can,ite
         
             }
             else{
-                console.log(npc.hp,"before")
+            
                 npc.hp-=monster.strenghtAttackFromGun
                 arrWithBullet.splice(indexBullet,1)
                 npc.percentageHp-=handleHp(monster.strenghtAttackFromGun,npc)
-                console.log(npc.hp,"after")
+                
         
             }
      })

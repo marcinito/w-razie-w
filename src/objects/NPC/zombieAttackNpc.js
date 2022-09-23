@@ -28,7 +28,7 @@ NPC.forEach((npc,i,arr)=>{
          npc.hp-=zombie.strenghtAttack
          npc.percentageHp-=handleHp(zombie.strenghtAttack,npc)
         
-         
+            
          zombie.isDuringAttackPlayer=true
        
   

@@ -1,5 +1,5 @@
 
-import { random } from '../../Functions/helpFunction/random'
+import { random } from '../../../Functions/shorthandFunction/random'
 import duszek from '../ghost/duszek.png'
 let imgGhost=new Image(100,100)
 imgGhost.src=duszek
