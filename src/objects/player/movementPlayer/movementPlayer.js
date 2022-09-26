@@ -1,4 +1,4 @@
-import { can, changeLevel, menu } from "../../../main"
+import { can, changeLevel, menu, MONSTER, player } from "../../../main"
 import { Glock } from "../../GUN/glock/glock"
 import { glockItems } from "../../ITEMSonMAP/glock/glockItems"
 import { brickWall } from "../../WALL/brickWall/brickWall"
@@ -10,26 +10,84 @@ import { displayItemInDetail } from "../shorthandFunction/displayItemInDetail"
 import { dropItemFromBpOnMap } from "../shorthandFunction/dropItemFromBpOnMap"
 import { giveBorderToUsingSlotBp } from "../shorthandFunction/giveBorderToUsingSlotBp"
 import { updateEqDashboard } from "../shorthandFunction/updateEqDashboard"
+import { canIPutBlockInThisPlace } from "./canIPutBlockInThisPlace"
+import { mouseDetector } from "./mouseDetector"
 import { setPositionTileOnMap } from "./setPositionTileOnMap"
 
 
 const allSlot=[...document.querySelectorAll(".slotBp")]
 
 //QUERY FROM HTML
-
-
+export let mouseDetectorMonster=new mouseDetector(0,0)
+export let point
 
 export const movementPlayer=(player,itemsOnMap)=>{
-    
+   
     window.addEventListener("keydown",(e)=>{
+       console.log(e.keyCode)
+       //monster jump
+       if(e.keyCode===87){
+               
        
+        MONSTER.forEach((particular)=>{
+            particular.forEach((monster)=>{
+                if(monster.name==="zombie"){
+                    monster.posY-=20
+                }
+            })
+        })
+  
+
+}
+    //monster right
+    if(e.keyCode===68){
+               
+       
+        MONSTER.forEach((particular)=>{
+            particular.forEach((monster)=>{
+                if(monster.name==="zombie"){
+                    monster.directionMove="right"
+                    monster.posX+=20
+                }
+            })
+        })
+        
+}
+      //Monster left
+      if(e.keyCode===65){
+               
+          
+        MONSTER.forEach((particular)=>{
+            particular.forEach((monster)=>{
+                if(monster.name==="zombie"){
+                    monster.directionMove="left"
+                    monster.posX-=20
+                }
+            })
+        })
+        
+}
         if(e.keyCode===37){
                
                 player.moveLeft()
+                MONSTER.forEach((particular)=>{
+                    particular.forEach((monster)=>{
+                        if(monster.name==="zombie"){
+                            monster.posX-=20
+                        }
+                    })
+                })
                 
         }
         if(e.keyCode===39){
             player.moveRight()
+            MONSTER.forEach((particular)=>{
+                particular.forEach((monster)=>{
+                    if(monster.name==="zombie"){
+                        monster.posX+=20
+                    }
+                })
+            })
     }
 
 if(e.keyCode===40){
@@ -160,36 +218,38 @@ displayItemInDetail(allSlot,player)
     })
     let ex
     let ey
-  let point
-  
+   let sizeTitle=65
+ 
     window.addEventListener("click",(e)=>{
         //PLAIN WALL IS BUILDING
-console.log(point)
-            if(player.whatIsInHand==="solidWall"&&player.backpack.solidWall.amount>0){
-            player.blockToBuild.push(new solidWall(point.x-30,point.y-30,65,"red","horizontal"))
+
+     if(player.canBuild===true){
+        if(player.whatIsInHand==="solidWall"&&player.backpack.solidWall.amount>0){
+            player.blockToBuild.push(new solidWall(point.x-sizeTitle/2,point.y-sizeTitle/2,65,"red","horizontal"))
             player.backpack.solidWall.amount-=1
          
             updateEqDashboard("solidWall",player.backpack)
             }
             if(player.whatIsInHand==="plainWall"&&player.backpack.plainWall.amount>0){
                 
-                player.blockToBuild.push(new plainWall(point.x-30,point.y-30,65,"red","horizontal"))
+                player.blockToBuild.push(new plainWall(point.x-sizeTitle/2,point.y-sizeTitle/2,65,"red","horizontal"))
                 player.backpack.plainWall.amount-=1
                 updateEqDashboard("plainWall",player.backpack)
                 }
                 if(player.whatIsInHand==="magmaWall"&&player.backpack.magmaWall.amount>0){
-                    player.blockToBuild.push(new magmaWall(point.x-30,point.y-30,65,"red","horizontal"))
+                    player.blockToBuild.push(new magmaWall(point.x-sizeTitle/2,point.y-sizeTitle/2,65,"red","horizontal"))
                     player.backpack.magmaWall.amount-=1
                     updateEqDashboard("magmaWall",player.backpack)
                     }
                     if(player.whatIsInHand==="brickWall"&&player.backpack.brickWall.amount>0){
-                        player.blockToBuild.push(new brickWall(point.x-30,point.y-30,65,"red","horizontal"))
+                        player.blockToBuild.push(new brickWall(point.x-sizeTitle/2,point.y-sizeTitle/2,65,"red","horizontal"))
                         player.backpack.magmaWall.amount-=1
                         updateEqDashboard("brickWall",player.backpack)
                         }
+     }
                 
           
-       
+                    
      
     })
     
@@ -199,7 +259,16 @@ console.log(point)
         ey=e.y
   
         point=setPositionTileOnMap(ex,ey)
+    
+        mouseDetectorMonster.posX=point.x-mouseDetectorMonster.size/2
+        mouseDetectorMonster.posY=point.y-mouseDetectorMonster.size/2
+        canIPutBlockInThisPlace(mouseDetectorMonster)
+       
     })
+
+
+    
+
   
 }
 

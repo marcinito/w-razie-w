@@ -29,8 +29,8 @@ export class helperPlayer{
         this.directionMemory=this.directionMove
         this.speed=3
         this.strenghtGravity=0.1
-        this.skyAttack=false//when fly monster are on map helper will attack up direction
-        this.stop=false
+        this.skyAttack=true//when fly monster are on map helper will attack up direction
+        this.stopJump=false
         this.detectJump=new detectJump()
         this.touchWall=false
         this.jump=false
@@ -54,8 +54,8 @@ export class helperPlayer{
         can.ctx.strokeStyle="black"
         can.ctx.strokeRect(this.posX,this.posY-25,50,10)
         can.ctx.fillStyle=this.color
-       
-        if(this.jump==true&&this.stop===false){
+       //jump npc
+        if(this.jump==true&&this.stopJump===false){
             this.posY-=50
             this.jump=false
             
@@ -144,11 +144,11 @@ export class helperPlayer{
    //detect jump
        if(this.directionMove==="left"){
         this.detectJump.posX=this.posX-this.detectJump.size
-        this.detectJump.posY=this.posY-100
+        this.detectJump.posY=this.posY-30
        }
        if(this.directionMove==="right"){
         this.detectJump.posX=this.posX+this.size
-        this.detectJump.posY=this.posY-100
+        this.detectJump.posY=this.posY-30
        }
         this.detectJump.draw(can)
 

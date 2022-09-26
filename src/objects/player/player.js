@@ -80,11 +80,11 @@ export class Player{
       glock:{amount:0,itemInBp:false,bp:[],ammo:0,flag:true},
       machineGun:{amount:0,itemInBp:false,bp:[],ammo:0,flag:true},
       dynamite:{amount:1212,itemInBp:false,ammo:"BOMB",},
-      solidWall:{amount:0,itemInBp:false,ammo:0,},
-      plainWall:{amount:0,itemInBp:false,ammo:0,},
-      brickWall:{amount:0,itemInBp:false,ammo:0,},
-      magmaWall:{amount:0,itemInBp:false,ammo:0,},
-      woodenWall:{amount:0,itemInBp:false,ammo:0,},
+      solidWall:{amount:1110,itemInBp:false,ammo:0,},
+      plainWall:{amount:11110,itemInBp:false,ammo:0,},
+      brickWall:{amount:1110,itemInBp:false,ammo:0,},
+      magmaWall:{amount:1110,itemInBp:false,ammo:0,},
+      woodenWall:{amount:1110,itemInBp:false,ammo:0,},
       hpPotion:{amount:0,itemInBp:false,ammo:0,},
       jumpFluid:{amount:0,itemInBp:false,ammo:0,},
       meat:{amount:0,itemInBp:false,ammo:0,},
@@ -95,10 +95,12 @@ export class Player{
    //BUILDIN NEW BLOCK
     this.mode=true
    this.blockToBuild=[new plainWall(100,100,0,"red","horizontal")]
+   this.canBuild=true
        //gun
        this.bulletGlockArray=[]
        this.dynamitsArray=[]
        this.axeArray=[]
+       
        //switch for checking what a position is lowest tile on map
    
        this.deadEffect=false

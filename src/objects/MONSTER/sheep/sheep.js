@@ -2,6 +2,7 @@
 import { random } from "../../../Functions/shorthandFunction/random"
 import { detectJumpPosition } from "../FUNCTION/detectJumpPosition"
 import { checkIfMonsterCanGoFurther } from "../FUNCTION/detectVerge/checkIfCreatureCanGoFurther"
+import { detectBlokJump } from "../objects/detectBlokJump"
 import { detectEdge } from "../objects/detectEdge"
 import { detectJump } from "../objects/detectJump"
 
@@ -56,6 +57,7 @@ constructor(posX,posY){
        this.touchWall=false
        this.jump=false
        this.stopJump=false
+       this.detectBlokJump=new detectBlokJump()
        
 }
 draw(can){
@@ -82,18 +84,62 @@ draw(can){
     this.detect.draw(can)
     //detect jump
 detectJumpPosition(this.directionMove,this.detectJump,this.posX,this.posY,this.size,can,20,90)
+    //detect blok jump
+    this.detectBlokJump.posX=this.posX+10
+    this.detectBlokJump.posY=this.posY
+    this.detectBlokJump.size=this.size-20
+
+        this.detectBlokJump.draw(can)
+}
+jumpAction(){
+  //jump
+
+  let jumpHeight=2
+  if(this.stopJump===false){
+    this.posY-=jumpHeight
+    setTimeout(()=>{
+      if(this.stopJump===false){
+        this.posY-=jumpHeight
+        setTimeout(()=>{
+          if(this.stopJump===false){
+            this.posY-=jumpHeight
+          }
+        },20)
+        setTimeout(()=>{
+          if(this.stopJump===false){
+            this.posY-=jumpHeight
+          }
+        },20)
+        setTimeout(()=>{
+          if(this.stopJump===false){
+            this.posY-=jumpHeight
+          }
+        },20)
+        setTimeout(()=>{
+          if(this.stopJump===false){
+            this.posY-=jumpHeight
+          }
+        },20)
+      }
+      
+    },20)
+
+    this.jump=false
+    
+  }
+
 }
 movement(){
         //JUMP
      
-        if(this.jump==true&&this.stopJump===false){
-
-       this.posY-=20
-          this.jump=false
-          
-        
-      }
-
+    //jump
+   
+    if(this.jump===true&&this.stopJump===false){
+      this.speed=0
+      this.posY-=50
+      
+      this.jump=false
+    }
     if(this.directionMove==="left"){
         this.posX-=this.speed
         if(this.detect.trigger===true&&this.blok===false&&this.detect.avoidFallInChasm===true){

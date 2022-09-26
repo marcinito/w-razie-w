@@ -11,10 +11,7 @@ entry:{
       import:'./src/main.js',
       
     },
-    instruction:{
-      import:'./src/instruction.js',
 
-    },
     gameover:{
       import:'./src/gameover.js',
 
@@ -32,13 +29,7 @@ plugins:[
        chunks:['main']
 
     }),
-    new HtmlWebpackPlugin({
-      template:'./src/instruction.html',
-      filename:"instruction.html",
-      inject:"body",
-      chunks:['instruction'],
 
-   }),
    new HtmlWebpackPlugin({
     template:'./src/gameover.html',
     filename:"gameover.html",

@@ -21,8 +21,8 @@ let distance=detect.posY-posY+size
       
         detect.posY+=detect.speed
         
-        if(distance>340||detect.posY>can.C_H){
-          console.log("distance detect more than 300")
+        if(distance>400||detect.posY>can.C_H){
+          
             detect.avoidFallInChasm=true
             
   

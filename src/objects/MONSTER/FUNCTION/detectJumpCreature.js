@@ -1,12 +1,23 @@
-export const detecJumpCreature=(creature,title)=>{
- 
-    if(creature.detectJump.posX+creature.detectJump.size<title.posX || creature.detectJump.posX>title.posX+title.size ||
-        creature.detectJump.posY+creature.detectJump.size<title.posY || creature.detectJump.posY>title.posY+title.size){
+import { WALL } from "../../../main"
 
-        }else{
-            creature.touchWall=true
-    
-           
-        }
+
+
+export const detecJumpCreature=(creature)=>{
+ creature.touchWall=false
+    WALL.forEach((particular,index,arr)=>{
+        particular.forEach((title,indexTitle,arrTitle)=>{
+            
+            if(creature.posX+creature.size<title.posX || creature.posX>title.posX+title.size ||
+                creature.posY+creature.size<title.posY || creature.posY>title.posY+title.size){
+            
+                }else{
+                
+                    creature.touchWall=true
+                   
+            
+                   
+                }
+        })
+       })
        
 }

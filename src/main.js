@@ -7,7 +7,7 @@ import { canvasSettingsGame } from './Functions/settingCanas'
 import { Player } from './objects/player/player'
 export const menu=new menuObject()
 export let player=new Player()
-import { movementPlayer } from './objects/player/movementPlayer/movementPlayer'
+import { mouseDetectorMonster, movementPlayer, point } from './objects/player/movementPlayer/movementPlayer'
 import { FireAtakFromPlayer } from './objects/player/FireAtakFromPlayer'
 import { menuObject } from './objects/menuObject'
 import { PLAYERGRAVITY } from './objects/player/PLAYERGRAVITY'
@@ -57,6 +57,8 @@ import { playerIsTreating } from './objects/NPC/helperPlayer/playerIsTreating'
 import { zombieAttackNpc } from './objects/NPC/zombieAttackNpc'
 import { soldierAttackNpc } from './objects/NPC/soldierAttackNpc'
 import { whenDragonTouchNpc } from './objects/NPC/whenDragonTouchNpc'
+import { cleanMap } from './LEVEL/CHANGE-LEVEl/cleanMap'
+
 
 
 
@@ -75,15 +77,17 @@ export let can=canvasSettingsGame()
 
 
 
-
 export let transitionArray=[]
 
 export let changeLevel=()=>{
+    //change level work in this way that when monster is killed function count all monster on map when
+    //number is 0 its will change level
     if(menu.level===1){
-      
+     
                 WALL=secondLevelArrangementWall(player,can)
                 MONSTER=monsterInSecondLevel()
                 itemsOnMap=itemsOnSecondLvl()
+                cleanMap(player)
                 
             }
             if(menu.level===2){
@@ -98,9 +102,13 @@ export let NPC=[]
 export let WALL=firstLevelArrangementWall(player,can)
 export let MONSTER=monsterOnFirstLevel()
 export let itemsOnMap=itemsOnFirstLevel()
+console.log(MONSTER)
 movementPlayer(player,itemsOnMap)
+let counter1=0
  const runApp=()=>{
-    
+ 
+
+  
    if(menu.playGame==="game"){
 
 
@@ -150,9 +158,12 @@ MONSTER.forEach((pArrMonster,index,arrayMONSTER)=>{
             monster.movement()
             monster.draw(can)
             zombieGravity(WALL,arr,can)
+         
+           
             zombieAttackPlayer(player,arr)
             glockAmmoVsMonster(player,arr)
             zombieAttackNpc(NPC,arr)
+          
             
            
 
@@ -170,6 +181,7 @@ MONSTER.forEach((pArrMonster,index,arrayMONSTER)=>{
            
         }
         if(monster.name==="sheep"){
+       
             monster.movement()
             monster.draw(can)
           
@@ -193,13 +205,7 @@ NPC.forEach((npc,index,arrNpc)=>{
         helperAttackWall(WALL,npc.arrayWithMagic)
         helperAttackMonster(MONSTER,NPC)
         playerIsTreating(NPC)
-        MONSTER.forEach((pA)=>{
-            pA.forEach((el)=>{
-                if(el.name==="dragon"||el.name==="ghost"){
-                    npc.skyAttack=true
-                }
-            })
-        })
+   
         if(npc.hp<0){
             arrNpc.splice(index,1)
         }
@@ -227,6 +233,7 @@ if(itemsOnMap.length>0){
     })
 }
 //effect when player passed level
+mouseDetectorMonster.draw(can)
 if(transitionArray.length>0){
     transitionArray.forEach((el)=>{
         el.draw(can)

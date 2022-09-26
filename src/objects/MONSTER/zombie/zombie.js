@@ -8,8 +8,10 @@ import { random } from '../../../Functions/shorthandFunction/random'
 import { detectJumpPosition } from '../FUNCTION/detectJumpPosition'
 import { checkIfMonsterCanGoFurther } from '../FUNCTION/detectVerge/checkIfCreatureCanGoFurther'
 import { detectEdge } from '../objects/detectEdge'
-import { detectJump } from '../objects/detectJump'
 
+import { detecJumpCreature } from '../FUNCTION/detectJumpCreature'
+import { detectJump } from '../objects/detectJump'
+import { detectBlokJump } from '../objects/detectBlokJump'
 
 
 
@@ -42,7 +44,10 @@ export class Zombie{
         this.color="darkgreen"
         this.name="zombie"
         this.naturalSpeed=1
-        this.speed=0
+        this.speed=1
+        //detectJump
+        this.dposX=this.posX
+        this.dposY=this.posY
        
         this.strenghtGravity=3
         this.strenghtAttack=0.3
@@ -67,18 +72,21 @@ export class Zombie{
        this.blok=false
        //detec jump
        this.detectJump=new detectJump()
-       this.touchWall=false
+       this.detectBlokJump=new detectBlokJump()
+
        this.jump=false
        this.stopJump=false
-
+      this.touchWall=false
       //zombie touch other zombie
       this.touchOtherZombie=false
+
+      this.startPoint=0
+      this.destroyWall=false
             
     }
 draw(can){
 
-        //its set position block which is sensor
-        detectJumpPosition(this.directionMove,this.detectJump,this.posX,this.posY,this.size,can,40,130)
+        
 
 
 
@@ -87,7 +95,7 @@ draw(can){
     can.ctx.lineWidth=1
     can.ctx.strokeStyle="black"
     can.ctx.strokeRect(this.posX,this.posY-10,this.size,7)
-    can.ctx.strokeRect(this.posX,this.posY,this.size,this.size)
+    // can.ctx.strokeRect(this.posX,this.posY,this.size,this.size)
 if(this.directionMove==="right"){
 if(this.isDuringAttackPlayer==false&&this.doFall===false){
     if(zombieMove===0){
@@ -230,19 +238,56 @@ if(this.directionMove==="left"){
   }
   checkIfMonsterCanGoFurther(this.detect,this.posY,this.size)
     this.detect.draw(can)
+//show if monster can do jump
+  detectJumpPosition(this.directionMove,this.detectJump,this.posX,this.posY,this.size,can,10,130)
+    //detect blok jump
+    this.detectBlokJump.posX=this.posX+10
+    this.detectBlokJump.posY=this.posY-10
+    this.detectBlokJump.size=this.size-20
 
+        this.detectBlokJump.draw(can)
+}
+jumpAction(){
+  //jump
 
+  let jumpHeight=3
+  if(this.stopJump===false){
+    this.posY-=jumpHeight
+    setTimeout(()=>{
+      if(this.stopJump===false){
+        this.posY-=jumpHeight
+        setTimeout(()=>{
+          if(this.stopJump===false){
+            this.posY-=jumpHeight
+          }
+        },20)
+        setTimeout(()=>{
+          if(this.stopJump===false){
+            this.posY-=jumpHeight
+          }
+        },20)
+        setTimeout(()=>{
+          if(this.stopJump===false){
+            this.posY-=jumpHeight
+          }
+        },20)
+        setTimeout(()=>{
+          if(this.stopJump===false){
+            this.posY-=jumpHeight
+          }
+        },20)
+      }
+      
+    },20)
+
+    this.jump=false
     
+  }
+
 }
     movement(){
-      //JUMP
-   
-    //   if(this.jump==true&&this.stopJump===false){
-    // this.posY-=20
-    // this.jump=false
-        
-      
-    // }
+  
+ 
     
         if(this.directionMove==="left"){
             this.posX-=this.speed

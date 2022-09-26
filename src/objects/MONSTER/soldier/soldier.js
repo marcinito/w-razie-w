@@ -5,6 +5,7 @@ import { detectJump } from '../objects/detectJump'
 import { detectJumpPosition } from '../FUNCTION/detectJumpPosition'
 import { detectEdge } from '../objects/detectEdge'
 import { checkIfMonsterCanGoFurther } from '../FUNCTION/detectVerge/checkIfCreatureCanGoFurther'
+import { detectBlokJump } from '../objects/detectBlokJump'
 
 
 const fireFromSoldier=new Image(100,100)
@@ -36,7 +37,7 @@ export class Soldier{
      
         this.name="soldier"
         this.color="orange"
-        this.naturalSpeed=2
+        this.naturalSpeed=1.2
         this.speed=0
         this.strenghtGravity=3
         this.strenghtAttack=0.3
@@ -70,6 +71,7 @@ export class Soldier{
        this.jump=false
        this.stopJump=false
        this.waitForNextJump=false
+       this.detectBlokJump=new detectBlokJump()
 
     }
     draw(can,changeImage){
@@ -305,16 +307,61 @@ if(this.directionMove==="left"){
      //detect jump
     
      detectJumpPosition(this.directionMove,this.detectJump,this.posX,this.posY,this.size,can,20,90)
+    //detect blok jump
+    this.detectBlokJump.posX=this.posX+10
+    this.detectBlokJump.posY=this.posY
+    this.detectBlokJump.size=this.size-20
 
+        this.detectBlokJump.draw(can)
 
     }
     
+    jumpAction(){
+        //jump
+      
+        let jumpHeight=3
+        if(this.stopJump===false){
+          this.posY-=jumpHeight
+          setTimeout(()=>{
+            if(this.stopJump===false){
+              this.posY-=jumpHeight
+              setTimeout(()=>{
+                if(this.stopJump===false){
+                  this.posY-=jumpHeight
+                }
+              },20)
+              setTimeout(()=>{
+                if(this.stopJump===false){
+            
+                  this.posY-=jumpHeight
+                }
+              },20)
+              setTimeout(()=>{
+                if(this.stopJump===false){
+                  this.posY-=jumpHeight
+                }
+              },20)
+              setTimeout(()=>{
+                if(this.stopJump===false){
+                  this.posY-=jumpHeight
+                }
+              },20)
+            }
+            
+          },20)
+      
+          this.jump=false
+        }
+      
+      }
         movement(){
         
             if(this.jump==true&&this.stopJump===false){
  
-        this.posY-=20
-              this.jump=false
+                this.speed=0
+                this.posY-=50
+                
+                this.jump=false
               
             
           }

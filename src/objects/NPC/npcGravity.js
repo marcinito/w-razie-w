@@ -13,7 +13,7 @@ WALL.forEach((pAW,pAI,wallArray)=>{
 
 
         //check do npc can do jump it is possible when meet only one title height
-    detecJumpCreature(npc,title)
+    
 
     //CONTACT PLAYER WITH TITLE FROM WALL
     if(npc.posX+npc.size<title.posX || npc.posX>title.posX+title.size ||
@@ -56,69 +56,32 @@ WALL.forEach((pAW,pAI,wallArray)=>{
           
       //Block jump when meet down horizontal wall
       //JUMP JUMP
-      if(npc.posY<title.posY+title.size+3&&npc.posY>title.posY+title.size/2){
-        npc.posY=title.posY+title.size+1
+       // jump
+               
+              
+       if(npc.posY<title.posY+title.size+3&&npc.posY>title.posY+title.size-60){
+                       
+        if(npc.directionMove==="left"){
+            if(npc.posX<title.posX+title.size/2){
+                npc.posY=title.posY+title.size+1
+            }
+        }
+        if(npc.directionMove==="right"){
+            if(npc.posX>title.posX+title.size/2){
+                npc.posY=title.posY+title.size+1
+            }
+        }
+
         title.color="black"
-      //  
-        npc.stop=true
+
+        npc.stopJump=true
       
         title.color="red"
       }
 
           }
 
-          //VERTICAL
-          if(title.direction==="vertical"){
-          
-            //STAND ON TOP
-            if(npc.posY+npc.size>title.posY-1&&npc.posY+npc.size<title.posY+title.size/2){
-              npc.down=false
-              npc.up=true
-              npc.counterJump=0
-              let deepCollision=npc.posY+npc.size-title.posY
-              npc.posY-=deepCollision
-            
-
-              
-             
-            }
-
-            //BLOCK RIGHT
-            if(npc.posX+npc.size>title.posX&&npc.posX+npc.size<title.posX+title.size && npc.directionMove==="right"
-            &&npc.posY+npc.size>title.posY){
-              let deepCollision=npc.posX+npc.size-title.posX
-              npc.posX-=deepCollision+3
-
-              npc.up=false
-              title.color="#696969"
-              console.log("block right..v.")
-             
-            }
-            //BLOCK LEFT
-            if(npc.posX<title.posX+title.size&&npc.posX>title.posX+title.size/2&&npc.directionMove==="left"&&npc.posY+npc.size>title.posY){
-          
-              let deepCollision=title.posX+title.size-npc.posX
-              npc.posX+=deepCollision+3
-              npc.up=false
-              
-              title.color="darkblue"
-              console.log("block left")
-              
-
-            }
-            // BLOCK JUMP JUMP
-            if(npc.posY<title.posY+title.size&&npc.posY>title.posY+title.size/2&&npc.directionMove=="up"){
-              npc.posY=title.posY+title.size+2
-              title.color="yellow"
-              console.log("wykonuje sie")
-              npc.up=false
-             
-              
-            }
-      
-
-          }
-
+        
            
             //END ELSE
          }

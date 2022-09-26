@@ -24,8 +24,8 @@ soldierArr.forEach((soldier,i,arr)=>{
 WALL.forEach((particularArray,index,WALLarr)=>{
 particularArray.forEach((title,indexTitle,particularArrayArray)=>{
 
-    soldierArr.forEach((soldier,indexSoldier,soldierArray)=>{
-        detecJumpCreature(soldier,title)
+    soldierArr.forEach((soldier,indx,soldierArr)=>{
+     soldier.detectBlokJump.canMonsterJump(title)
      
         if(title.posX>soldier.posX+soldier.size || title.posX+title.size<soldier.posX||
             title.posY>soldier.posY+soldier.size||title.posY+title.size<soldier.posY){
@@ -43,71 +43,58 @@ particularArray.forEach((title,indexTitle,particularArrayArray)=>{
                         soldier.doFall=false
                         soldier.stopJump=false
                       
+                      
                        
                     
                     }
-               
+                       // jump
+                    if(soldier.jump===true){
+                        soldierArr[indx].jumpAction()
+                    }
+                           if(soldier.detectBlokJump.canJump===false){
+                                soldierArr[indx].stopJump=true
+                                soldierArr[indx].posY=title.posY+title.size+2
+                                console.log("wykonuje sie")
+                                
+                                if(soldier.directionMove==="left"&&soldier.detectJump.touchWall===false){
+                                    soldier.directionMove="right"
+                                    soldier.posX+=3
+                            return
+                            }
+                                if(soldier.directionMove==="right"&&soldier.detectJump.touchWall===false){
+                                    soldier.directionMove="left"
+                                soldier.posX-=3
+                            return
+                            }
+                                
+                                
+                           }
+                        }
                     //LEFT MOVE ON HORIZONTAL
                     if(soldier.posX<title.posX+title.size&&soldier.posX>title.posX+title.size/2&&
-                    soldier.posY+soldier.size>title.posY+5){
+                    soldier.posY+soldier.size>title.posY){
                         let deepCollision=title.posX+title.size-soldier.posX
                         soldier.posX+=deepCollision
                       
-                        detectJumpCreature2(soldier,"right")
-                        
-                        
+                        detectJumpCreature2(soldierArr[indx],"right",title)
+                                           
                     }
                     //RIGHT MOVE
                     if(soldier.posX+soldier.size>title.posX&&soldier.posX+soldier.size<title.posX+title.size/2&&
-                    soldier.posY+soldier.size>title.posY+5){
+                    soldier.posY+soldier.size>title.posY){
                         let deepCollision=soldier.posX+soldier.size-title.posX
                         soldier.posX-=deepCollision
-                        
-                        detectJumpCreature2(soldier,"left")
-                        
                     
+                        detectJumpCreature2(soldierArr[indx],"left",title)
+                        
+                   
                        
                     }
-                    //jump
+                    
+                 
+         
+
             
-                    if(soldier.posY<title.posY+title.size+3&&soldier.posY>title.posY+title.size/2){
-                        soldier.posY=title.posY+title.size+1
-                        title.color="black"
-
-                        soldier.stopJump=true
-                      
-                        title.color="red"
-                      }
-                    
-                    
-                }
-
-               if(title.direction==="vertical"){
-                if(soldier.posY+soldier.size>title.posY-1&&title.posY>soldier.posY+soldier.size/2){
-                    let deepCollision=soldier.posY+soldier.size-title.posY
-                    soldier.posY-=deepCollision
-                    soldier.doFall=false
-                  
-                  
-                }
-                if(soldier.posX<title.posX+title.size&&soldier.posX>title.posX+title.size/2&&soldier.directionMove==="left"
-                &&soldier.posY+soldier.size>title.posY){
-                //LEFT
-                    let deepCollision=title.posX+title.size-soldier.posX
-                    soldier.posX+=deepCollision
-                    soldier.directionMove="right"
-                   
-
-                }
-                // RIGHT
-                if(soldier.posX+soldier.size>title.posX&&soldier.posX+soldier.size<title.posX+title.size/2&&
-                soldier.directionMove==="right"&&soldier.posY+soldier.size>title.posY){
-                    let deepCollision=soldier.posX+soldier.size-title.posX
-                    soldier.posX-=deepCollision
-                    soldier.directionMove="left"
-                   
-                }
-               }
                 
             }
              //code serve as detect verge on map where monster need change direction in order not to fall to oblivion

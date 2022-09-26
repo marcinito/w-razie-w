@@ -14,7 +14,7 @@ export const firstLevelArrangementWall=(player,can)=>{
    makeWall(solidWall,30,0,can.C_H-220,65,"red","horizontal"),
    makeWall(brickWall,5,0,can.C_H-285,65,"red","horizontal"),makeWall(brickWall,5,450,can.C_H-285,65,"red","horizontal"),makeWall(woodenWall,5,770,can.C_H-285,65,"red","horizontal"),
    makeWall(brickWall,4,65,can.C_H-350,65,"red","horizontal"),makeWall(goldWall,5,450,can.C_H-350,65,"red","horizontal"),
-   makeWall(solidWall,30,0,can.C_H-415,65,"red","horizontal"),
+   makeWall(solidWall,1,500,can.C_H-415,65,"red","horizontal"),
    makeWall(solidWall,30,0,can.C_H-480,65,"red","horizontal"),
    makeWall(solidWall,5,0,can.C_H-545,65,"red","horizontal"),   makeWall(brickWall,15,600,can.C_H-545,65,"red","horizontal"),
    makeWall(plainWall,5,0,can.C_H-610,65,"red","horizontal"),   makeWall(plainWall,15,600,can.C_H-610,65,"red","horizontal"),

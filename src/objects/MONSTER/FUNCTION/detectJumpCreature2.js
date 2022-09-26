@@ -1,18 +1,21 @@
 import { detecJumpCreature } from "./detectJumpCreature"
 
-export const detectJumpCreature2=(creature,side)=>{
+export const detectJumpCreature2=(creature,side,title)=>{
 
-    console.log(creature.touchWall,"wall")
    
-    if(creature.touchWall===true){
-    console.log("dziala")
+   
+    if(creature.detectJump.touchWall===true){
+        // creature.detectJump.color="orange"
         creature.directionMove=side
-        
     
+        
+        
+
     }
-    if(creature.touchWall===false){
-     
+    if(creature.detectJump.touchWall===false){
+        // creature.detectJump.color="yellow"
         creature.jump=true
+        
        
     }
 }

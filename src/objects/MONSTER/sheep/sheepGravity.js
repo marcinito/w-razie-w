@@ -1,3 +1,4 @@
+import { blokJump } from "../FUNCTION/blokJump"
 import { detecJumpCreature } from "../FUNCTION/detectJumpCreature"
 import { detectJumpCreature2 } from "../FUNCTION/detectJumpCreature2"
 import { dontFallDownFromTitle } from "../FUNCTION/dontFallDwonFromTitle"
@@ -5,10 +6,9 @@ import { zombieTouchAnotherZombie } from "../zombie/zombieTouchAnotherZombie"
 
 
 
-
 export const sheepGravity=(WALL,sheepArr,can)=>{
 sheepArr.forEach((sheep,index,arrSheep)=>{
-    sheep.speed=0.5
+    sheep.speed=1
    sheep.posY+=sheep.strenghtGravity
    sheep.doFall=true
 
@@ -19,7 +19,7 @@ WALL.forEach((particularArray,index,WALLarr)=>{
     particularArray.forEach((title,indexTitle,particularArrayArray)=>{
     
         sheepArr.forEach((sheep,indexSheep,sheepArray)=>{
-            detecJumpCreature(sheep,title)
+          
          
             if(title.posX>sheep.posX+sheep.size || title.posX+title.size<sheep.posX||
                 title.posY>sheep.posY+sheep.size||title.posY+title.size<sheep.posY){
@@ -30,17 +30,40 @@ WALL.forEach((particularArray,index,WALLarr)=>{
                     if(title.direction==="horizontal"){
                         //Sheep STAND ON TOP HORIZONTAL BLOCK
                         if(sheep.posY+sheep.size>title.posY-1&&title.posY>sheep.posY+sheep.size/2){
-                          
+                   
                             let deepCollision=sheep.posY+sheep.size-title.posY
                             sheep.posY-=deepCollision
                             sheep.doFall=false
-                          sheep.speed=sheep.naturalSpeed
+                            sheep.speed=sheep.naturalSpeed
                           sheep.stopJump=false
                           
                            
                            
                         
                         }
+                              // jump
+                              if(sheep.jump===true){
+                                sheep.jumpAction()
+                            }
+                          
+                            if(sheep.detectBlokJump.canJump===false){
+                                sheep.stopJump=true
+                                sheep.posY=title.posY+title.size+2
+                                console.log("wykonuje sie")
+                                
+                                if(sheep.directionMove==="left"&&sheep.detectJump.touchWall===false){
+                                    sheep.directionMove="right"
+                                    sheep.posX+=3
+                            return
+                            }
+                                if(sheep.directionMove==="right"&&sheep.detectJump.touchWall===false){
+                                    sheep.directionMove="left"
+                                sheep.posX-=3
+                            return
+                            }
+                                
+                                
+                           }
                    
                         //LEFT MOVE ON HORIZONTAL
                         if(sheep.posX<title.posX+title.size&&sheep.posX>title.posX+title.size/2&&
@@ -48,8 +71,8 @@ WALL.forEach((particularArray,index,WALLarr)=>{
                             let deepCollision=title.posX+title.size-sheep.posX
                             sheep.posX+=deepCollision
                         
-                           detectJumpCreature2(sheep,"right",title)
-                           
+                           detectJumpCreature2(sheep,"right")
+                          
                             
                         }
                         //RIGHT MOVE
@@ -58,25 +81,22 @@ WALL.forEach((particularArray,index,WALLarr)=>{
                             let deepCollision=sheep.posX+sheep.size-title.posX
                             sheep.posX-=deepCollision
                            
-                          detectJumpCreature2(sheep,"left",title)
+                          detectJumpCreature2(sheep,"left")
                         
                            
                         }
                        //jum[]
-                        if(sheep.posY<title.posY+title.size+3&&sheep.posY>title.posY+title.size/2){
-                            sheep.posY=title.posY+title.size+1
-                            title.color="black"
-                            console.log("stop")
-                            sheep.stopJump=true
-                          
-                            title.color="red"
-                          }
+      
+                  
+                            
+              
+                    
                   
                   
                       
                         
                     }
-    
+    //deprecated option\/
                    if(title.direction==="vertical"){
                     if(sheep.posY+sheep.size>title.posY-1&&title.posY>sheep.posY+sheep.size/2){
                         let deepCollision=sheep.posY+sheep.size-title.posY
