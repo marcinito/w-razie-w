@@ -1,3 +1,5 @@
+import { blokJump } from "../FUNCTION/blokJump"
+import { blockMonsterAgainstEndMap, blockMonsterAgainstMap } from "../FUNCTION/blokMonsterAgainstEndMap"
 import { detecJumpCreature } from "../FUNCTION/detectJumpCreature"
 import { detectJumpCreature2 } from "../FUNCTION/detectJumpCreature2"
 import { dontFallDownFromTitle } from "../FUNCTION/dontFallDwonFromTitle"
@@ -24,7 +26,7 @@ soldierArr.forEach((soldier,i,arr)=>{
 WALL.forEach((particularArray,index,WALLarr)=>{
 particularArray.forEach((title,indexTitle,particularArrayArray)=>{
 
-    soldierArr.forEach((soldier,indx,soldierArr)=>{
+    soldierArr.forEach((soldier,indx,soldierArray)=>{
      soldier.detectBlokJump.canMonsterJump(title)
      
         if(title.posX>soldier.posX+soldier.size || title.posX+title.size<soldier.posX||
@@ -49,26 +51,9 @@ particularArray.forEach((title,indexTitle,particularArrayArray)=>{
                     }
                        // jump
                     if(soldier.jump===true){
-                        soldierArr[indx].jumpAction()
+                        soldier.jumpAction()
                     }
-                           if(soldier.detectBlokJump.canJump===false){
-                                soldierArr[indx].stopJump=true
-                                soldierArr[indx].posY=title.posY+title.size+2
-                                console.log("wykonuje sie")
-                                
-                                if(soldier.directionMove==="left"&&soldier.detectJump.touchWall===false){
-                                    soldier.directionMove="right"
-                                    soldier.posX+=3
-                            return
-                            }
-                                if(soldier.directionMove==="right"&&soldier.detectJump.touchWall===false){
-                                    soldier.directionMove="left"
-                                soldier.posX-=3
-                            return
-                            }
-                                
-                                
-                           }
+                         blokJump(soldier,title)
                         }
                     //LEFT MOVE ON HORIZONTAL
                     if(soldier.posX<title.posX+title.size&&soldier.posX>title.posX+title.size/2&&
@@ -76,7 +61,7 @@ particularArray.forEach((title,indexTitle,particularArrayArray)=>{
                         let deepCollision=title.posX+title.size-soldier.posX
                         soldier.posX+=deepCollision
                       
-                        detectJumpCreature2(soldierArr[indx],"right",title)
+                        detectJumpCreature2(soldier,"right",title)
                                            
                     }
                     //RIGHT MOVE
@@ -85,7 +70,7 @@ particularArray.forEach((title,indexTitle,particularArrayArray)=>{
                         let deepCollision=soldier.posX+soldier.size-title.posX
                         soldier.posX-=deepCollision
                     
-                        detectJumpCreature2(soldierArr[indx],"left",title)
+                        detectJumpCreature2(soldier,"left",title)
                         
                    
                        
@@ -99,13 +84,8 @@ particularArray.forEach((title,indexTitle,particularArrayArray)=>{
             }
              //code serve as detect verge on map where monster need change direction in order not to fall to oblivion
             dontFallDownFromTitle(soldier,title)
-            if(soldier.posX<0){
-                soldier.directionMove="right"
-            }
-            if(soldier.posX+soldier.size>can.C_W){
-                soldier.directionMove="left"
-
-            }
+       
+          blockMonsterAgainstEndMap(soldier,soldierArray,indx)
 
     })
 

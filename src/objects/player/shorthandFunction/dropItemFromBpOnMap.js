@@ -1,4 +1,4 @@
-import { player } from "../../../main"
+import { itemsOnMap, player } from "../../../main"
 import { AxeItems } from "../../ITEMSonMAP/axe/axe"
 import { brickWallItems } from "../../ITEMSonMAP/brickWall/brickWall"
 import { dynamiteItems } from "../../ITEMSonMAP/dynamite/dynamieItems"
@@ -16,9 +16,9 @@ import { countAmmoInGlockInPlayer } from "./countAmmoInGlockInPlayer"
 import { countEnduranceInAxe } from "./countEnduranceInAxe"
 
 
-export const dropItemFromBpOnMap=(item,directionMove,itemsOnMap,backpack,player)=>{
+export const dropItemFromBpOnMap=(item,directionMove,backpack,player)=>{
 if(item==="glock"){
-
+console.log("wykonuje sie")
  if(directionMove==="left"){
 
    backpack.glock.bp[0].posX=player.posX-35

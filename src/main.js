@@ -25,7 +25,6 @@ import { playerTakeItemFromMap } from './objects/player/playerTakeItemFromMap'
 import { zombieGravity } from './objects/MONSTER/zombie/zombieGravity'
 import { zombieAttackPlayer } from './objects/MONSTER/zombie/zombieAttackPlayer'
 
-
 import { firstLevelArrangementWall } from './LEVEL/FIRST LEVEL/firstLevelArrangementWall'
 
 import { monsterOnFirstLevel } from './LEVEL/FIRST LEVEL/monsterOnFirstLevel'
@@ -58,10 +57,22 @@ import { zombieAttackNpc } from './objects/NPC/zombieAttackNpc'
 import { soldierAttackNpc } from './objects/NPC/soldierAttackNpc'
 import { whenDragonTouchNpc } from './objects/NPC/whenDragonTouchNpc'
 import { cleanMap } from './LEVEL/CHANGE-LEVEl/cleanMap'
+import imagess from './stylesImage/chmura.png'
+import { monsterHitInWallToOften } from './objects/GUN/FUNCTION/monsterHitInWallToOften'
+import { background } from './LEVEL/BACKGROUND/background'
+import { thirdLevelArrangement } from './LEVEL/THIRD-LEVEL/thirdLevelArrangement'
+import { fourLevelArrangementWall } from './LEVEL/FOUR-LEVEL/fourLevelArrangementWall'
+import { monsterOnThirdLevel } from './LEVEL/THIRD-LEVEL/monsterOnThirdLevel'
+import { itemsOnThirdLevel } from './LEVEL/THIRD-LEVEL/itemsOnThirdLevel'
+import { dragonFireBallAttack } from './objects/MONSTER/dragon/dragonFireBallAttack'
+import { changeWay } from './objects/MONSTER/FUNCTION/changeWay'
+import { monsterOnFourLevel } from './LEVEL/FOUR-LEVEL/monsterOnFourLevel'
+import { lastLevelArrangementWall } from './LEVEL/LASTLEVEL/lastLevelArrangementWall'
+import { monsterOnLastLevel } from './LEVEL/LASTLEVEL/monsterOnLastLevel'
+import { itemsOnlastLevel } from './LEVEL/LASTLEVEL/itemsOnLastLevel'
+import { effectWhenPlayerPassedLevel } from './LEVEL/CHANGE-LEVEl/effectWhenPlayerPassedLevel'
 
-
-
-
+const body=document.querySelector("body")
 
 
 
@@ -82,39 +93,65 @@ export let transitionArray=[]
 export let changeLevel=()=>{
     //change level work in this way that when monster is killed function count all monster on map when
     //number is 0 its will change level
-    if(menu.level===1){
-     
+    console.log(menu.level)
+    if(menu.level===2){
+     console.log("2level")
                 WALL=secondLevelArrangementWall(player,can)
                 MONSTER=monsterInSecondLevel()
                 itemsOnMap=itemsOnSecondLvl()
                 cleanMap(player)
                 
             }
-            if(menu.level===2){
-                
-                        WALL=firstLevelArrangementWall(player,can)
+            if(menu.level===3){
+              
+                console.log("3level")
+                        WALL=thirdLevelArrangement(player,can)
                         MONSTER=monsterInSecondLevel()
-                        itemsOnMap=itemsOnSecondLvl()
+                        itemsOnMap=itemsOnThirdLevel()
+                        cleanMap(player)
                       
                     }
+                    
+                    if(menu.level===4){
+                        console.log("4level")
+                        WALL=fourLevelArrangementWall(player,can)
+                        MONSTER=monsterOnFourLevel()
+                        itemsOnMap=itemsOnFourLvl()
+                        cleanMap(player)
+                      
+                    }
+                    if(menu.level===5){
+                        WALL=lastLevelArrangementWall()
+                        MONSTER=monsterOnLastLevel()
+                        itemsOnMap=itemsOnlastLevel()
+                        cleanMap(player)
+                    }
 }
+
+
 export let NPC=[]
 export let WALL=firstLevelArrangementWall(player,can)
 export let MONSTER=monsterOnFirstLevel()
 export let itemsOnMap=itemsOnFirstLevel()
 console.log(MONSTER)
 movementPlayer(player,itemsOnMap)
-let counter1=0
- const runApp=()=>{
- 
+
+
+const tlo=new Image(100,100)
+tlo.src=imagess
+const backgroundImg=new background()
+ const runApp=()=>{ 
 
   
+
    if(menu.playGame==="game"){
+   
+    can.ctx.clearRect(0,0,can.C_W,can.C_H)
+    backgroundImg.makebackground(can)
+  
 
-
-can.ctx.clearRect(0,0,can.C_W,can.C_H)
 //player
-player.draw(can)
+
 
 breathingOfPlayer(player)
 playerTakeItemFromMap(player,itemsOnMap)
@@ -128,12 +165,12 @@ WALL.forEach((pArrWallArray,wI,WALLarray)=>{
 
 pArrWallArray.forEach((title,pItitle,pArrWall)=>{
         title.draw(can)
-    
-
 })   
 })
 
 //MONSTER
+
+monsterHitInWallToOften()
 MONSTER.forEach((pArrMonster,index,arrayMONSTER)=>{
     pArrMonster.forEach((monster,i,arr)=>{
         if(monster.name==="ghost"){
@@ -142,13 +179,16 @@ MONSTER.forEach((pArrMonster,index,arrayMONSTER)=>{
             ghostAttackPlayer(player,arr)
             ghostGravity(WALL,arr,can)
             monster.movement()
+            monster.changeWay()
             glockAmmoVsMonster(player,arr)
+
         }
         if(monster.name==="dragon"){
-            monster.movement()
+        
+            monster.movement(can)
             monster.draw(can)
+            dragonFireBallAttack(monster)
             dragonGravity(WALL,arr,can)
-            monster.attackFireBall(can)
             whenFireBallFromDragonTouchWallOrPlayer(monster,player,WALL,can,itemsOnMap)
             whenDragonTouchPlayer(player,arr)
             glockAmmoVsMonster(player,arr)
@@ -158,7 +198,7 @@ MONSTER.forEach((pArrMonster,index,arrayMONSTER)=>{
             monster.movement()
             monster.draw(can)
             zombieGravity(WALL,arr,can)
-         
+            
            
             zombieAttackPlayer(player,arr)
             glockAmmoVsMonster(player,arr)
@@ -217,6 +257,7 @@ NPC.forEach((npc,index,arrNpc)=>{
 
 FireAtakFromPlayer(player,can)
 //GUN
+
 axeAttackHitWall(player,WALL,can,itemsOnMap)
 dynamiteAmmoVsWall(player,WALL,can,itemsOnMap)
 dynamiteVsLivingCreature(MONSTER,player)
@@ -232,28 +273,17 @@ if(itemsOnMap.length>0){
     item.draw(can)
     })
 }
-//effect when player passed level
+
 mouseDetectorMonster.draw(can)
-if(transitionArray.length>0){
-    transitionArray.forEach((el)=>{
-        el.draw(can)
-        let gradient=can.ctx.createLinearGradient(0,30,1050,200)
-        gradient.addColorStop(0,"red")
-        gradient.addColorStop(1,"magenta")
-        gradient.addColorStop(0.5,"green")
-        gradient.addColorStop(0.3,"yellow")
-        can.ctx.fillStyle=gradient
-        can.ctx.font = "100px Arial";
-        can.ctx.fillText("You passed level",can.C_H/3,300)
-        can.ctx.fillStyle="black"
-        can.ctx.strokeText("You passed level",can.C_H/3,300)
-    })
-}
+player.draw(can)
+//effect when player passed level
+effectWhenPlayerPassedLevel(transitionArray,can)
    }
 
    if(menu.playGame==="game-over"){
     window.location="/gameover.html"
    }
+
     requestAnimationFrame(runApp)
 }
 

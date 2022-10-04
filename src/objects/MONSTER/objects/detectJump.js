@@ -8,7 +8,7 @@ export class detectJump{
         this.size=20
         this.width=
         this.touchWall=false
-        this.color="gray"
+        this.color="transparent"
        
     }
     draw(can){
@@ -16,7 +16,7 @@ export class detectJump{
         can.ctx.fillStyle=this.color
         can.ctx.fillRect(this.posX,this.posY,this.size,this.size)
         this.touchWall=false
-        this.color="red"
+        // this.color="red"
         WALL.forEach((particular)=>{
             particular.forEach((title,index,arr)=>{
 
@@ -24,7 +24,7 @@ export class detectJump{
                     this.posY+this.size<title.posY || this.posY>title.posY+title.size){
           
                     }else{
-                        this.color="yellow"
+                        // this.color="yellow"
                         this.touchWall=true
                      
                        

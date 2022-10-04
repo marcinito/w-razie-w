@@ -43,7 +43,7 @@ export const axeAttackHitWall=(player,WALL,can)=>{
         }
         if(title.name==="woodenWall"){
                 let itemsToDrop=[dynamiteItems,glockItems,machineGunItems,jumpFluidItems,healthFluidItems]
-                itemsOnMap.push(new dynamiteItems(title.posX,title.posY,title.size))
+                itemsOnMap.push(new itemsToDrop[Math.floor(Math.random()*itemsToDrop.length)](title.posX,title.posY,title.size))
         }
    
    

@@ -27,9 +27,6 @@ WALL.forEach((pAW,pAI,wallArray)=>{
    
             let deepCollision=player.posY+player.size-title.posY
             player.posY-=deepCollision
-           
-              
-            //
               player.down=false
              title.color="white"
              player.up=true
@@ -66,57 +63,57 @@ WALL.forEach((pAW,pAI,wallArray)=>{
 
           }
 
-          //VERTICAL
-          if(title.direction==="vertical"){
+          // //VERTICAL deprecated
+          // if(title.direction==="vertical"){
           
-            //STAND ON TOP
-            if(player.posY+player.size>title.posY-1&&player.posY+player.size<title.posY+title.size/2){
-              player.down=false
-              player.up=true
-              player.counterJump=0
-              let deepCollision=player.posY+player.size-title.posY
-              player.posY-=deepCollision
+          //   //STAND ON TOP
+          //   if(player.posY+player.size>title.posY-1&&player.posY+player.size<title.posY+title.size/2){
+          //     player.down=false
+          //     player.up=true
+          //     player.counterJump=0
+          //     let deepCollision=player.posY+player.size-title.posY
+          //     player.posY-=deepCollision
             
 
               
              
-            }
+          //   }
 
-            //BLOCK RIGHT
-            if(player.posX+player.size>title.posX&&player.posX+player.size<title.posX+title.size && player.directionMove==="right"
-            &&player.posY+player.size>title.posY){
-              let deepCollision=player.posX+player.size-title.posX
-              player.posX-=deepCollision+3
+          //   //BLOCK RIGHT
+          //   if(player.posX+player.size>title.posX&&player.posX+player.size<title.posX+title.size && player.directionMove==="right"
+          //   &&player.posY+player.size>title.posY){
+          //     let deepCollision=player.posX+player.size-title.posX
+          //     player.posX-=deepCollision+3
 
-              player.up=false
-              title.color="#696969"
-              console.log("block right..v.")
+          //     player.up=false
+          //     title.color="#696969"
+              
              
-            }
-            //BLOCK LEFT
-            if(player.posX<title.posX+title.size&&player.posX>title.posX+title.size/2&&player.directionMove==="left"&&player.posY+player.size>title.posY){
+          //   }
+          //   //BLOCK LEFT
+          //   if(player.posX<title.posX+title.size&&player.posX>title.posX+title.size/2&&player.directionMove==="left"&&player.posY+player.size>title.posY){
           
-              let deepCollision=title.posX+title.size-player.posX
-              player.posX+=deepCollision+3
-              player.up=false
+          //     let deepCollision=title.posX+title.size-player.posX
+          //     player.posX+=deepCollision+3
+          //     player.up=false
               
-              title.color="darkblue"
-              console.log("block left")
+          //     title.color="darkblue"
+          //     console.log("block left")
               
 
-            }
-            // BLOCK JUMP JUMP
-            if(player.posY<title.posY+title.size&&player.posY>title.posY+title.size/2&&player.directionMove=="up"){
-              player.posY=title.posY+title.size+2
-              title.color="yellow"
-              console.log("wykonuje sie")
-              player.up=false
+          //   }
+          //   // BLOCK JUMP JUMP
+          //   if(player.posY<title.posY+title.size&&player.posY>title.posY+title.size/2&&player.directionMove=="up"){
+          //     player.posY=title.posY+title.size+2
+          //     title.color="yellow"
+              
+          //     player.up=false
              
               
-            }
+          //   }
       
 
-          }
+          // }
 
            
             //END ELSE
@@ -134,7 +131,14 @@ if(player.posX+player.size>can.C_W){
   player.posX=can.C_W-player.size-1
   player.right=false
 }
-if(player.posY>can.C_H){
-  player.posY=100
+let flag=false
+if(player.posY>can.C_H&&flag===false){
+  flag=true
+  player.posY=0
+  player.hp-=21343214324
+  setTimeout(()=>{
+    flag=false
+  },5000)
+  return
 }
 }

@@ -6,6 +6,7 @@ import { detectJumpPosition } from '../FUNCTION/detectJumpPosition'
 import { detectEdge } from '../objects/detectEdge'
 import { checkIfMonsterCanGoFurther } from '../FUNCTION/detectVerge/checkIfCreatureCanGoFurther'
 import { detectBlokJump } from '../objects/detectBlokJump'
+import { menu } from '../../../main'
 
 
 const fireFromSoldier=new Image(100,100)
@@ -37,9 +38,9 @@ export class Soldier{
      
         this.name="soldier"
         this.color="orange"
-        this.naturalSpeed=1.2
+        this.naturalSpeed=1.2+menu.level/3
         this.speed=0
-        this.strenghtGravity=3
+        this.strenghtGravity=4
         this.strenghtAttack=0.3
         this.strenghtAttackFromGun=10
 
@@ -55,7 +56,7 @@ export class Soldier{
         //OUTFIT
    
         //hp
-        this.hpTotal=300
+        this.hpTotal=900
         this.hp=this.hpTotal
         this.percentageHp=this.size
         this.ratePercentage=this.size
@@ -73,6 +74,10 @@ export class Soldier{
        this.waitForNextJump=false
        this.detectBlokJump=new detectBlokJump()
 
+       this.hitInWallStrenght=3
+       this.frequencyFireFromGun=Math.floor(Math.random()*400)
+       this.frequencyNumber=random([400,450,350,370,380,390,420])
+
     }
     draw(can,changeImage){
         can.ctx.fillStyle=this.color
@@ -80,7 +85,7 @@ export class Soldier{
         can.ctx.lineWidth=1
         can.ctx.strokeStyle="black"
         can.ctx.strokeRect(this.posX,this.posY-10,this.size,7)
-        can.ctx.strokeRect(this.posX,this.posY,this.size,this.size)
+        // can.ctx.strokeRect(this.posX,this.posY,this.size,this.size)
       
         if(this.doFall===true&&this.directionMove==="left"){
             can.ctx.drawImage(soldier,566,663,85,108,this.posX,this.posY,this.size,this.size)

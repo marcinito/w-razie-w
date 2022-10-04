@@ -24,70 +24,58 @@ export let point
 export const movementPlayer=(player,itemsOnMap)=>{
    
     window.addEventListener("keydown",(e)=>{
-       console.log(e.keyCode)
-       //monster jump
-       if(e.keyCode===87){
+       
+//        //monster jump
+//        if(e.keyCode===87){
                
        
-        MONSTER.forEach((particular)=>{
-            particular.forEach((monster)=>{
-                if(monster.name==="zombie"){
-                    monster.posY-=20
-                }
-            })
-        })
+//         MONSTER.forEach((particular)=>{
+//             particular.forEach((monster)=>{
+//                 if(monster.name==="zombie"){
+//                     monster.posY-=20
+//                 }
+//             })
+//         })
   
 
-}
-    //monster right
-    if(e.keyCode===68){
+// }
+//     //monster right
+//     if(e.keyCode===68){
                
        
-        MONSTER.forEach((particular)=>{
-            particular.forEach((monster)=>{
-                if(monster.name==="zombie"){
-                    monster.directionMove="right"
-                    monster.posX+=20
-                }
-            })
-        })
+//         MONSTER.forEach((particular)=>{
+//             particular.forEach((monster)=>{
+//                 if(monster.name==="zombie"){
+//                     monster.directionMove="right"
+//                     monster.posX+=20
+//                 }
+//             })
+//         })
         
-}
-      //Monster left
-      if(e.keyCode===65){
+// }
+//       //Monster left
+//       if(e.keyCode===65){
                
           
-        MONSTER.forEach((particular)=>{
-            particular.forEach((monster)=>{
-                if(monster.name==="zombie"){
-                    monster.directionMove="left"
-                    monster.posX-=20
-                }
-            })
-        })
+//         MONSTER.forEach((particular)=>{
+//             particular.forEach((monster)=>{
+//                 if(monster.name==="zombie"){
+//                     monster.directionMove="left"
+//                     monster.posX-=20
+//                 }
+//             })
+//         })
         
-}
+// }
         if(e.keyCode===37){
                
                 player.moveLeft()
-                MONSTER.forEach((particular)=>{
-                    particular.forEach((monster)=>{
-                        if(monster.name==="zombie"){
-                            monster.posX-=20
-                        }
-                    })
-                })
+             
                 
         }
         if(e.keyCode===39){
             player.moveRight()
-            MONSTER.forEach((particular)=>{
-                particular.forEach((monster)=>{
-                    if(monster.name==="zombie"){
-                        monster.posX+=20
-                    }
-                })
-            })
+         
     }
 
 if(e.keyCode===40){
@@ -204,7 +192,7 @@ displayItemInDetail(allSlot,player)
         //G
         allSlot.forEach((el,i,arr)=>{
          if(el.dataset.item==player.whatIsInHand){
-            dropItemFromBpOnMap(el.dataset.item,player.directionMove,itemsOnMap,player.backpack,player)
+            dropItemFromBpOnMap(el.dataset.item,player.directionMove,player.backpack,player)
             updateEqDashboard(el.dataset.item,player.backpack,"drop")
          }
         })

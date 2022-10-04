@@ -21,11 +21,11 @@ playerImage.src=playerImageFile
 export class Player{
     constructor(){
 
-        if(menu.level===0){
+        if(menu.level===1){
          this.posX=386
          this.posY=623
         }
-        if(menu.level===1){
+        if(menu.level===2){
           this.posX=286
           this.posY=203
          }
@@ -53,7 +53,7 @@ export class Player{
         this.right=true
  
         //JUMP HANDLE
-   this.powerJump=20//-strenght of jump how many player move to up when jump
+   this.powerJump=50//-strenght of jump how many player move to up when jump
    this.counterJump=0
    this.stop=false//-is becoming active when player meet obstacle when jump its blok his jumping
     this.counterExtraJump=0 //-is serve as timer how many second player can jump higher than usually
@@ -62,10 +62,11 @@ export class Player{
   
 
    //HP
-   this.hpTotal=2000  //hp total tell what is maximum hp player
+   this.hpTotal=20 //hp total tell what is maximum hp player
    this.hp=this.hpTotal
    this.percentageHp=50// percentageHp tell how many percent hp player have
    this.ratePercentage=50// ratePercentage set value for "percent" in this case percent means 50
+   this.whenPlayerLostLife="transparent"
    //quantity live
    this.quantityLive=3
    //visual effect of treatment
@@ -79,12 +80,12 @@ export class Player{
       axe:{amount:0,itemInBp:false,ammo:"∞",bp:[],totalEndurance:0},
       glock:{amount:0,itemInBp:false,bp:[],ammo:0,flag:true},
       machineGun:{amount:0,itemInBp:false,bp:[],ammo:0,flag:true},
-      dynamite:{amount:1212,itemInBp:false,ammo:"BOMB",},
-      solidWall:{amount:1110,itemInBp:false,ammo:0,},
-      plainWall:{amount:11110,itemInBp:false,ammo:0,},
-      brickWall:{amount:1110,itemInBp:false,ammo:0,},
-      magmaWall:{amount:1110,itemInBp:false,ammo:0,},
-      woodenWall:{amount:1110,itemInBp:false,ammo:0,},
+      dynamite:{amount:453540,itemInBp:false,ammo:"",},
+      solidWall:{amount:333330,itemInBp:false,ammo:0,},
+      plainWall:{amount:0,itemInBp:false,ammo:0,},
+      brickWall:{amount:0,itemInBp:false,ammo:0,},
+      magmaWall:{amount:0,itemInBp:false,ammo:0,},
+      woodenWall:{amount:0,itemInBp:false,ammo:0,},
       hpPotion:{amount:0,itemInBp:false,ammo:0,},
       jumpFluid:{amount:0,itemInBp:false,ammo:0,},
       meat:{amount:0,itemInBp:false,ammo:0,},
@@ -106,8 +107,8 @@ export class Player{
        this.deadEffect=false
     }
     draw(can){
-    
-
+      can.ctx.fillStyle=this.whenPlayerLostLife
+      can.ctx.fillRect(this.posX,this.posY,this.size,this.size)
     let percentHp=this.hp/this.hpTotal*this.ratePercentage
 if(percentHp>25){
     
@@ -136,7 +137,7 @@ this.effect++
   }
 
     }
-     can.ctx.strokeRect(this.posX,this.posY,this.size,this.size)
+    //  can.ctx.strokeRect(this.posX,this.posY,this.size,this.size)
      if(this.directionMove==="up" || this.directionMove==="down"){
       can.ctx.drawImage(this.image,0,0,250,230,this.posX,this.posY,this.size,this.size)
     
@@ -167,9 +168,13 @@ this.effect++
       }
      }
     }
+
+   
     }
     moveUp(){
   this.stop=false
+
+
       if(this.up===true){
         this.posY-=this.powerJump
       setTimeout(()=>{
@@ -327,7 +332,7 @@ if(this.whatIsInHand==="glock"){
     this.backpack.glock.flag=false
     setTimeout(()=>{
       this.backpack.glock.flag=true
-    },1)
+    },300)
     if( this.backpack.glock.bp[0].ammo===0){
       this.backpack.glock.bp.splice(0,1)
       this.backpack.glock.amount-=1

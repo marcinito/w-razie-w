@@ -29,7 +29,7 @@ export class goldenCoin{
         
     }
     draw(can){
-        can.ctx.strokeRect(this.posX,this.posY,this.size,this.size)
+        // can.ctx.strokeRect(this.posX,this.posY,this.size,this.size)
         if(moveCoin===1){
             
             can.ctx.drawImage(this.image,0,0,167,158,this.posX,this.posY,this.size,this.size)

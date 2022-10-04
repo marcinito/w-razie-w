@@ -344,7 +344,11 @@ export const playerTakeItemFromMap=(player,itemsOnMap)=>{
                 //NO COLLISION
             }
             else{
-              console.log(itemsFromMap.name.slice(-4))
+             let score= allSlot.every((el)=>{return el.dataset.empty==="false"})
+           
+            if(score===false){
+
+        
               if(itemsFromMap.name.slice(-4)==="Wall"){
              
                itemsFromMap.layOnMap=false
@@ -415,6 +419,7 @@ export const playerTakeItemFromMap=(player,itemsOnMap)=>{
               }
              
             }
+          }
     })
 
 }

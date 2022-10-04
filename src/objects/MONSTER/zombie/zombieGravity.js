@@ -1,4 +1,6 @@
 import { player } from "../../../main"
+import { blokJump } from "../FUNCTION/blokJump"
+import { blockMonsterAgainstEndMap, blockMonsterAgainstMap } from "../FUNCTION/blokMonsterAgainstEndMap"
 import { detecJumpCreature } from "../FUNCTION/detectJumpCreature"
 import { detectJumpCreature2 } from "../FUNCTION/detectJumpCreature2"
 import { detectJumpPosition } from "../FUNCTION/detectJumpPosition"
@@ -54,7 +56,7 @@ particularArray.forEach((title,indexTitle,arrTitle)=>{
          
             else{
        
-                //ZOMBIE WALK LEFT
+              
                 if(title.direction==="horizontal"){
                     //ZOMBIE STAND ON TOP HORIZONTAL BLOCK
                     if(zombie.posY+zombie.size>title.posY-1&&title.posY>zombie.posY+zombie.size/2){
@@ -72,39 +74,34 @@ particularArray.forEach((title,indexTitle,arrTitle)=>{
             if(zombie.jump===true){
                 zombie.jumpAction()
             }
-                   if(zombie.detectBlokJump.canJump===false){
-                        zombie.stopJump=true
-                        title.isHitBy="glock"
-                        title.hp-=10
-                        
-                        
-                   }
+
+            blokJump(zombie,title)
                            //LEFT MOVE ON HORIZONTAL
                            if(zombie.posX<title.posX+title.size&&zombie.posX>title.posX+title.size/2&&
-                           zombie.posY+zombie.size>title.posY+5){
+                           zombie.posY+zombie.size>title.posY){
                                let deepCollision=title.posX+title.size-zombie.posX
                                zombie.posX+=deepCollision
-                                  detectJumpCreature2(zombie,"right")
+                               
+                                  detectJumpCreature2(zombie,"right",title)
+                                  //new function
+
                                 
-                                 console.log("left")
                                 
                          
                              
-                             return
+                             
                            }
                            //RIGHT MOVE
                            if(zombie.posX+zombie.size>title.posX&&zombie.posX+zombie.size<title.posX+title.size/2&&
-                           zombie.posY+zombie.size>title.posY+5){
+                           zombie.posY+zombie.size>title.posY){
                                let deepCollision=zombie.posX+zombie.size-title.posX
-                          console.log("right")
+                        
                               zombie.posX-=deepCollision
-                              detectJumpCreature2(zombie,"left")
+                              detectJumpCreature2(zombie,"left",title)
                              
-                              
                              
                           
-                         
-                       return
+                 
                            }
                     
                 }
@@ -115,14 +112,7 @@ particularArray.forEach((title,indexTitle,arrTitle)=>{
         // code serve as detect verge on map where monster need change direction in order not to fall to oblivion
        
       dontFallDownFromTitle(zombie,title)
-            if(zombie.posX<0){
-                zombie.directionMove="right"
-           
-            }
-            if(zombie.posX+zombie.size>can.C_W){
-                zombie.directionMove="left"
-                
-            }
+    blockMonsterAgainstEndMap(zombie,zombieArray,indexZombie)
            
 
     })
@@ -131,6 +121,6 @@ particularArray.forEach((title,indexTitle,arrTitle)=>{
 
 
 })
-zombieTouchAnotherZombie(zombieArr)
+
 
 }

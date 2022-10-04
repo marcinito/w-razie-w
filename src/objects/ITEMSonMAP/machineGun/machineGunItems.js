@@ -2,7 +2,7 @@ import machineGunImg from './machineGun.png'
 const machineGun=new Image(100,100)
 machineGun.src=machineGunImg
 export class machineGunItems{
-    constructor(posX,posY,isDrop,direction,ammo=20){
+    constructor(posX,posY,isDrop,direction,ammo=40){
         this.posX=posX
         this.posY=posY
         this.name="machineGun"

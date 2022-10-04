@@ -77,4 +77,11 @@ NPC.forEach((npc,index,arr)=>{
 })
 })
 
+
+//above map
+monster.fireBall.forEach((ball,index,array)=>{
+    if(ball.posX>can.C_W||ball.posX+ball.size<0||ball.posY+ball.size<0||ball.posY>can.C_H){
+        array.splice(index,1)
+    }
+})
 }

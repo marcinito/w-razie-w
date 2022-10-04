@@ -2,7 +2,7 @@ import glockImg from './glockItems.png'
 const glock=new Image(100,100)
 glock.src=glockImg
 export class glockItems{
-    constructor(posX,posY,isDrop,direction,ammo=4354320){
+    constructor(posX,posY,isDrop,direction,ammo=25){
         this.posX=posX
         this.posY=posY
         this.name="glock"

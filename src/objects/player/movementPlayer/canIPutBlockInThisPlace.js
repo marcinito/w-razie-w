@@ -3,7 +3,7 @@ import { mouseDetectorMonster } from "./movementPlayer"
 
 export const canIPutBlockInThisPlace=(detect)=>{
     
-detect.color="gray"
+detect.color="black"
 player.canBuild=true
 MONSTER.forEach((particular)=>{
     particular.forEach((monster,index,arr)=>{
@@ -12,13 +12,22 @@ MONSTER.forEach((particular)=>{
         detect.posY+detect.size<monster.posY || detect.posY>monster.posY+monster.size){
 
         }else{
-          console.log("dziala")
-          // detect.color="orange"
+         
+          detect.color="red"
           player.canBuild=false
+         
         }
        
 
     })
 })
+if(detect.posX+detect.size<player.posX || detect.posX>player.posX+player.size ||
+  detect.posY+detect.size<player.posY || detect.posY>player.posY+player.size){
+
+  }else{
+    detect.color="red"
+    player.canBuild=false
+    
+  }
 
 }

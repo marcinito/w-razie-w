@@ -25,6 +25,8 @@ WALL.forEach((arrayWIthWall,index,WALL)=>{
                 //Monster Collisionb with static Element
                
                   //right
+                  title.isHitBy="monster"
+                  title.hp-=1
                   if(dragon.posX+dragon.size>title.posX && dragon.posX+dragon.size<title.posX+title.size/2){
                     dragon.down=true
                     dragon.up=true

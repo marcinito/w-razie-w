@@ -1,5 +1,7 @@
 
 import { random } from '../../../Functions/shorthandFunction/random'
+import { menu } from '../../../main'
+import { changeDirectionMonster } from '../FUNCTION/changeDirectionMonster'
 import duszek from '../ghost/duszek.png'
 let imgGhost=new Image(100,100)
 imgGhost.src=duszek
@@ -20,8 +22,8 @@ export class Ghost{
         this.directionArr=["up","left","right","down"]
         this.directionCrossArr=["negative","positive","null"]
         this.directionCross=random(this.directionCrossArr)
-        this.direction=random(this.directionArr)
-        this.speed=0
+        this.directionMove=random(this.directionArr)
+        this.speed=4+menu.level/2.5
 
         //direct
         this.left=true
@@ -33,6 +35,8 @@ export class Ghost{
         this.hp=this.hpTotal
         this.percentageHp=50
         this.ratePercentage=50
+        this._ID=Math.floor(Math.random()*213123)
+        this.startPoint=Math.floor(Math.random()*280)
    
     }
     draw(can){
@@ -45,11 +49,12 @@ export class Ghost{
     }
 
     movement(){
-      
+    
+    
 
 
     if(this.left===true){
-        if(this.direction==="left"){
+        if(this.directionMove==="left"){
             this.posX-=this.speed
             if(this.directionCross==="negative"){
                 this.posY-=this.speed/2
@@ -63,7 +68,7 @@ export class Ghost{
           }
     }
   if(this.right===true){
-    if(this.direction==="right"){
+    if(this.directionMove==="right"){
         this.posX+=this.speed
         if(this.directionCross==="negative"){
             this.posY-=this.speed/2
@@ -79,7 +84,7 @@ export class Ghost{
   }
    
 if(this.up===true){
-    if(this.direction==="up"){
+    if(this.directionMove==="up"){
         this.posY-=this.speed
         if(this.directionCross==="negative"){
             this.posX-=this.speed/2
@@ -94,7 +99,7 @@ if(this.up===true){
 }
 
     if(this.down===true){
-        if(this.direction==="down"){
+        if(this.directionMove==="down"){
             this.posY+=this.speed
             if(this.directionCross==="negative"){
                 this.posX-=this.speed/2
@@ -113,6 +118,26 @@ if(this.up===true){
     }
       
     }
+changeWay(){
+    this.startPoint++
+    if(this.startPoint>300){
+    this.directionMove=random(this.directionArr)
 
+    let whichSideUnBlok=this.directionMove.slice(0)
+   
+    this.startPoint=0
+    switch(whichSideUnBlok){
+        case "left":
+            return this.left=true
+            case "right":
+                return this.right=true
+                case "up":
+                    return this.up=true
+                    case "down":
+                        return this.down=true
+    }
+    
+    }
+}
 
 }

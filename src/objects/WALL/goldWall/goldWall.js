@@ -24,6 +24,7 @@ export class goldWall{
         this.image=[block100,block80,block50,block20]
         this.hp=10
         this.isHitBy="null"
+        this.isVulnerable=[]
         
         
     }

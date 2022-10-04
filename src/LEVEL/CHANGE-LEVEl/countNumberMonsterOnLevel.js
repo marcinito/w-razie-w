@@ -6,6 +6,7 @@ import { transitionEffect } from "./transitionEffect"
 
 
 export const countNumberMonsterOnLeve=()=>{
+    console.log("ile razy")
     let counter=0
     MONSTER.forEach((el,i,arr)=>{
         counter+=el.length
@@ -25,10 +26,12 @@ export const countNumberMonsterOnLeve=()=>{
         }
      },500)
 setTimeout(()=>{
-    menu.level+=1
+    
+   menu.level++
     //
     changeLevel()//this function update new monster ,object in next level
     transitionArray.splice(0)
+    return
  
 },5000)
 }

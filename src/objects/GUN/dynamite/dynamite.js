@@ -25,7 +25,7 @@ export class Dynamite{
         this.imageExplosion=tnt2
         this.posXWhenExplosion=null
         this.posYWhenExplosion=null
-        this.strenghtAttack=1
+        this.strenghtAttack=7
         
     }
 

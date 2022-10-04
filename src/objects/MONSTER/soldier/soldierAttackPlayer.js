@@ -1,20 +1,20 @@
 import { handleHp } from "../../../Functions/shorthandFunction/handleHp"
+import { random } from "../../../Functions/shorthandFunction/random"
 import { monsterTurnWhenPlayerIsBehindHisBack } from "../FUNCTION/monsterTurnWhenPlayesIsBehindHisBack"
 
 import {bulletFromSoldierGun} from '../soldier/bulletFromSoldierGun'
 
-let counter=0
 
 export const soldierAttackPlayer=(player,arrSoldier)=>{
-counter++
+
 
     arrSoldier.forEach((soldier,iSoldier,sArr)=>{
-       
+       soldier.frequencyFireFromGun++
 //Shooting
-        if(counter%400===0&&soldier.isDuringAttackPlayer===false){
+        if(soldier.frequencyFireFromGun%soldier.frequencyNumber===0&&soldier.isDuringAttackPlayer===false){
             soldier.heIsShooting=true
           
-        
+        soldier.frequencyNumber=random([400,450,350,370,380,390,420])
             soldier.speed=0
             soldier.arrayWithBullet.push(new bulletFromSoldierGun(soldier.posX,soldier.posY+soldier.size/2,soldier.directionMove))
             setTimeout(()=>{

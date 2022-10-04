@@ -5,7 +5,7 @@ export class machineGun{
         this.size=10
         this.color="black"
         this.name="machineGun"
-        this.strenghtAttack=15.7
+        this.strenghtAttack=51.7
         this.directionAttack=directionAttack
         
     }

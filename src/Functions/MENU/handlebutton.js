@@ -18,6 +18,7 @@ export const handleButton=(menu)=>{
         menu.playGame="game"
         mainMenu.style.opacity=0
         mainMenu.style.zIndex=-100
+        menu.click=1
      
     })
     pause.addEventListener("click",()=>{

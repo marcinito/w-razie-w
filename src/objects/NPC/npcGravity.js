@@ -1,15 +1,18 @@
+import { blokJump } from "../MONSTER/FUNCTION/blokJump"
 import { detecJumpCreature } from "../MONSTER/FUNCTION/detectJumpCreature"
 import { detectJumpCreature2 } from "../MONSTER/FUNCTION/detectJumpCreature2"
+import { dontFallDownFromTitle } from "../MONSTER/FUNCTION/dontFallDwonFromTitle"
 export const npcGravity=(npc,WALL,can)=>{
     npc.posY+=npc.strenghtGravity
     npc.strenghtGravity=3
    npc.touchWall=false
+   npc.detect.trigger=true
   
 
 WALL.forEach((pAW,pAI,wallArray)=>{
     //pE-particular Element wall title
   pAW.forEach((title,pI,pArr)=>{
-
+    npc.detectBlokJump.canMonsterJump(title)
 
 
         //check do npc can do jump it is possible when meet only one title height
@@ -31,17 +34,21 @@ WALL.forEach((pAW,pAI,wallArray)=>{
               npc.strenghtGravity=2
             let deepCollision=npc.posY+npc.size-title.posY
             npc.posY-=deepCollision
-           npc.stop=false
+           npc.stopJump=false
           
             }
+            if(npc.jump===true){
+              npc.jumpAction()
+            }
+            blokJump(npc,title)
             //Move Left
             if(npc.posX<title.posX+title.size&&npc.posX>title.posX+title.size/2&&npc.directionMove==="left"
             &&npc.posY+npc.size>title.posY){
               let deepCollision=title.posX+title.size-npc.posX
-              npc.up=false
+           console.log("hit left")
               npc.posX+=deepCollision+3
               //detect jump posibility
-          detectJumpCreature2(npc,"right")
+          detectJumpCreature2(npc,"right",title)
              
             }
             //move right
@@ -49,35 +56,15 @@ WALL.forEach((pAW,pAI,wallArray)=>{
             npc.posY+npc.size>title.posY){
               let deepCollision=npc.posX+npc.size-title.posX
               npc.posX-=deepCollision+3
-          
-              detectJumpCreature2(npc,"left")
+              console.log("hit right")
+              detectJumpCreature2(npc,"left",title)
     
             }
           
-      //Block jump when meet down horizontal wall
-      //JUMP JUMP
-       // jump
+
                
               
-       if(npc.posY<title.posY+title.size+3&&npc.posY>title.posY+title.size-60){
-                       
-        if(npc.directionMove==="left"){
-            if(npc.posX<title.posX+title.size/2){
-                npc.posY=title.posY+title.size+1
-            }
-        }
-        if(npc.directionMove==="right"){
-            if(npc.posX>title.posX+title.size/2){
-                npc.posY=title.posY+title.size+1
-            }
-        }
-
-        title.color="black"
-
-        npc.stopJump=true
-      
-        title.color="red"
-      }
+       
 
           }
 
@@ -85,7 +72,7 @@ WALL.forEach((pAW,pAI,wallArray)=>{
            
             //END ELSE
          }
- 
+ dontFallDownFromTitle(npc,title)
 
 
   })
@@ -102,6 +89,6 @@ if(npc.posX+npc.size>can.C_W){
   npc.directionMove="left"
 }
 if(npc.posY>can.C_H){
-  npc.posY=100
+  npc.hp=-20
 }
 }

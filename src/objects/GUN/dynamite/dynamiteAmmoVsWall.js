@@ -21,24 +21,41 @@ arrayWithTitle.forEach((title,tI,tArr)=>{
     if(title.hp<0&&title.isHitBy==="dynamite"){
           
         if(title.name==="goldWall"){
-            itemsOnMap.push(new goldenCoin(title.posX,title.posY,title.size))
+            if(Math.floor(Math.random()*2)===1){
+                itemsOnMap.push(new goldenCoin(title.posX,title.posY,title.size))
+            }
+         
         }
         if(title.name==="solidWall"){
+            if(Math.floor(Math.random()*2)===1){
                 itemsOnMap.push(new solidWallItems(title.posX,title.posY,title.size))
+            }
+                
         }
         if(title.name==="plainWall"){
+            if(Math.floor(Math.random()*2)===1){
                 itemsOnMap.push(new plainWallItems(title.posX,title.posY,title.size))
+            }
+               
         }
         if(title.name==="magmaWall"){
-                itemsOnMap.push(new magmaWallItems(title.posX,title.posY,title.size))
+            if(Math.floor(Math.random()*2)===1){
+                itemsOnMap.push(new magmaWallItems(title.posX,title.posY,title.size)) 
+            }
+                
         }
         if(title.name==="brickWall"){
-            itemsOnMap.push(new brickWallItems(title.posX,title.posY,title.size))
+            if(Math.floor(Math.random()*2)===1){
+                itemsOnMap.push(new brickWallItems(title.posX,title.posY,title.size))
+            }
+           
     }
     if(title.name==="woodenWall"){
-        let itemToDrop=[dynamiteItems,machineGunItems,glockItems,jumpFluidItems]
+  
+            let itemToDrop=[dynamiteItems,machineGunItems,glockItems,jumpFluidItems]
                    
-        itemsOnMap.push(new itemToDrop[Math.floor(Math.random()*itemToDrop.length)](title.posX,title.posY,title.size,"true"))
+            itemsOnMap.push(new itemToDrop[Math.floor(Math.random()*itemToDrop.length)](title.posX,title.posY,title.size,"true"))   
+      
 }
         tArr.splice(tI,1)
     

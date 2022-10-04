@@ -2,14 +2,17 @@ import styles from './gameover.scss'
 const end=[...document.querySelectorAll(".tile")]
 const container=document.querySelector(".container")
 let counter=0
-window.addEventListener("click",(e)=>{
-    window.location="./index.html"  
-})
-window.addEventListener("keydown",(e)=>{
-    if(e.keyCode===32||e.keyCode===13){
-        window.location="./index.html"
-    }
-})
+setTimeout(()=>{
+    window.addEventListener("click",(e)=>{
+        window.location="./index.html"  
+    })
+    window.addEventListener("keydown",(e)=>{
+        if(e.keyCode===32||e.keyCode===13){
+            window.location="./index.html"
+        }
+    })
+},5000)
+
 
 setTimeout(()=>{
     let displayNewLetter=setInterval(()=>{

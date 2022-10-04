@@ -24,6 +24,7 @@ export class brickWall{
         this.image=[block100,block80,block50,block20]
         this.hp=16
         this.isHitBy="null"
+        this.isVulnerable=[]
         
     }
     draw(can){

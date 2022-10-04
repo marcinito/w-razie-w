@@ -32,21 +32,14 @@ export const breathingOfPlayer=()=>{
         player.quantityLive-=1
         canvas.style.backgroundColor="red"
         amountLifeImg.src=deadImg
-        
+        player.whenPlayerLostLife="red"
+        amountLife.style.backgroundColor="red"
 
         setTimeout(()=>{
-            canvas.style.backgroundColor="skyblue"
-          
-            setTimeout(()=>{
-                canvas.style.backgroundColor="red"
-                
-                setTimeout(()=>{
-                    canvas.style.backgroundColor="skyblue"
-                    amountLifeImg.src=heartImg
-                },500)
-            },100)
-
-        },100)
+            player.whenPlayerLostLife="transparent"
+            amountLife.style.backgroundColor="bisque"
+            amountLifeImg.src=heartImg
+        },3000)
         
         if(player.quantityLive===0&&player.hp<0){
             menu.playGame="game-over"

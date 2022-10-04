@@ -24,6 +24,7 @@ export class plainWall{
         this.image=[block100,block80,block50,block20]
         this.hp=11
         this.isHitBy=undefined
+        this.isVulnerable=[]
         
     }
     draw(can){

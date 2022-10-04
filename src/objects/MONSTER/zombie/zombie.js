@@ -12,6 +12,7 @@ import { detectEdge } from '../objects/detectEdge'
 import { detecJumpCreature } from '../FUNCTION/detectJumpCreature'
 import { detectJump } from '../objects/detectJump'
 import { detectBlokJump } from '../objects/detectBlokJump'
+import { menu } from '../../../main'
 
 
 
@@ -43,13 +44,13 @@ export class Zombie{
         this.size=this.naturalSize
         this.color="darkgreen"
         this.name="zombie"
-        this.naturalSpeed=1
+        this.naturalSpeed=1+menu.level/2
         this.speed=1
         //detectJump
         this.dposX=this.posX
         this.dposY=this.posY
        
-        this.strenghtGravity=3
+        this.strenghtGravity=5
         this.strenghtAttack=0.3
     
         //DIRECTION
@@ -62,7 +63,7 @@ export class Zombie{
         //OUTFIT
         this.image=zombieImg2
         //hp
-        this.hpTotal=450
+        this.hpTotal=1050
         this.hp=this.hpTotal
         this.percentageHp=this.size
         this.ratePercentage=this.size
@@ -80,8 +81,11 @@ export class Zombie{
       //zombie touch other zombie
       this.touchOtherZombie=false
 
-      this.startPoint=0
-      this.destroyWall=false
+   
+      this.hitInWallStrenght=5
+      this._ID=Math.floor(Math.random()*213123)
+      //change way in random manner
+      this.counterToChangeWay=0
             
     }
 draw(can){
@@ -239,7 +243,7 @@ if(this.directionMove==="left"){
   checkIfMonsterCanGoFurther(this.detect,this.posY,this.size)
     this.detect.draw(can)
 //show if monster can do jump
-  detectJumpPosition(this.directionMove,this.detectJump,this.posX,this.posY,this.size,can,10,130)
+  detectJumpPosition(this.directionMove,this.detectJump,this.posX,this.posY,this.size,can,10,110)
     //detect blok jump
     this.detectBlokJump.posX=this.posX+10
     this.detectBlokJump.posY=this.posY-10
@@ -293,7 +297,7 @@ jumpAction(){
             this.posX-=this.speed
             if(this.detect.trigger===true&&this.blok===false&&this.detect.avoidFallInChasm===true){
         
-           console.log("direction change to right")
+
               this.directionMove="right"
                
               setTimeout(()=>{
@@ -314,7 +318,7 @@ jumpAction(){
          
             this.posX+=this.speed
             if(this.detect.trigger===true&&this.blok===false&&this.detect.avoidFallInChasm===true){
-              console.log("direction change to left")
+            
               setTimeout(()=>{
                 this.detect.avoidFallInChasm=false
               },1000)
@@ -333,4 +337,5 @@ jumpAction(){
         
 
     }
+
 }

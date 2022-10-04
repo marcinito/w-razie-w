@@ -6,6 +6,10 @@ import { random } from '../../../Functions/shorthandFunction/random'
 import { detectJump } from '../../MONSTER/objects/detectJump'
 import { player } from '../../../main'
 import { helperTreatPlayer } from './helperTreatmentPlayer'
+import { detectEdge } from '../../MONSTER/objects/detectEdge'
+import { checkIfMonsterCanGoFurther } from '../../MONSTER/FUNCTION/detectVerge/checkIfCreatureCanGoFurther'
+import { detecJumpCreature } from '../../MONSTER/FUNCTION/detectJumpCreature'
+import { detectBlokJump } from '../../MONSTER/objects/detectBlokJump'
 let animationChange=0
 setInterval(()=>{
 animationChange++
@@ -27,11 +31,15 @@ export class helperPlayer{
         this.directionArr=["left","right"]
         this.directionMove=random(this.directionArr)
         this.directionMemory=this.directionMove
-        this.speed=3
+        this.speed=2
         this.strenghtGravity=0.1
         this.skyAttack=true//when fly monster are on map helper will attack up direction
         this.stopJump=false
+
         this.detectJump=new detectJump()
+        this.detectBlokJump=new detectBlokJump()
+        this.detect=new detectEdge()
+
         this.touchWall=false
         this.jump=false
         this.image=helper
@@ -45,8 +53,12 @@ export class helperPlayer{
         this.ratePercentage=50
 
         this.counter=0
+        this._ID=Math.floor(Math.random()*324324324)
+        this.blok=false
+        this.hitInWallStrenght=3
     }
     draw(can){
+     
         this.counter++
         can.ctx.fillStyle="green"
         can.ctx.fillRect(this.posX,this.posY-25,this.percentageHp,10)
@@ -54,13 +66,7 @@ export class helperPlayer{
         can.ctx.strokeStyle="black"
         can.ctx.strokeRect(this.posX,this.posY-25,50,10)
         can.ctx.fillStyle=this.color
-       //jump npc
-        if(this.jump==true&&this.stopJump===false){
-            this.posY-=50
-            this.jump=false
-            
-          
-        }
+     
         if(this.directionMove==="left"){
             if(this.attack===false){
              let height=234
@@ -141,6 +147,7 @@ export class helperPlayer{
             
             }
         }
+        
    //detect jump
        if(this.directionMove==="left"){
         this.detectJump.posX=this.posX-this.detectJump.size
@@ -158,25 +165,109 @@ export class helperPlayer{
                 el.draw(can)
             })
         }
+    //detect blok jump
+    this.detectBlokJump.posX=this.posX+10
+    this.detectBlokJump.posY=this.posY
+    this.detectBlokJump.size=this.size-20
 
+        this.detectBlokJump.draw(can)
+        //detect edge
+        if(this.directionMove==="left"){
+            this.detect.posX=this.posX-50     
+          }
+          if(this.directionMove==="right"){
+            this.detect.posX=this.posX+this.size-this.detect.size+50
+          }
+          checkIfMonsterCanGoFurther(this.detect,this.posY,this.size,this.name)
+            this.detect.draw(can)
     }
-    movement(){
-        let distanceFromPlayer=this.posX-player.posX
+    jumpAction(){
+        //jump
       
-      if(distanceFromPlayer>300){
-        this.directionMove="left"
+        let jumpHeight=3
+        if(this.stopJump===false){
+          this.posY-=jumpHeight
+          setTimeout(()=>{
+            if(this.stopJump===false){
+              this.posY-=jumpHeight
+              setTimeout(()=>{
+                if(this.stopJump===false){
+                  this.posY-=jumpHeight
+                }
+              },20)
+              setTimeout(()=>{
+                if(this.stopJump===false){
+                  this.posY-=jumpHeight
+                }
+              },20)
+              setTimeout(()=>{
+                if(this.stopJump===false){
+                  this.posY-=jumpHeight
+                }
+              },20)
+              setTimeout(()=>{
+                if(this.stopJump===false){
+                  this.posY-=jumpHeight
+                }
+              },20)
+            }
+            
+          },20)
+      
+          this.jump=false
+          
+        }
+      
       }
-      if(distanceFromPlayer<-300){
-        this.directionMove="right"
-      }
+    movement(){
+      
+    //jump npc
+    if(this.jump==true&&this.stopJump===false){
+        this.posY-=50
+        this.jump=false
+        
+      
+    }
    
 
         
     if(this.directionMove==="right"){
         this.posX+=this.speed
+        if(this.detect.trigger===true&&this.blok===false&&this.detect.avoidFallInChasm===true){
+            
+            setTimeout(()=>{
+              this.detect.avoidFallInChasm=false
+            },1000)
+           
+            this.directionMove="left"
+           
+            
+            this.blok=true;
+       
+          setTimeout(()=>{
+           
+            this.blok=false
+          },1000)
+        }
     }
     if(this.directionMove==="left"){
         this.posX-=this.speed
+        if(this.detect.trigger===true&&this.blok===false&&this.detect.avoidFallInChasm===true){
+        
+
+            this.directionMove="right"
+             
+            setTimeout(()=>{
+              this.detect.avoidFallInChasm=false
+            },1000)
+              
+            this.blok=true
+      
+            setTimeout(()=>{
+            
+              this.blok=false
+            },1000)
+          }
     }
   
     }

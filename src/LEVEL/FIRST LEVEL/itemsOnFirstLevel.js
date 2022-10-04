@@ -15,8 +15,8 @@ import { solidWallItems } from "../../objects/ITEMSonMAP/solidWall/solidWallItem
 
 export const itemsOnFirstLevel=()=>{
     let array=[
-     new glockItems(348,621,true), new AxeItems(348,621,true), new helperSpawnRuna(348,621,true), new dynamiteItems(348,621,true), new AxeItems(348,621,true),new AxeItems(348,621,true),
-     new machineGunItems(32,463,true)
+      new glockItems(348,621,true),new machineGunItems(348,621,true),new dynamiteItems(348,621,true), new helperSpawnRuna(348,621,true), new AxeItems(348,621,true), new AxeItems(348,621,true),new AxeItems(348,621,true),
+     new glockItems(32,463,true)
     ]
     return array
 }

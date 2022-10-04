@@ -30,7 +30,7 @@ constructor(posX,posY){
     this.naturalSpeed=2
     this.speed=this.naturalSpeed
   
-    this.strenghtGravity=1
+    this.strenghtGravity=3
     this.doFall=true
     this.image=sheep
     this.isAlive=true
@@ -41,7 +41,7 @@ constructor(posX,posY){
     this.directionMove=random(this.directionArr)
 
        //hp
-       this.hpTotal=80
+       this.hpTotal=200
        this.hp=this.hpTotal
        this.percentageHp=this.size
        this.ratePercentage=this.size
@@ -58,6 +58,9 @@ constructor(posX,posY){
        this.jump=false
        this.stopJump=false
        this.detectBlokJump=new detectBlokJump()
+
+       this.hitInWallStrenght=3
+       this._ID=Math.floor(Math.random()*213123)
        
 }
 draw(can){
@@ -65,7 +68,7 @@ draw(can){
     can.ctx.fillStyle=this.color
     can.ctx.fillRect(this.posX,this.posY-10,this.percentageHp,5)
     can.ctx.strokeRect(this.posX,this.posY-10,this.size,5)
-    can.ctx.strokeRect(this.posX,this.posY,this.size,this.size)
+    // can.ctx.strokeRect(this.posX,this.posY,this.size,this.size)
     if(this.directionMove==="right"){
         can.ctx.drawImage(this.image,animation*100,8,95,80,this.posX,this.posY,this.size,this.size)
     }

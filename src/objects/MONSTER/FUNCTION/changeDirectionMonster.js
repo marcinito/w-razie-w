@@ -14,7 +14,7 @@ export const changeDirectionMonster=(dE,cross,payload)=>{
     let availableMove=directionArr.filter(el=>el!=payload)
     let newDirection=random(availableMove)
     
-    dE.direction=newDirection
+    dE.directionMove=newDirection
 
     dE.directionCross=newCrossDirection
 

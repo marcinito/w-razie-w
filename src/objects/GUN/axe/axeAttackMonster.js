@@ -4,6 +4,9 @@ import { handleHp } from "../../../Functions/shorthandFunction/handleHp"
 import { monsterDropItem } from "../../MONSTER/FUNCTION/monsterDropItem"
 import { countNumberMonsterOnLeve } from "../../../LEVEL/CHANGE-LEVEl/countNumberMonsterOnLevel"
 import { itemsOnMap } from "../../../main"
+
+let flag=false
+
 export const  axeAttackMonster=(MONSTER,player)=>{
     player.axeArray.forEach((axe,axeIndex,axeArr)=>{
 
@@ -18,10 +21,15 @@ export const  axeAttackMonster=(MONSTER,player)=>{
                 {
                     monster.hp-=axe.strenghtAttack.monster
                     monster.percentageHp-=handleHp(axe.strenghtAttack.monster,monster)
-                    if(monster.hp<0){
+                    if(monster.hp<0&&flag===false){
+                        flag=true
                         monsterDropItem(monster,itemsOnMap)
                     particularArrayArr.splice(monsterIndex,1)
                     countNumberMonsterOnLeve()
+                    setTimeout(()=>{
+                        flag=false
+                    },200)
+                    return
                     }
                 }
 

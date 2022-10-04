@@ -14,9 +14,9 @@
         height:100%;
         position:absolute;
         overflow:hidden;
-        background-image: url("./stylesImage//smok2.png");
+    
         background-size: 100%;
-       
+        
        
         
        
@@ -24,11 +24,11 @@
     }
     
     #canvas{
+        cursor:none;
         border:1px solid black;
-      
+        
         position:absolute;
-       
-        background-color: lighten(skyblue,0%);
+        
         width:100%;
         height:101%;
         
@@ -45,7 +45,8 @@
         bottom:5%;
         left:50%;
         transform:translateX(-50%);
-        opacity:1;
+        opacity:0.9;
+         filter:brightness(120%) contrast(1);
         
       
     
@@ -59,7 +60,8 @@
      .bpPlace{
         width:20%;
         height:100%;
-        border:3px solid darkblue;
+        border:2px groove silver; 
+       
         .slotBp{
             border:1px solid black;
             background-color: darkorange;
@@ -84,18 +86,18 @@
       
      }
      .skills{
-        width:35%;
-        height:300%;
+        width:25%;
+        height:250%;
         background-image:conic-gradient(darkblue,skyblue, blue);
         position:absolute;
-        right:-35%;
-        top:-180%;
+        right:-25%;
+        top:-145%;
         border-top-right-radius: 40%;
         border-top-left-radius: 5%;
         border-bottom-left-radius: 5%;
         border-bottom-right-radius: 5%;
-        border:5px solid  yellow;
-     
+        border:2px groove silver;     
+        opacity:0.8;
        
         .choosenItem{
             width:78%;
@@ -108,6 +110,7 @@
           display:grid;
           grid-template-columns: 50% 50%;
           grid-template-rows:33.3% 33.3% 33.3%;
+          
           
     
             .choosenItemImg{
@@ -131,7 +134,7 @@
                 background-image:radial-gradient(white,red,blue);
                 position:absolute;
                 right:0;
-                font-size:20px;
+                font-size:14px;
                 font-weight:bold;
                 color:blue;
                 -webkit-text-stroke:1px green;
@@ -148,7 +151,7 @@
                 grid-row-end:5;
                 position:relative;
                 font-weight: bold;
-                font-size:20px;
+                font-size:16px;
                 display:flex;
                 justify-content: center;
                 align-items: center;
@@ -266,13 +269,27 @@
         .pause{
             position:absolute;
             z-index:110;
-            width:10px;
-            height:10px;
-            border:5px solid red;
+            width:30%;
+            height:20%;
+            border:1px solid red;
             background-color: orange;
-            top:10%;
-            left:20%;
-            opacity:0;
+            top:-440%;
+            border-radius:40%;
+            font-weight: bold;
+            font-size:7px;
+       
+           
+            text-align: center;
+           
+            right:-111%;
+            opacity:0.6;
+            overflow:hidden;
+        }
+        .pause:hover{
+            opacity:1;
+            border:1px groove lawngreen;
+            color:white;
+            -webkit-text-stroke:0.3px darkblue;
         }
         .lifeSpan{
             position:absolute;
@@ -285,9 +302,11 @@
             display:flex;
             .amountLife{
                 width:40%;
-             
+                font-size:12px;
+                text-indent: 5px;
                 font-weight:bold;
                 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+              
              
            
             }
@@ -369,7 +388,7 @@
        
         font-size:3vw;
         color:white;
-        border:10px groove bisque;
+        border:9px groove bisque;
         font-family: 'Inconsolata', monospace;
         text-align: center;
        vertical-align:bottom;

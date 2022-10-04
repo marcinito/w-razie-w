@@ -5,10 +5,10 @@ import { monsterInSecondLevel } from "../LEVEL/secondLevel/monsterInSecondLevel"
 export class menuObject{
     constructor(){
         this.playGame="menu"
-        this.active="firstLevel"
         this.click=0
-        this.level=0
+        this.level=1
         this.numberOfMonster=0
         this.navigation="home"
     }
+    
 }

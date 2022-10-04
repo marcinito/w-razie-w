@@ -24,6 +24,7 @@ export class woodenWall{
         this.image=[block1,block2,block3,block4]
         this.hp=26
         this.isHitBy="null"
+        this.isVulnerable=[]
         
     }
     draw(can){
